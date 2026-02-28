@@ -5,17 +5,12 @@
 *.log
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
 *.zip
 *.tar.gz
 *.rar
-
-# Allow JUnit JARs in libs/ 
-!libs/
-!libs/junit-platform-console-standalone-6.1.0-M1.jar
 
 # VS Code
 .vscode/
