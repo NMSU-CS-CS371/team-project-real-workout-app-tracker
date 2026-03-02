@@ -1,0 +1,48 @@
+<project name="workoutApp" default="junit">
+   <property name="junitjar" location="lib/junit-platform-console-standalone-6.1.0-M1.jar"/>
+    <!-- directories -->
+    <property name="src.dir"     value="src"/>
+    <property name="build.dir"   value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="tests.dir"   value="tests"/>
+    <property name="lib.dir"     value="lib"/>
+
+    <!-- classpath for compilation and tests -->
+    <path id="compile.classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+    </path>
+
+   <!-- clean up compiled files -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <!-- compile sources -->
+    <target name="compile" depends="clean">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}"
+               destdir="${classes.dir}"
+               includeantruntime="false"
+               classpathref="compile.classpath"
+               release="17" target="17"/>
+    </target>
+
+   <!-- run junit tests -->
+    <target name="test" depends="compile">
+        <mkdir dir="${build.dir}/test-results"/>
+        <junit printsummary="yes" haltonfailure="yes" fork="yes">
+            <classpath>
+                <pathelement path="${classes.dir}"/>
+                <path refid="compile.classpath"/>
+            </classpath>
+            <batchtest todir="${build.dir}/test-results">
+                <fileset dir="${tests.dir}">
+                    <include name="**/*Test.java"/>
+                </fileset>
+            </batchtest>
+            <formatter type="plain"/>
+            <formatter type="xml"/>
+        </junit>
+    </target>
+</project>
+

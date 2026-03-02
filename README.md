@@ -1,33 +1,25 @@
 # team-project-real-workout-app-tracker
 ## Workout Tracker - CSCI 3710 Team Project
-Lightweight, offline, java-based workout tracking application focused on routine creation, simple exercise logging, and local XML-based data storage.
+Lightweight, offline, java-based workout tracking application focused on routine creation, simple exercise logging, and local JSON-based data storage.
 
 ## Project Summary
-This product provides a minimal, distraction-free workout tracker allowing uwsers to create routines, define exercises, log workouts, and save/load data locally using XML. Goal is to support quick, reliable workout tracking without accounts, servers, or network requirements.
-
-# Sprints
-## Sprint 1 
-Sprint 1 establishes foundation of the system.
-
-Features implemented in sprint 1: 
+This product provides a minimal, distraction-free workout tracker allowing uwsers to create routines, define exercises, log workouts, and save/load data locally using JSON. Goal is to support quick, reliable workout tracking without accounts, servers, or network requirements.
 
 # Repository Structure
 project-root/
 |
-|---src/            Source Code Files
+|---src/com/workoutapp/            Source Code Files
 |   |--- models/        Core domain classes
-|   |--- services/      File I/O, XML parsing, etc.
+|   |--- services/      File I/O, JSON parsing, etc.
 |   |--- ui/            Future UI classes
-|   Main.java
+|   |--- app/           Main.java
 |
 |---tests/          Junit Tests
 |   |---models/
 |   |---services/
 |
-|---data/           XML Data Files
-|   |---exercises.xml
-|   |---sample_routine.xml
-|   |---sample_profile.xml
+|---data/           JSON Data Files
+|   |---
 |
 |---libs/           External Libraries (JUnit, etc)
 |   |---junit jar file
@@ -37,14 +29,35 @@ project-root/
 |---.gitignore
 |---.README.md
 
-# Running Tests
-Instructions to run tests in JUnit
-
 # Data Files
-Example XML data files for testing
+Example JSON data files for testing
 
 # Build & Run
-Instructions to build/run in Ant here
+### Prequisites
+- JDK 17 or above
+- Apache Ant 1.10.x or newer (1.10.12 reccommended)
+- src/com/workoutapp contains Java source files
+- data/ contains *.json data files
+- lib/ contains junit-platform-console-standalone-6.1.0-M1.jar
+- tests/ contains files ending in *Test.java for JUnit tests
+
+### Build the Project
+Type into terminal
+ant compile
+
+This will:
+- Clean previous build directory
+- Compiles source files into build/
+- Compile all Java files using JDK >= 17
+
+### Running Tests
+Make sure lib/ contains junit-platform-console-standalone-6.1.0-M1.jar
+
+You can download from Maven Repository Site at
+[https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/6.1.0-M1/](https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/6.1.0-M1/)
+
+Type into terminal:
+    ant test
 
 # Documentation
 All sprint planning, user stories, and design documentation is maintained on GitHub Wiki
