@@ -74,6 +74,10 @@ public class Exercise {
         return tags != null && tags.remove(tag);
     }
 
+    public int numTags(){
+        return tags.size();
+    }
+
     /**
      * Checks if the exercise has a specific tag.
      * @param tag the tag to check for

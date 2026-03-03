@@ -233,6 +233,7 @@ public class WorkoutRoutine {
      * and all entries.
       * @return a string representation of the workout routine
      */
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Workout Routine: ").append(name).append("\n");

@@ -21,7 +21,7 @@ project-root/
 
 |
 
-|---tests/          Junit Tests
+|---sec/com/workoutapptests/          Junit Test Classes
 
 |   |---models/
 
