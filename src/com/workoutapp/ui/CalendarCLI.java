@@ -1,16 +1,14 @@
-package ui;
+package com.workoutapp.ui;
 
-import models.CalendarEvent;
-import models.Exercise;
-import models.SetEntry;
-import models.Workout;
-import services.PersistenceService;
+import com.workoutapp.models.Workout;
+import com.workoutapp.models.Workout.WorkoutExercise;
+import com.workoutapp.models.SetEntry;
+import com.workoutapp.services.PersistenceService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -63,7 +61,7 @@ public class CalendarCLI {
                 System.out.print("Add exercise name (or empty to finish): ");
                 String ename = scanner.nextLine().trim();
                 if (ename.isEmpty()) break;
-                Exercise e = new Exercise(ename);
+                WorkoutExercise e = new WorkoutExercise(ename);
                 while (true) {
                     System.out.print("  Add set as 'reps weight notes' (or empty to finish sets): ");
                     String line = scanner.nextLine().trim();

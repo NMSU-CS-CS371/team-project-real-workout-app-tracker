@@ -1,6 +1,6 @@
-package services;
+package com.workoutapp.services;
 
-import models.CalendarEvent;
+import com.workoutapp.ui.CalendarEvent;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
 // PersistenceService handles saving and loading of calendar events to/from a file using Java's serialization mechanism.
 public class PersistenceService {
     private static final String DATA_DIR = "data";
@@ -28,6 +29,7 @@ public class PersistenceService {
         }
         return new ArrayList<>();
     }
+
     // Saves the list of calendar events to a file using serialization. Creates the data directory if it doesn't exist.
     public void saveEvents(List<CalendarEvent> events) {
         try {

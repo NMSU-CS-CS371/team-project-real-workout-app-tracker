@@ -1,7 +1,9 @@
-package models;
+package com.workoutapp.ui;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import com.workoutapp.models.Workout;
+
 // CalendarEvent represents a scheduled workout event, containing the date/time, associated workout, and any notes.
 public class CalendarEvent implements Serializable {
     private static final long serialVersionUID = 1L;
