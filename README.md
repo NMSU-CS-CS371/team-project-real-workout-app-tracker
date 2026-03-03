@@ -8,25 +8,45 @@ This product provides a minimal, distraction-free workout tracker allowing uwser
 # Repository Structure
 project-root/
 |
+
 |---src/com/workoutapp/            Source Code Files
+
 |   |--- models/        Core domain classes
+
 |   |--- services/      File I/O, JSON parsing, etc.
+
 |   |--- ui/            Future UI classes
+
 |   |--- app/           Main.java
+
 |
+
 |---tests/          Junit Tests
+
 |   |---models/
+
 |   |---services/
+
 |
+
 |---data/           JSON Data Files
+
 |   |---
+
 |
+
 |---libs/           External Libraries (JUnit, etc)
+
 |   |---junit jar file
+
 |
+
 |---docs/           Documents not on wiki
+
 |
+
 |---.gitignore
+
 |---.README.md
 
 # Data Files
