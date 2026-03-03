@@ -1,17 +1,31 @@
 # team-project-real-workout-app-tracker
 ## Workout Tracker - CSCI 3710 Team Project
+<<<<<<< HEAD
 Lightweight, offline, java-based workout tracking application focused on routine creation, simple exercise logging, and local JSON-based data storage.
 
 ## Project Summary
 This product provides a minimal, distraction-free workout tracker allowing uwsers to create routines, define exercises, log workouts, and save/load data locally using JSON. Goal is to support quick, reliable workout tracking without accounts, servers, or network requirements.
+=======
+Lightweight, offline, java-based workout tracking application focused on routine creation, simple exercise logging, and local binary-based data storage.
 
-# Repository Structure
+## Project Summary
+This product provides a minimal, distraction-free workout tracker allowing users to create routines, define exercises, log workouts, and save/load data locally. Goal is to support quick, reliable workout tracking without accounts, servers, or network requirements.
+
+## Sprints
+### Sprint 1 
+Sprint 1 establishes foundation of the system.
+
+Features implemented in sprint 1: 
+>>>>>>> 74a8fc3 (initial calendar application commit)
+
+## Repository Structure
 project-root/
 |
 
 |---src/com/workoutapp/            Source Code Files
 
 |   |--- models/        Core domain classes
+<<<<<<< HEAD
 
 |   |--- services/      File I/O, JSON parsing, etc.
 
@@ -19,6 +33,11 @@ project-root/
 
 |   |--- app/           Main.java
 
+=======
+|   |--- services/      File I/O, serialization, etc.
+|   |--- ui/            UI classes
+|   Main.java
+>>>>>>> 74a8fc3 (initial calendar application commit)
 |
 
 |---sec/com/workoutapptests/          Junit Test Classes
@@ -28,6 +47,7 @@ project-root/
 |   |---services/
 
 |
+<<<<<<< HEAD
 
 |---data/           JSON Data Files
 
@@ -39,9 +59,15 @@ project-root/
 
 |   |---junit jar file
 
+=======
+|---data/           Serialized data files
+|
+|---lib/            External Libraries (JUnit, etc)
+>>>>>>> 74a8fc3 (initial calendar application commit)
 |
 
 |---docs/           Documents not on wiki
+<<<<<<< HEAD
 
 |
 
@@ -81,3 +107,36 @@ Type into terminal:
 
 # Documentation
 All sprint planning, user stories, and design documentation is maintained on GitHub Wiki
+=======
+|---.gitignore
+
+## Running Tests
+Instructions to run tests in JUnit
+
+## Data Files
+Example data files for testing
+
+## Build & Run
+Instructions to build/run
+
+## Calendar CLI (added)
+This repository now includes a simple command-line calendar and workout entry tool implemented in Java.
+
+- **Main class:** [src/ui/CalendarCLI.java](src/ui/CalendarCLI.java)
+- **Persistence:** events are saved to `data/events.dat` using Java serialization (binary file)
+
+Usage (build and run with `javac`/`java`):
+
+```bash
+javac -d out src/models/*.java src/services/*.java src/ui/CalendarCLI.java
+java -cp out ui.CalendarCLI
+```
+
+Commands in the CLI:
+- `add` : create a dated event with a `Workout`, `Exercise`s, and `Set` entries (reps, weight, notes)
+- `list`: list all events
+- `date`: list events for a specific date
+- `quit`: save and exit
+
+The CLI is minimal and intended to demonstrate a working calendar-backed workout logger. You can extend the `PersistenceService` to use JSON or XML if human-readable files are preferred.
+>>>>>>> 74a8fc3 (initial calendar application commit)
