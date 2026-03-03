@@ -9,15 +9,20 @@ import java.util.*;
 public class WorkoutRoutine {
     private String name;
     private String description;
-    @SuppressWarnings("FieldMayBeFinal")
     private List<RoutineEntry> entries;
 
     /**
      * Constructor for WorkoutRoutine. Name and description are required, while entries can be added later.
      * @param name
      * @param description
+     * @throws NullPointerException if name or description is null
      */
-    public WorkoutRoutine(String name, String description) {
+    public WorkoutRoutine(String name, String description) throws Exception {
+        if(name == null){
+            throw new NullPointerException("Routine name cannot be null");
+        } else if(description == null){
+            throw new NullPointerException("Routine description cannot be null");
+        }
         this.name = name;
         this.description = description;
         this.entries = new ArrayList<RoutineEntry>();
@@ -27,6 +32,7 @@ public class WorkoutRoutine {
      * Getters and setters for routine name, description, and entries. Also includes 
      * methods for adding, deleting, moving, and updating entries.
      * @return 
+     * @throws IndexOutOfBoundsException if index is out of bounds for entries list
      */
     public String getName() {
         return name;
@@ -36,7 +42,10 @@ public class WorkoutRoutine {
         return description;
     }
 
-    public RoutineEntry getEntry(int index) {
+    public RoutineEntry getEntry(int index) throws IndexOutOfBoundsException {
+        if(index < 0 || index >= entries.size()) {
+            throw new IndexOutOfBoundsException("Invalid index for getting entry.");
+        }
         return entries.get(index);
     }
 
@@ -48,8 +57,12 @@ public class WorkoutRoutine {
      * Setters for name and description.
      * @param newName
      * @return
+     * @throws NullPointerException if newName is null
      */
-    public void setName(String newName) {
+    public void setName(String newName) throws NullPointerException {
+        if(newName == null) {
+            throw new NullPointerException("New name cannot be null.");
+        }
         this.name = newName;
     }
 
@@ -57,24 +70,42 @@ public class WorkoutRoutine {
      * Setter for description.
      * @param newDescription
      * @return
+     * @throws NullPointerException if newDescription is null
      */
-    public void setDescription(String newDescription) {
+    public void setDescription(String newDescription) throws NullPointerException {
+        if(newDescription == null) {
+            throw new NullPointerException("New description cannot be null.");
+        }
         this.description = newDescription;
     }
 
     /**
      * Adds a new entry to the routine.
      * @param entry
+     * @throws NullPointerException if entry is null or has a null exercise
+     * @throws IllegalArgumentException if entry has invalid data with respect to the exercise type 
+     * (e.g. sets/reps for cardio, duration for strength)
      */
-    public void addEntry(RoutineEntry entry) {
+    public void addEntry(RoutineEntry entry) throws NullPointerException, IllegalArgumentException {
+        if(entry == null) {
+            throw new NullPointerException("Entry cannot be null.");
+        } else if(entry.getExercise() == null) {
+            throw new NullPointerException("Entry must have a valid exercise.");
+        } else if(entry.isValid() == false) {
+            throw new IllegalArgumentException("Entry has invalid data. Please check sets, reps, duration, weight, and rest time for consistency with the exercise type.");
+        }
         entries.add(entry);
     }
 
     /**
      * Deletes an entry from the routine at the specified index. 
      * @param index the index of the entry to delete
+     * @throws IndexOutOfBoundsException if the index is out of bounds for the entries list
      */
-    public void deleteEntry(int index) {
+    public void deleteEntry(int index) throws IndexOutOfBoundsException {
+        if(index < 0 || index >= entries.size()) {
+            throw new IndexOutOfBoundsException("Invalid index for deleting entry.");
+        }
         entries.remove(index);
     }
 
@@ -88,19 +119,21 @@ public class WorkoutRoutine {
 
     /**
      * Clears all entries from the routine. This can be used when resetting a routine or starting fresh.
-     * @return true if the entries were cleared successfully, false otherwise
      */
-    public boolean clearEntries() {
+    public void clearEntries() {
         entries.clear();
-        return true; // success
     }
 
     /**
      * Moves an entry from one index to another within the routine. This allows for easy reordering of exercises
      * @param fromIndex
      * @param toIndex
+     * @throws IndexOutOfBoundsException if either index is out of bounds for the entries list
      */
-    public void MoveEntry(int fromIndex, int toIndex) {
+    public void MoveEntry(int fromIndex, int toIndex) throws IndexOutOfBoundsException {
+        if(fromIndex < 0 || fromIndex >= entries.size() || toIndex < 0 || toIndex >= entries.size()) {
+            throw new IndexOutOfBoundsException("Invalid index for moving entry.");
+        }
         RoutineEntry entry = entries.remove(fromIndex);
         entries.add(toIndex, entry);
     }
@@ -110,8 +143,20 @@ public class WorkoutRoutine {
      * exercise, sets, reps, duration, weight, and rest time of an entry without needing to delete and re-add it.
      * @param index the index of the entry to update
      * @param newEntry the new entry data to replace the existing entry
+     * @throws NullPointerException if newEntry is null or has a null exercise
+     * @throws IllegalArgumentException if newEntry has invalid data with respect to the exercise type
+     * @throws IndexOutOfBoundsException if the index is out of bounds for the entries list
      */
-    public void UpdateEntry(int index, RoutineEntry newEntry) {
+    public void UpdateEntry(int index, RoutineEntry newEntry) throws NullPointerException, IllegalArgumentException, IndexOutOfBoundsException {
+        if(newEntry == null) {
+            throw new NullPointerException("New entry cannot be null.");
+        } else if(newEntry.getExercise() == null) {
+            throw new NullPointerException("New entry must have a valid exercise.");
+        } else if(newEntry.isValid() == false) {
+            throw new IllegalArgumentException("New entry has invalid data. Please check sets, reps, duration, weight, and rest time for consistency with the exercise type.");
+        } else if(index < 0 || index >= entries.size()) {
+            throw new IndexOutOfBoundsException("Invalid index for updating entry.");
+        }
         entries.set(index, newEntry);
     }
 

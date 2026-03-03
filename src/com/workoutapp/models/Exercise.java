@@ -16,9 +16,15 @@ public class Exercise {
      * Constructor for Exercise. Name and type are required, while tags can be added later.
      * @param name
      * @param type
+     * @throws IllegalArgumentException if name is null or empty, or if type is not valid
      */
-    @SuppressWarnings("Convert2Diamond")
-    public Exercise(String name, ExerciseType type) {
+
+    public Exercise(String name, ExerciseType type) throws IllegalArgumentException {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Exercise name cannot be null or empty.");
+        } else if(type != ExerciseType.CARDIO && type != ExerciseType.STRENGTH) {
+            throw new IllegalArgumentException("Exercise type must be either CARDIO or STRENGTH.");
+        }
         this.name = name;
         this.type = type;
         this.tags = new ArrayList<String>();
@@ -44,9 +50,12 @@ public class Exercise {
     /**
      * Adds a new tag to the exercise.
      * @param tag the tag to add
+     * @throws IllegalArgumentException if the tag is null or empty
      */
-    public void addTag(String tag) {
-        if (tags == null) {
+    public void addTag(String tag) throws IllegalArgumentException {
+        if (tag == null || tag.trim().isEmpty()) {
+            throw new IllegalArgumentException("Tag cannot be null or empty.");
+        } else if (tags == null) {
             tags = new java.util.ArrayList<>();
         }
         tags.add(tag);
@@ -56,8 +65,12 @@ public class Exercise {
      * Removes a tag from the exercise. 
      * @param tag the tag to remove
      * @return true if the tag was removed, false otherwise
+     * @throws IllegalArgumentException if the tag is null or empty
      */
-    public boolean removeTag(String tag) {
+    public boolean removeTag(String tag) throws IllegalArgumentException {
+        if (tag == null || tag.trim().isEmpty()) {
+            throw new IllegalArgumentException("Tag cannot be null or empty.");
+        }
         return tags != null && tags.remove(tag);
     }
 

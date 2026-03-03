@@ -24,8 +24,37 @@ public class RoutineEntry {
      * @param weight
      * @param restTime
      * @param duration
+     * @throws NullPointerException if exercise is null,
+     * @throws IllegalArgumentException if the parameters are not consistent with the type of exercise 
+     * (e.g. sets and reps must be greater than 0 for strength exercises, duration must be greater than 0
+     * for cardio exercises, etc.)
      */
-    public RoutineEntry(Exercise exercise, int sets, int reps, double weight, int restTime, double duration) {
+    public RoutineEntry(Exercise exercise, int sets, int reps, double weight, int restTime, double duration)  throws Exception {
+        if(exercise == null) {
+            throw new NullPointerException("Exercise cannot be null.");
+        } else if(exercise.getType() == ExerciseType.STRENGTH) {
+            if(sets <= 0) {
+                throw new IllegalArgumentException("Sets must be greater than 0 for strength exercises.");
+            } else if(reps <= 0) {
+                throw new IllegalArgumentException("Reps must be greater than 0 for strength exercises.");
+            } else if(weight < 0) {
+                throw new IllegalArgumentException("Weight cannot be negative for strength exercises.");
+            } else if(restTime < 0) {
+                throw new IllegalArgumentException("Rest time cannot be negative for strength exercises.");
+            } else if(duration != 0) {
+                throw new IllegalArgumentException("Duration must be 0 for strength exercises.");
+            }
+        } else if(exercise.getType() == ExerciseType.CARDIO) {
+            if(duration <= 0) {
+                throw new IllegalArgumentException("Duration must be greater than 0 for cardio exercises.");
+            } else if(weight < 0 || weight > 100) {
+                throw new IllegalArgumentException("Intensity (weight) must be between 0 and 100 for cardio exercises.");
+            } else if(restTime < 0) {
+                throw new IllegalArgumentException("Rest time cannot be negative for cardio exercises.");
+            } else if(sets != 0 || reps != 0) {
+                throw new IllegalArgumentException("Sets and reps must be 0 for cardio exercises.");
+            }
+        }
         this.exercise = exercise;
         this.sets = sets;
         this.reps = reps;
@@ -40,9 +69,28 @@ public class RoutineEntry {
      * @param intensity
      * @param restTime
      * @param duration
+     * @throws NullPointerException if exercise is null, 
+     * @throws IllegalArgumentException if exercise is not of type CARDIO, or if intensity, 
+     * restTime, or duration are out of valid ranges
      */
-    public RoutineEntry(Exercise exercise, double intensity, int restTime, double duration) {
-        this(exercise, 0, 0, intensity, restTime, duration);
+    public RoutineEntry(Exercise exercise, double intensity, int restTime, double duration) throws IllegalArgumentException, NullPointerException {
+        if(exercise == null) {
+            throw new NullPointerException("Exercise cannot be null.");
+        } else if(exercise.getType() != ExerciseType.CARDIO) {
+            throw new IllegalArgumentException("Exercise must be of type CARDIO for this constructor.");
+        } else if(intensity < 0 || intensity > 100) {
+            throw new IllegalArgumentException("Intensity must be between 0 and 100.");
+        } else if(restTime < 0) {
+            throw new IllegalArgumentException("Rest time cannot be negative.");
+        } else if(duration <= 0) {
+            throw new IllegalArgumentException("Duration must be greater than 0.");
+        }   
+        this.exercise = exercise;
+        this.sets = 0;
+        this.reps = 0;
+        this.weight = intensity;
+        this.restTime = restTime;
+        this.duration = duration;
     }
 
     /**
@@ -52,9 +100,30 @@ public class RoutineEntry {
      * @param reps
      * @param weight
      * @param restTime
+     * @throws NullPointerException if exercise is null, 
+     * @throws IllegalArgumentException if exercise is not of type STRENGTH, or if sets, reps, 
+     * weight, or restTime are out of valid ranges
      */
-    public RoutineEntry(Exercise exercise, int sets, int reps, double weight, int restTime) {
-        this(exercise, sets, reps, weight, restTime, 0);
+    public RoutineEntry(Exercise exercise, int sets, int reps, double weight, int restTime) throws IllegalArgumentException, NullPointerException {
+        if(exercise == null) {
+            throw new NullPointerException("Exercise cannot be null.");
+        } else if(exercise.getType() != ExerciseType.STRENGTH) {
+            throw new IllegalArgumentException("Exercise must be of type STRENGTH for this constructor.");
+        } else if(sets <= 0) {
+            throw new IllegalArgumentException("Sets must be greater than 0.");
+        } else if(reps <= 0) {
+            throw new IllegalArgumentException("Reps must be greater than 0.");
+        } else if(weight < 0) {
+            throw new IllegalArgumentException("Weight cannot be negative.");
+        } else if(restTime < 0) {
+            throw new IllegalArgumentException("Rest time cannot be negative.");
+        }
+        this.exercise = exercise;
+        this.sets = sets;
+        this.reps = reps;
+        this.weight = weight;
+        this.restTime = restTime;
+        this.duration = 0;
     }
 
     /**
@@ -107,28 +176,48 @@ public class RoutineEntry {
     /**
      * Setters for the routine entry parameters. These should be used with caution, as changing the parameters may make the entry invalid if they are not consistent with the type of exercise.
      * @param exercise
+     * @throws NullPointerException if exercise is null
+     * @throws IllegalArgumentException if new parameters are invalid with the type of exercise
      */
-    public void setExercise(Exercise exercise) {
+    public void setExercise(Exercise exercise) throws NullPointerException {
+        if(exercise == null) {
+            throw new NullPointerException("Exercise cannot be null.");
+    }
         this.exercise = exercise;
     }
 
-    public void setSets(int sets) {
+    public void setSets(int sets) throws IllegalArgumentException {
+        if(sets < 0) {
+            throw new IllegalArgumentException("Sets cannot be negative.");
+        }
         this.sets = sets;
     }
 
-    public void setReps(int reps) {
+    public void setReps(int reps) throws IllegalArgumentException{
+        if(reps < 0) {
+            throw new IllegalArgumentException("Reps cannot be negative.");
+        }
         this.reps = reps;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(double weight) throws IllegalArgumentException {
+        if(weight < 0) {
+            throw new IllegalArgumentException("Weight cannot be negative.");
+        }   
         this.weight = weight;
     }
 
-    public void setRestTime(int restTime) {
+    public void setRestTime(int restTime) throws IllegalArgumentException {
+        if(restTime < 0) {
+            throw new IllegalArgumentException("Rest time cannot be negative.");
+        }
         this.restTime = restTime;
     }
 
-    public void setDuration(double duration) {
+    public void setDuration(double duration) throws IllegalArgumentException {
+        if(duration < 0) {
+            throw new IllegalArgumentException("Duration cannot be negative.");
+        }
         this.duration = duration;
     }
 
