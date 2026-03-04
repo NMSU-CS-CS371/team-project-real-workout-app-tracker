@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CalendarCLI {
-    private PersistenceService persistence = new PersistenceService();
+    public PersistenceService persistence = new PersistenceService();
     private List<CalendarEvent> events;
     private Scanner scanner = new Scanner(System.in);
 
@@ -17,27 +17,11 @@ public class CalendarCLI {
         events = persistence.loadEvents();
     }
 
-    public void run() {
-        System.out.println("Workout Calendar CLI");
-        while (true) {
-            System.out.println("Commands: add, list, date, quit");
-            System.out.print("> ");
-            String cmd = scanner.nextLine().trim().toLowerCase();
-            switch (cmd) {
-                case "add": addEvent(); break;
-                case "list": listAll(); break;
-                case "date": listByDate(); break;
-                case "quit":
-                    persistence.saveEvents(events);
-                    System.out.println("Saved. Bye.");
-                    return;
-                default:
-                    System.out.println("Unknown command");
-            }
-        }
+    public List<CalendarEvent> getEvents(){
+        return this.events;
     }
 
-    private void addEvent() {
+    public void addEvent(ExerciseInstance w) {
         try {
             System.out.print("Title for workout: ");
             String title = scanner.nextLine().trim();
@@ -51,9 +35,7 @@ public class CalendarCLI {
             LocalTime t = LocalTime.parse(time);
             LocalDateTime dt = LocalDateTime.of(d, t);
 
-            ExerciseInstance w = new ExerciseInstance(null, 0);
-
-            CalendarEvent ev = new CalendarEvent(dt, w, "notes");
+            CalendarEvent ev = new CalendarEvent(dt, w, title);
             events.add(ev);
             System.out.println("Event added: " + dt.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
         } catch (Exception ex) {
@@ -61,7 +43,7 @@ public class CalendarCLI {
         }
     }
 
-    private void listAll() {
+    public void listAll() {
         if (events.isEmpty()) { System.out.println("No events"); return; }
         events.sort((a,b) -> a.getDateTime().compareTo(b.getDateTime()));
         for (CalendarEvent e : events) {
@@ -70,7 +52,7 @@ public class CalendarCLI {
         }
     }
 
-    private void listByDate() {
+    public void listByDate() {
         try {
             System.out.print("Date (YYYY-MM-DD): ");
             String date = scanner.nextLine().trim();

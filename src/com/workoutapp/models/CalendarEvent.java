@@ -10,7 +10,7 @@ public class CalendarEvent implements Serializable {
     private LocalDateTime dateTime;
     private ExerciseInstance workout;
     private String notes;
-
+    
     public CalendarEvent() {}
 
     public CalendarEvent(LocalDateTime dateTime, ExerciseInstance workout, String notes) {
