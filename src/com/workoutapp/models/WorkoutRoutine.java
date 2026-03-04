@@ -1,39 +1,37 @@
 package com.workoutapp.models;
 import java.util.*;
+import java.io.Serializable;
 
 /**
- * Represents a workout routine, which consists of a name, description, and a list of routine entries.
- * Provides methods for managing the routine entries, calculating total sets, reps, and estimated duration,
- * and validating the routine to ensure all entries are complete and consistent with their exercise types.
+ * Represents a workout routine, which consists of name, description, and list of exercises.
+ * Provides methods for managing exercises, and parameters. Will beused by profiles, etc.
  */
-public class WorkoutRoutine {
+public class WorkoutRoutine implements Serializable{
+    private static final long serialVersionUID = 1L;
+
     private String name;
     private String description;
-    private List<RoutineEntry> entries;
+    private List<Exercise> exercises;
 
-    /**
-     * Constructor for WorkoutRoutine. Name and description are required, while entries can be added later.
-     * @param name
-     * @param description
-     * @throws NullPointerException if name or description is null
-     */
-    public WorkoutRoutine(String name, String description) throws Exception {
-        if(name == null){
-            throw new NullPointerException("Routine name cannot be null");
-        } else if(description == null){
-            throw new NullPointerException("Routine description cannot be null");
-        }
-        this.name = name;
-        this.description = description;
-        this.entries = new ArrayList<RoutineEntry>();
+    //Default constructor
+    public WorkoutRoutine(){
+        this.name = "Untitled Workout";
+        this.description = "";
+        this.exercises = new ArrayList<Exercise>();
     }
 
     /**
-     * Getters and setters for routine name, description, and entries. Also includes 
-     * methods for adding, deleting, moving, and updating entries.
-     * @return 
-     * @throws IndexOutOfBoundsException if index is out of bounds for entries list
+     * Main constructor
+     * @param name  title of workout
+     * @param description   description of workout
      */
+    public WorkoutRoutine(String name, String description) {
+        this.name = name;
+        this.description = description;
+        this.exercises = new ArrayList<Exercise>();
+    }
+
+    //Getters for name and description
     public String getName() {
         return name;
     }
@@ -42,204 +40,94 @@ public class WorkoutRoutine {
         return description;
     }
 
-    public RoutineEntry getEntry(int index) throws IndexOutOfBoundsException {
-        if(index < 0 || index >= entries.size()) {
+    //Returns exercise in routine at specified index 
+    public Exercise getExercise(int index) throws Exception {
+        if(index < 0 || index >= exercises.size())
             throw new IndexOutOfBoundsException("Invalid index for getting entry.");
-        }
-        return entries.get(index);
+        return exercises.get(index);
     }
 
+    // Return list of all the exercises
+    public List<Exercise> getExercises() {
+        return this.exercises;
+    }
+
+    //Get number of exercises in routine
     public int getNumEntries() {
-        return entries.size();
+        return this.exercises.size();
     }
 
-    /**
-     * Setters for name and description.
-     * @param newName
-     * @return
-     * @throws NullPointerException if newName is null
-     */
-    public void setName(String newName) throws NullPointerException {
-        if(newName == null) {
-            throw new NullPointerException("New name cannot be null.");
+    //Set title of routine
+    public void setName(String newName){
+        this.name = newName != null ? this.name : "Untitled Workout";
+    }
+
+    //Set description of routine
+    public void setDescription(String newDescription) {
+        this.description = newDescription != null ? this.description : "";
+    }
+
+    //Add exercise to end of routine - must have valid exercise
+    public void addExercise(Exercise entry) throws Exception {
+        if(entry == null)
+            throw new NullPointerException("Exercise cannot be null.");
+        exercises.add(entry);
+    }
+
+    //Check if routine has specific exercise, return exercise index else -1
+    public int hasExercise(Exercise e){
+        if(e == null) throw new NullPointerException("Exercise cannot be null");
+        for(int i = 0; i < this.exercises.size(); i++){
+            if(this.exercises.get(i) == e || this.exercises.get(i).equals(e)){
+                return i;
+            }
         }
-        this.name = newName;
+        return -1;  //Exercise not found
     }
 
-    /**
-     * Setter for description.
-     * @param newDescription
-     * @return
-     * @throws NullPointerException if newDescription is null
-     */
-    public void setDescription(String newDescription) throws NullPointerException {
-        if(newDescription == null) {
-            throw new NullPointerException("New description cannot be null.");
-        }
-        this.description = newDescription;
-    }
-
-    /**
-     * Adds a new entry to the routine.
-     * @param entry
-     * @throws NullPointerException if entry is null or has a null exercise
-     * @throws IllegalArgumentException if entry has invalid data with respect to the exercise type 
-     * (e.g. sets/reps for cardio, duration for strength)
-     */
-    public void addEntry(RoutineEntry entry) throws NullPointerException, IllegalArgumentException {
-        if(entry == null) {
-            throw new NullPointerException("Entry cannot be null.");
-        } else if(entry.getExercise() == null) {
-            throw new NullPointerException("Entry must have a valid exercise.");
-        } else if(entry.isValid() == false) {
-            throw new IllegalArgumentException("Entry has invalid data. Please check sets, reps, duration, weight, and rest time for consistency with the exercise type.");
-        }
-        entries.add(entry);
-    }
-
-    /**
-     * Deletes an entry from the routine at the specified index. 
-     * @param index the index of the entry to delete
-     * @throws IndexOutOfBoundsException if the index is out of bounds for the entries list
-     */
-    public void deleteEntry(int index) throws IndexOutOfBoundsException {
-        if(index < 0 || index >= entries.size()) {
+    //Delete exercise at specific index
+    public void deleteExerciseFromIndex(int index) throws Exception {
+        if(index < 0 || index >= exercises.size())
             throw new IndexOutOfBoundsException("Invalid index for deleting entry.");
-        }
-        entries.remove(index);
+        exercises.remove(index);
     }
 
-    /**
-     * Checks if the routine has any entries.
-     * @return true if the routine has no entries, false otherwise
-     */
+    //Remove specific exercise from routine
+    public void deleteEntry(Exercise e) {
+        for(int i = 0; i < exercises.size(); i++){
+            if(exercises.get(i) == e || exercises.get(i).equals(e)){
+                exercises.remove(i);
+            }
+        }
+    }
+
+    //Check if this routine has no exercises
     public boolean isEmpty() {
-        return entries.isEmpty();
+        return exercises.isEmpty();
     }
 
-    /**
-     * Clears all entries from the routine. This can be used when resetting a routine or starting fresh.
-     */
-    public void clearEntries() {
-        entries.clear();
+    //Delete all exercises from this workout
+    public void clearExercises() {
+        exercises.clear();
     }
 
-    /**
-     * Moves an entry from one index to another within the routine. This allows for easy reordering of exercises
-     * @param fromIndex
-     * @param toIndex
-     * @throws IndexOutOfBoundsException if either index is out of bounds for the entries list
-     */
-    public void MoveEntry(int fromIndex, int toIndex) throws IndexOutOfBoundsException {
-        if(fromIndex < 0 || fromIndex >= entries.size() || toIndex < 0 || toIndex >= entries.size()) {
-            throw new IndexOutOfBoundsException("Invalid index for moving entry.");
-        }
-        RoutineEntry entry = entries.remove(fromIndex);
-        entries.add(toIndex, entry);
-    }
-
-    /**
-     * Updates an existing entry at the specified index with new data. This allows for modifying the 
-     * exercise, sets, reps, duration, weight, and rest time of an entry without needing to delete and re-add it.
-     * @param index the index of the entry to update
-     * @param newEntry the new entry data to replace the existing entry
-     * @throws NullPointerException if newEntry is null or has a null exercise
-     * @throws IllegalArgumentException if newEntry has invalid data with respect to the exercise type
-     * @throws IndexOutOfBoundsException if the index is out of bounds for the entries list
-     */
-    public void UpdateEntry(int index, RoutineEntry newEntry) throws NullPointerException, IllegalArgumentException, IndexOutOfBoundsException {
-        if(newEntry == null) {
+    //Replace exercise in routine
+    public void updateExercise(int index, Exercise e) throws Exception {
+        if(e == null) 
             throw new NullPointerException("New entry cannot be null.");
-        } else if(newEntry.getExercise() == null) {
-            throw new NullPointerException("New entry must have a valid exercise.");
-        } else if(newEntry.isValid() == false) {
-            throw new IllegalArgumentException("New entry has invalid data. Please check sets, reps, duration, weight, and rest time for consistency with the exercise type.");
-        } else if(index < 0 || index >= entries.size()) {
-            throw new IndexOutOfBoundsException("Invalid index for updating entry.");
-        }
-        entries.set(index, newEntry);
+        else if(index < 0 || index >= exercises.size()) 
+            throw new IndexOutOfBoundsException("Invalid index for updating exercise.");
+        exercises.set(index, e);
     }
 
-    /**
-     * Calculates the total number of sets across all entries in the routine. For cardio exercises, this will
-     * count the duration to estimate sets in increments of 2 minutes.
-     * @return
-     */
-    public int getTotalSets() {
-        int totalSets = 0;
-        for (RoutineEntry entry : entries) {
-            if(entry.getExercise().getType() == ExerciseType.CARDIO) {
-                totalSets += entry.getDuration() / 120; // For cardio, we can estimate 1 set per 2 minutes of duration for simplicity
-            } else {
-                totalSets += entry.getSets();
-            }
-        }
-        return totalSets;
-    }
-
-    /**
-     * Calculates the total number of reps across all entries in the routine. For cardio exercises, this will
-     * count the duration as reps for estimation purposes in increments of 20 seconds.
-     * @return
-     */
-    public int getTotalReps() {
-        int totalReps = 0;
-        for (RoutineEntry entry : entries) {
-            if(entry.getExercise().getType() == ExerciseType.CARDIO) {
-                totalReps += entry.getDuration() / 20; // For cardio, we can estimate 1 rep per 20 seconds of duration for simplicity
-            } else {
-                totalReps += entry.getReps();
-            }
-            totalReps += entry.getReps();
-        }
-        return totalReps;
-    }
-
-    /**
-     * Removes any entries that have invalid data, such as missing exercises or 
-     * inconsistent sets/reps/duration
-     */
-    public void removeInvalidEntries() {
-        entries.removeIf(entry -> entry.getExercise() == null ||
-                (entry.getExercise().getType() == ExerciseType.STRENGTH && (entry.getSets() <= 0 || entry.getReps() <= 0 || entry.getWeight() < 0 || entry.getRestTime() < 0)) ||
-                (entry.getExercise().getType() == ExerciseType.CARDIO && (entry.getDuration() <= 0 || entry.getWeight() < 0 || entry.getRestTime() < 0)));
-    }
-
-    /**
-     * Validates the workout routine by checking that all entries have a valid exercise and that the 
-     * sets, reps, duration, weight, and rest time are consistent with the exercise type.
-     * @return
-     */
-    public boolean isValid() {
-        for (RoutineEntry entry : entries) {
-            if (entry.getExercise() == null) {
-                return false;
-            }
-            if (entry.getExercise().getType() == ExerciseType.STRENGTH) {
-                if (entry.getSets() <= 0 || entry.getReps() <= 0 || entry.getWeight() < 0 || entry.getRestTime() < 0) {
-                    return false;
-                }
-            } else if (entry.getExercise().getType() == ExerciseType.CARDIO) {
-                if (entry.getDuration() <= 0 || entry.getWeight() < 0 || entry.getRestTime() < 0) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    /**
-     * String representation of the workout routine for easy debugging and display. Shows name, description, 
-     * and all entries.
-      * @return a string representation of the workout routine
-     */
+    //String representation of WorkoutRoutine
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Workout Routine: ").append(name).append("\n");
+        sb.append("Workout: ").append(name).append("\n");
         sb.append(description).append("\n");
-        for (int i = 0; i < entries.size(); i++) {
-            sb.append(i + 1).append(". ").append(entries.get(i).toString()).append("\n");
+        for (int i = 0; i < exercises.size(); i++) {
+            sb.append(i + 1).append(". ").append(exercises.get(i).toString()).append("\n");
         }
         return sb.toString();
     }

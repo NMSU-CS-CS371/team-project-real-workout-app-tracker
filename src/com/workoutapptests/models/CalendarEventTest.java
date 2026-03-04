@@ -1,9 +1,6 @@
 package com.workoutapptests.models;
 
-import com.workoutapp.ui.CalendarEvent;
-import com.workoutapp.models.Workout;
-import com.workoutapp.models.Workout.WorkoutExercise;
-import com.workoutapp.models.SetEntry;
+import com.workoutapp.models.*;
 import org.junit.jupiter.api.*;
 
 import java.io.*;
@@ -15,14 +12,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CalendarEventTest {
     private CalendarEvent event;
-    private Workout workout;
+    private WorkoutRoutine workout;
 
     @BeforeEach
     public void setUp() {
-        workout = new Workout("Morning");
-        WorkoutExercise e = new WorkoutExercise("Pushups");
-        e.addSet(new SetEntry(10,0,"good"));
-        workout.addExercise(e);
+        workout = new WorkoutRoutine("Morning", "");
+        Exercise e = new Exercise("Pushups", ExerciseType.STRENGTH);
+        ExerciseEvent r = new ExerciseEvent(e, 10, 5, 60, 600);
+        r.setNotes("good");
+        workout.addEntry(r);
         event = new CalendarEvent(LocalDateTime.of(2025,1,1,9,0), workout, "note1");
     }
 
@@ -41,7 +39,7 @@ public class CalendarEventTest {
         LocalDateTime newTime = LocalDateTime.of(2025,1,2,10,0);
         event.setDateTime(newTime);
         event.setNotes("other");
-        Workout w2 = new Workout("Evening");
+        WorkoutRoutine w2 = new WorkoutRoutine("Evening", "");
         event.setWorkout(w2);
 
         assertEquals(newTime, event.getDateTime());
@@ -77,6 +75,6 @@ public class CalendarEventTest {
         CalendarEvent e2 = (CalendarEvent) obj;
         assertEquals(event.getDateTime(), e2.getDateTime());
         assertEquals(event.getNotes(), e2.getNotes());
-        assertEquals(event.getWorkout().getTitle(), e2.getWorkout().getTitle());
+        assertEquals(event.getWorkout().getName(), e2.getWorkout().getName());
     }
 }

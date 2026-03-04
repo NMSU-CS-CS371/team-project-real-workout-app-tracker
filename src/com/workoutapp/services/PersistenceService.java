@@ -1,7 +1,6 @@
 package com.workoutapp.services;
 
-import com.workoutapp.ui.CalendarEvent;
-
+import com.workoutapp.models.CalendarEvent;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;

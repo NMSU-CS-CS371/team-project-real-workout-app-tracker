@@ -1,10 +1,6 @@
-package com.workoutapp.ui;
+package com.workoutapp.services;
 
-import com.workoutapp.models.Workout;
-import com.workoutapp.models.Workout.WorkoutExercise;
-import com.workoutapp.models.SetEntry;
-import com.workoutapp.services.PersistenceService;
-
+import com.workoutapp.models.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -55,24 +51,48 @@ public class CalendarCLI {
             LocalTime t = LocalTime.parse(time);
             LocalDateTime dt = LocalDateTime.of(d, t);
 
-            Workout w = new Workout(title);
+            WorkoutRoutine w = new WorkoutRoutine(title);
 
             while (true) {
                 System.out.print("Add exercise name (or empty to finish): ");
                 String ename = scanner.nextLine().trim();
                 if (ename.isEmpty()) break;
-                WorkoutExercise e = new WorkoutExercise(ename);
-                while (true) {
-                    System.out.print("  Add set as 'reps weight notes' (or empty to finish sets): ");
-                    String line = scanner.nextLine().trim();
-                    if (line.isEmpty()) break;
-                    String[] parts = line.split("\\s+", 3);
-                    int reps = Integer.parseInt(parts[0]);
-                    double weight = parts.length > 1 ? Double.parseDouble(parts[1]) : 0.0;
-                    String notes = parts.length > 2 ? parts[2] : "";
-                    e.addSet(new SetEntry(reps, weight, notes));
+                System.out.print("Enter C for cardio or S for strength");
+                String etype = scanner.nextLine();
+                while(!(etype.equals("S") || etype.equals("C"))){
+                    System.out.print("Enter C for cardio or S for strength");
+                    etype = scanner.nextLine();
                 }
-                w.addExercise(e);
+                if(etype.equals("S")){
+                    Exercise e = new Exercise(ename, ExerciseType.STRENGTH);
+                    while (true) { 
+                        System.out.print("  Add set as 'sets reps restTime weight notes' (or empty to finish strength entries): ");
+                        String line = scanner.nextLine().trim();
+                        if (line.isEmpty()) break;
+                        String[] parts = line.split("\\s+", 5);
+                        int sets = Integer.parseInt(parts[0]);
+                        int reps = Integer.parseInt(parts[1]);
+                        int rest = Integer.parseInt(parts[2]);
+                        double weight = parts.length > 3 ? Double.parseDouble(parts[3]) : 0.0;
+                        String notes = parts.length > 4 ? parts[4] : "";
+                        w.addEntry(new RoutineEntry(e, sets, reps, weight, rest, notes);
+                    }
+                } else if(etype.equals("C")){
+                    Exercise e = new Exercise(ename, ExerciseType.CARDIO);
+                    while (true) { 
+                        System.out.print("  Add set as 'intensity restTime duration notes' (or empty to finish cardio entries): ");
+                        String line = scanner.nextLine().trim();
+                        if (line.isEmpty()) break;
+                        String[] parts = line.split("\\s+", 5);
+                        int intensity = Integer.parseInt(parts[0]);
+                        int d = Integer.parseInt(parts[1]);
+                        int rest = Integer.parseInt(parts[2]);
+                        double weight = parts.length > 3 ? Double.parseDouble(parts[3]) : 0.0;
+                        String notes = parts.length > 4 ? parts[4] : "";
+                        w.addEntry(new RoutineEntry(e, sets, reps, weight, rest, notes);
+                    }
+                }
+
             }
 
             System.out.print("Notes for event: ");
@@ -112,9 +132,5 @@ public class CalendarCLI {
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
         }
-    }
-
-    public static void main(String[] args) {
-        new CalendarCLI().run();
     }
 }

@@ -5,7 +5,6 @@ import java.util.*;
 /**
  * Represents an exercise that can be added to workout routines. Contains basic information about 
  * the exercise such as its name, type (cardio or strength), and optional tags for categorization.
- * This class is immutable except for the tags, which can be modified after creation.
  */
 public class Exercise {
     final private String name;
@@ -62,10 +61,10 @@ public class Exercise {
     }
 
     /**
-     * Removes a tag from the exercise. 
-     * @param tag the tag to remove
-     * @return true if the tag was removed, false otherwise
-     * @throws IllegalArgumentException if the tag is null or empty
+     * Removes tag from exercise. 
+     * @param tag tag to remove
+     * @return true if tag was removed, false otherwise
+     * @throws IllegalArgumentException if tag is null or empty
      */
     public boolean removeTag(String tag) throws IllegalArgumentException {
         if (tag == null || tag.trim().isEmpty()) {
@@ -117,8 +116,8 @@ public class Exercise {
 
     @Override
     /**
-     * String representation of the exercise for easy debugging and display. Shows name, type, and tags.
-      * @return a string representation of the exercise
+     * String representation of the exercise object. Shows name, type, and tags.
+      * @return string representation of the exercise
      */
     public String toString() {
         return "Exercise{" +
