@@ -19,21 +19,16 @@ public class Exercise {
      */
 
     public Exercise(String name, ExerciseType type) throws IllegalArgumentException {
-        if (name == null || name.trim().isEmpty()) {
+        if (name == null || name.trim().isEmpty())
             throw new IllegalArgumentException("Exercise name cannot be null or empty.");
-        } else if(type != ExerciseType.CARDIO && type != ExerciseType.STRENGTH) {
+        else if(type != ExerciseType.CARDIO && type != ExerciseType.STRENGTH)
             throw new IllegalArgumentException("Exercise type must be either CARDIO or STRENGTH.");
-        }
         this.name = name;
         this.type = type;
         this.tags = new ArrayList<String>();
     }
 
-    /**
-     * Getters and setters for exercise name, type, and tags. Also includes methods for adding, 
-     * removing, and checking tags.
-     * @return
-     */
+    // Getters and setters for exercise name, type, and tags. Also includes methods for adding, removing, and checking tags.
     public String getName() {
         return name;
     }
@@ -46,11 +41,7 @@ public class Exercise {
         return tags == null ? null : List.copyOf(tags);
     }  
 
-    /**
-     * Adds a new tag to the exercise.
-     * @param tag the tag to add
-     * @throws IllegalArgumentException if the tag is null or empty
-     */
+    //Add new tag to exercise
     public void addTag(String tag) throws IllegalArgumentException {
         if (tag == null || tag.trim().isEmpty()) {
             throw new IllegalArgumentException("Tag cannot be null or empty.");
@@ -60,16 +51,10 @@ public class Exercise {
         tags.add(tag);
     }
 
-    /**
-     * Removes tag from exercise. 
-     * @param tag tag to remove
-     * @return true if tag was removed, false otherwise
-     * @throws IllegalArgumentException if tag is null or empty
-     */
+    //Remove tag from exercise
     public boolean removeTag(String tag) throws IllegalArgumentException {
-        if (tag == null || tag.trim().isEmpty()) {
+        if (tag == null || tag.trim().isEmpty())
             throw new IllegalArgumentException("Tag cannot be null or empty.");
-        }
         return tags != null && tags.remove(tag);
     }
 
@@ -77,18 +62,12 @@ public class Exercise {
         return tags.size();
     }
 
-    /**
-     * Checks if the exercise has a specific tag.
-     * @param tag the tag to check for
-     * @return true if the exercise has the tag, false otherwise
-     */
+    //Check if exercise has specific tag
     public boolean hasTag(String tag) {
         return tags != null && tags.contains(tag);
     }
 
-    /**
-     * Clears all tags from the exercise.
-     */
+    //Clear tags from exercise
     public void clearTags() {
         if (tags != null) {
             tags.clear();
@@ -115,10 +94,7 @@ public class Exercise {
     }
 
     @Override
-    /**
-     * String representation of the exercise object. Shows name, type, and tags.
-      * @return string representation of the exercise
-     */
+    //String representation of exercise
     public String toString() {
         return "Exercise{" +
                 "name='" + name + '\'' +

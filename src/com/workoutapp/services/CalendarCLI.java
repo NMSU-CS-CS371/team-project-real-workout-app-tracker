@@ -51,48 +51,68 @@ public class CalendarCLI {
             LocalTime t = LocalTime.parse(time);
             LocalDateTime dt = LocalDateTime.of(d, t);
 
-            WorkoutRoutine w = new WorkoutRoutine(title);
-
-            while (true) {
-                System.out.print("Add exercise name (or empty to finish): ");
+            //Create exercise routine
+            WorkoutRoutine r = new WorkoutRoutine();
+            while (true) { 
+                System.out.print("Enter exercise name (or empty to finish): ");
                 String ename = scanner.nextLine().trim();
                 if (ename.isEmpty()) break;
-                System.out.print("Enter C for cardio or S for strength");
+
+                System.out.print("Enter C for cardio or S for strength: ");
                 String etype = scanner.nextLine();
-                while(!(etype.equals("S") || etype.equals("C"))){
-                    System.out.print("Enter C for cardio or S for strength");
+                while(true){        //Strength
+                    if(etype.equals("S")){
+                        r.addExercise(new Exercise(ename, ExerciseType.STRENGTH));
+                        break;
+                    } else if(etype.equals("C")){       //Cardio
+                        r.addExercise(new Exercise(ename, ExerciseType.CARDIO));
+                        break;
+                    }
+                    System.out.print("Enter C for cardio or S for strength: ");
                     etype = scanner.nextLine();
                 }
-                if(etype.equals("S")){
-                    Exercise e = new Exercise(ename, ExerciseType.STRENGTH);
+            }
+
+            //Create workoutRoutine
+            System.out.print("Enter workout description:");
+            String description = scanner.nextLine().trim();
+            WorkoutEvent w = new WorkoutEvent(title, description, r);
+
+            for(int i = 0; i< r.getNumEntries(); i++){
+                if(r.getExercise(i).getType() == ExerciseType.STRENGTH){
                     while (true) { 
-                        System.out.print("  Add set as 'sets reps restTime weight notes' (or empty to finish strength entries): ");
+                        System.out.print("  Log exercise " + r.getExercise(i).getName() + " as 'sets reps restTime weight notes': ");
                         String line = scanner.nextLine().trim();
-                        if (line.isEmpty()) break;
                         String[] parts = line.split("\\s+", 5);
-                        int sets = Integer.parseInt(parts[0]);
-                        int reps = Integer.parseInt(parts[1]);
-                        int rest = Integer.parseInt(parts[2]);
-                        double weight = parts.length > 3 ? Double.parseDouble(parts[3]) : 0.0;
-                        String notes = parts.length > 4 ? parts[4] : "";
-                        w.addEntry(new RoutineEntry(e, sets, reps, weight, rest, notes);
+
+                        if (parts.length == 5) {
+                            int sets = Integer.parseInt(parts[0]);
+                            int reps = Integer.parseInt(parts[1]);
+                            int rest = Integer.parseInt(parts[2]);
+                            double weight = parts.length > 3 ? Double.parseDouble(parts[3]) : 0.0;
+                            String notes = parts.length > 4 ? parts[4] : "";
+
+                            w.addEntry(new ExerciseEvent(r.getExercise(i), sets, reps, weight, rest, notes));
+                            break;
+                        }
                     }
-                } else if(etype.equals("C")){
-                    Exercise e = new Exercise(ename, ExerciseType.CARDIO);
-                    while (true) { 
-                        System.out.print("  Add set as 'intensity restTime duration notes' (or empty to finish cardio entries): ");
+                } else if(r.getExercise(i).getType() == ExerciseType.CARDIO){
+                   while (true) { 
+                        System.out.print("  Log exercise " + r.getExercise(i).getName() + " as 'intesity duration restTime notes': ");
                         String line = scanner.nextLine().trim();
-                        if (line.isEmpty()) break;
-                        String[] parts = line.split("\\s+", 5);
-                        int intensity = Integer.parseInt(parts[0]);
-                        int d = Integer.parseInt(parts[1]);
-                        int rest = Integer.parseInt(parts[2]);
-                        double weight = parts.length > 3 ? Double.parseDouble(parts[3]) : 0.0;
-                        String notes = parts.length > 4 ? parts[4] : "";
-                        w.addEntry(new RoutineEntry(e, sets, reps, weight, rest, notes);
+                        String[] parts = line.split("\\s+", 4);
+
+                        if (parts.length == 4) {
+                            int intensity = Integer.parseInt(parts[0]);
+                            int duration = Integer.parseInt(parts[1]);
+                            int rest = Integer.parseInt(parts[2]);
+                            String notes = parts.length > 3 ? parts[3] : "";
+
+                            w.addEntry(new ExerciseEvent(r.getExercise(i), intensity, rest, duration, notes));
+                            break;
+                        }
                     }
                 }
-
             }
 
             System.out.print("Notes for event: ");

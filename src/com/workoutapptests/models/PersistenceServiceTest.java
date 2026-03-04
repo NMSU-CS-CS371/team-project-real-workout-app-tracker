@@ -1,8 +1,7 @@
 package com.workoutapptests.models;
 
 import com.workoutapp.services.PersistenceService;
-import com.workoutapp.ui.CalendarEvent;
-import com.workoutapp.models.Workout;
+import com.workoutapp.models.*;
 import org.junit.jupiter.api.*;
 
 import java.io.File;

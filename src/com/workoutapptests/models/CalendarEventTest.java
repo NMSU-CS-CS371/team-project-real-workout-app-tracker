@@ -18,7 +18,7 @@ public class CalendarEventTest {
     public void setUp() {
         workout = new WorkoutRoutine("Morning", "");
         Exercise e = new Exercise("Pushups", ExerciseType.STRENGTH);
-        ExerciseEvent r = new ExerciseEvent(e, 10, 5, 60, 600);
+        ExerciseEvent event = new ExerciseEvent(e, 10, 5, 0, 600, "");
         r.setNotes("good");
         workout.addEntry(r);
         event = new CalendarEvent(LocalDateTime.of(2025,1,1,9,0), workout, "note1");

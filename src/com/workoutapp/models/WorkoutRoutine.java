@@ -49,7 +49,7 @@ public class WorkoutRoutine implements Serializable{
 
     // Return list of all the exercises
     public List<Exercise> getExercises() {
-        return this.exercises;
+        return exercises == null ? null : List.copyOf(exercises);
     }
 
     //Get number of exercises in routine
