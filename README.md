@@ -1,6 +1,5 @@
 # team-project-real-workout-app-tracker
 ## Workout Tracker - CSCI 3710 Team Project
-<<<<<<< HEAD
 Lightweight, offline, java-based workout tracking application focused on routine creation, simple exercise logging, and local JSON-based data storage.
 
 ## Project Summary

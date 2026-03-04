@@ -8,12 +8,12 @@ public class CalendarEvent implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private LocalDateTime dateTime;
-    private WorkoutEvent workout;
+    private ExerciseInstance workout;
     private String notes;
 
     public CalendarEvent() {}
 
-    public CalendarEvent(LocalDateTime dateTime, WorkoutEvent workout, String notes) {
+    public CalendarEvent(LocalDateTime dateTime, ExerciseInstance workout, String notes) {
         this.dateTime = dateTime;
         this.workout = workout;
         this.notes = notes;
@@ -23,7 +23,7 @@ public class CalendarEvent implements Serializable {
         return dateTime; 
     }
 
-    public WorkoutEvent getWorkout() { 
+    public ExerciseInstance getWorkout() { 
         return workout; 
     }
 
@@ -35,7 +35,7 @@ public class CalendarEvent implements Serializable {
         this.dateTime = dateTime; 
     }
 
-    public void setWorkout(WorkoutEvent workout) { 
+    public void setWorkout(ExerciseInstance workout) { 
         this.workout = workout; 
     }
     public void setNotes(String notes) { 
