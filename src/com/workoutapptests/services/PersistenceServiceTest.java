@@ -1,4 +1,4 @@
-package com.workoutapptests.models;
+package com.workoutapptests.services;
 
 import com.workoutapp.services.PersistenceService;
 import com.workoutapp.models.*;

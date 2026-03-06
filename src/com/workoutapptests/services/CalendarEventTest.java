@@ -1,4 +1,4 @@
-package com.workoutapptests.models;
+package com.workoutapptests.services;
 
 import com.workoutapp.models.*;
 import org.junit.jupiter.api.*;
