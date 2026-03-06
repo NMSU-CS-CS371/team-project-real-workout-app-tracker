@@ -1,7 +1,7 @@
 package com.workoutapp.app;
 
-import com.workoutapp.services.CalendarCLI;
 import com.workoutapp.models.*;
+import com.workoutapp.services.CalendarCLI;
 import java.util.*;
 
 public class Main{

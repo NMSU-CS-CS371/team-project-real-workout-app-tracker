@@ -35,7 +35,7 @@ public class Exercise {
     @Override
     public String toString() {
         return "Exercise: " + name
-            + "\n Description: " + description
+            + "\nDescription: " + description
             + "\nType: " + type;
     }
 }
