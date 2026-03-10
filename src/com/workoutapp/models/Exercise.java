@@ -6,6 +6,9 @@ public class Exercise {
     private String description;
     private ExerciseType type;
 
+    public Exercise() {} // Default/null constructor for GSON serialization/deserialization
+
+    // Constructor that accepts arguments for all fields
     public Exercise(String name, String description, ExerciseType type) {
         this.name = name;
         this.description = description;

@@ -38,7 +38,7 @@
 
         <!-- Point to compiled classes -->
         <arg value="--class-path"/>
-        <arg value="${classes.dir}"/>
+        <arg value="${classes.dir}:${lib.dir}/*"/>
 
         <!-- Automatically discover all tests -->
         <arg value="--scan-class-path"/>
