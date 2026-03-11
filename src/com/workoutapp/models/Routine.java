@@ -29,6 +29,11 @@ public class Routine {
         return exercises;
     }
 
+    // Returns number of exercises in routine
+    public int getNumExercises() {
+        return exercises.size();
+    }
+
     // Adds an exercise to the routine
     public void addExercise(Exercise exercise) {
         exercises.add(exercise);
@@ -39,10 +44,15 @@ public class Routine {
         exercises.remove(exercise);
     }
 
+    // Removes an exercise from the routine at index
+    public void removeExerciseAt(int index) {
+        exercises.remove(index);
+    }
+
     // Prints the routine details
     public String toString() {
         StringBuilder r = new StringBuilder();
-        r.append(routineName).append("\n-------------");
+        r.append(routineName).append("\n-------------\n");
         for (Exercise exercise : exercises) {
             r.append(exercise.toString()).append("\n");
         }
