@@ -8,7 +8,7 @@ public class CalendarEvent implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private LocalDateTime dateTime;
-    private ExerciseInstance workout;
+    private ExerciseInstance workout; 
     private String notes;
     
     public CalendarEvent() {}
