@@ -13,11 +13,11 @@ public class ExerciseInstance {
     public ExerciseInstance(Exercise exercise, int sets, int reps, double weight) {
         if (exercise == null) {
             throw new IllegalArgumentException("Exercise cannot be null");
-        }
-        if (sets < 0 || reps < 0) {
+        } else if (exercise.getType() == ExerciseType.CARDIO) {
+            throw new IllegalArgumentException("Strength exrcise cannot have type CARDIO");
+        } else if (sets < 0 || reps < 0) {
             throw new IllegalArgumentException("Sets and reps must be non-negative");
-        }
-        if (weight < 0) {
+        } else if (weight < 0) {
             throw new IllegalArgumentException("Weight must be non-negative");
         }
 
@@ -32,8 +32,9 @@ public class ExerciseInstance {
     public ExerciseInstance(Exercise exercise, int durationMinutes) {
         if (exercise == null) {
             throw new IllegalArgumentException("Exercise cannot be null");
-        }
-        if (durationMinutes < 0) {
+        } else if (exercise.getType() != ExerciseType.CARDIO) {
+            throw new IllegalArgumentException("Exercise must have type CARDIO");
+        } else if (durationMinutes < 0) {
             throw new IllegalArgumentException("Duration must be non-negative");
         }
 

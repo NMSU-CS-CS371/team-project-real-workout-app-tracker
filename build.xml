@@ -1,13 +1,25 @@
-<project name="workoutApp" default="test">
+<project name="workoutApp" default="run">
 
     <!-- JUnit Platform Console -->
     <property name="junitjar" location="lib/junit-platform-console-standalone-6.1.0-M1.jar"/>
 
     <!-- directories -->
-    <property name="src.dir"     value="src"/>
+    <property name="src.dir"     value="src/com/workoutapp"/>
     <property name="build.dir"   value="build"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="lib.dir"     value="lib"/>
+    <property name="test.src.dir"     value="src/com/workoutapptests/"/>
+    <property name="test.classes.dir"     value="${build.dir}/classes"/>
+
+    <!-- run the application-->
+    <target name="run" depends="compile">
+        <java classname="com.workoutapp.app.Main" fork="true">
+            <classpath>
+                <pathelement path="${classes.dir}"/>
+                <fileset dir="${lib.dir}" includes="**/*.jar"/>
+            </classpath>
+        </java>
+    </target>
 
     <!-- classpath for compilation and tests -->
     <path id="compile.classpath">
@@ -30,15 +42,25 @@
                release="17" target="17"/>
     </target>
 
+    <!-- compile test sources -->
+    <target name="compile-tests" depends="compile">
+        <mkdir dir="${test.classes.dir}"/>
+        <javac srcdir="${test.src.dir}"
+               destdir="${test.classes.dir}"
+               includeantruntime="false"
+               classpathref="compile.classpath"
+               release="17" target="17"/>
+    </target>
+
     <!-- run junit tests -->
-<target name="test" depends="compile">
+<target name="test" depends="compile-tests">
     <java jar="${junitjar}" fork="true" failonerror="true">
         <!-- Run the JUnit Console Launcher -->
         <arg value="execute"/>
 
         <!-- Point to compiled classes -->
         <arg value="--class-path"/>
-        <arg value="${classes.dir}"/>
+        <arg value="${classes.dir}${path.separator}${test.classes.dir}"/>
 
         <!-- Automatically discover all tests -->
         <arg value="--scan-class-path"/>
@@ -49,8 +71,10 @@
 
         <arg value="--details-theme"/>
         <arg value="ascii"/>
+
+        <arg value="--include-classname"/>
+        <arg value=".*Test"/>
     </java>
 </target>
-
 
 </project>
