@@ -1,8 +1,6 @@
 package com.workoutapp.app;
 
 import com.workoutapp.models.*;
-import com.workoutapp.services.CalendarCLI;
-import java.util.*;
 
 public class Main{
     public static void main(String[] args){
@@ -13,6 +11,8 @@ public class Main{
         r.addExercise(e1);
         r.addExercise(e2);
         r.addExercise(e3);
-        System.out.println(r);
+        Profile user = new Profile("User");
+        user.addRoutine(r);
+        System.out.println(user);
     }    
 }

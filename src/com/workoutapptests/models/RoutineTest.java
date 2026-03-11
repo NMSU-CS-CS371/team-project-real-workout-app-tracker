@@ -87,14 +87,14 @@ public class RoutineTest {
         r.addExercise(e3);
         assertTrue(r.toString().equals("Workout\n" + 
                         "-------------\n" + 
-                        "Exercise: Treadmill\n" + 
+                        "#1 - Exercise: Treadmill\n" + 
                         "Description: Warm up\n" + 
-                        "Type: CARDIO\n" + 
-                        "Exercise: Bench Press\n" + 
+                        "Type: CARDIO\n\n" + 
+                        "#2 - Exercise: Bench Press\n" + 
                         "Description: \n" + 
-                        "Type: CHEST\n" + 
-                        "Exercise: Curls\n" + 
+                        "Type: CHEST\n\n" + 
+                        "#3 - Exercise: Curls\n" + 
                         "Description: \n" + 
-                        "Type: ARMS\n"));    
+                        "Type: ARMS\n\n"));    
     }
 }
