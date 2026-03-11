@@ -1,4 +1,4 @@
-<project name="workoutApp" default="test">
+<project name="workoutApp" default="run">
 
     <!-- JUnit Platform Console -->
     <property name="junitjar" location="lib/junit-platform-console-standalone-6.1.0-M1.jar"/>
@@ -11,6 +11,15 @@
     <property name="test.src.dir"     value="src/com/workoutapptests/"/>
     <property name="test.classes.dir"     value="${build.dir}/classes"/>
 
+    <!-- run the application-->
+    <target name="run" depends="compile">
+        <java classname="com.workoutapp.app.Main" fork="true">
+            <classpath>
+                <pathelement path="${classes.dir}"/>
+                <fileset dir="${lib.dir}" includes="**/*.jar"/>
+            </classpath>
+        </java>
+    </target>
 
     <!-- classpath for compilation and tests -->
     <path id="compile.classpath">

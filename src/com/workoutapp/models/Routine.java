@@ -1,7 +1,6 @@
 package com.workoutapp.models;
 
 import java.util.LinkedList;
-import java.lang.StringBuilder;
 
 public class Routine {
 
@@ -53,8 +52,8 @@ public class Routine {
     public String toString() {
         StringBuilder r = new StringBuilder();
         r.append(routineName).append("\n-------------\n");
-        for (Exercise exercise : exercises) {
-            r.append(exercise.toString()).append("\n");
+        for (int i = 0; i < exercises.size(); i++) {
+            r.append("#" + (i+1) + " - ").append(exercises.get(i).toString()).append("\n\n");
         }
         return r.toString();
     }
