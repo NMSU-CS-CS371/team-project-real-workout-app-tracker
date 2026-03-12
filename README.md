@@ -50,7 +50,6 @@ project-root/
 
 |
 
-|---docs/           Documentation not in wiki
     
 |---build.xml       Ant build file with commands
 
