@@ -13,7 +13,7 @@ public class CalendarEvent implements Serializable {
     
     public CalendarEvent() {}
 
-    public CalendarEvent(LocalDateTime dateTime, ExerciseInstance workout, String notes) {
+    public CalendarEvent(LocalDateTime dateTime, Workout workout, String notes) {
         this.dateTime = dateTime;
         this.workout = workout;
         this.notes = notes;
@@ -23,7 +23,7 @@ public class CalendarEvent implements Serializable {
         return dateTime; 
     }
 
-    public ExerciseInstance getWorkout() { 
+    public Workout getWorkout() { 
         return workout; 
     }
 
@@ -35,7 +35,7 @@ public class CalendarEvent implements Serializable {
         this.dateTime = dateTime; 
     }
 
-    public void setWorkout(ExerciseInstance workout) { 
+    public void setWorkout(Workout workout) { 
         this.workout = workout; 
     }
     public void setNotes(String notes) { 
@@ -47,4 +47,6 @@ public class CalendarEvent implements Serializable {
     public String toString() {
         return "Event[" + dateTime + "]\n" + (workout != null ? workout.toString() : "(no workout)") + "\nNotes: " + notes;
     }
+    // Calendar event gets name of workout which references to the workout object, which is a collection of exerciseInstances. Should also include the date that should pull from system , and then also include notes for the workout. This will be used to populate the calendar view, which will show the name of the workout and the date, and then when clicked will show the details of the workout and any notes.
+    // should be inputed into a CalendarService that will manage collection of CalendarEvents. Its code should be close to ExerciseService with a linked list of CalendarEvents and methods to remove and get events. It should also have a method to get events for a specific date, which will be used to populate the calendar view.
 }
