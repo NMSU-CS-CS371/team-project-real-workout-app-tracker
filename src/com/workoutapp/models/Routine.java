@@ -1,7 +1,6 @@
 package com.workoutapp.models;
 
 import java.util.LinkedList;
-import java.lang.StringBuilder;
 
 public class Routine {
 
@@ -29,6 +28,11 @@ public class Routine {
         return exercises;
     }
 
+    // Returns number of exercises in routine
+    public int getNumExercises() {
+        return exercises.size();
+    }
+
     // Adds an exercise to the routine
     public void addExercise(Exercise exercise) {
         exercises.add(exercise);
@@ -39,12 +43,17 @@ public class Routine {
         exercises.remove(exercise);
     }
 
+    // Removes an exercise from the routine at index
+    public void removeExerciseAt(int index) {
+        exercises.remove(index);
+    }
+
     // Prints the routine details
     public String toString() {
         StringBuilder r = new StringBuilder();
-        r.append(routineName).append("\n-------------");
-        for (Exercise exercise : exercises) {
-            r.append(exercise.toString()).append("\n");
+        r.append(routineName).append("\n-------------\n");
+        for (int i = 0; i < exercises.size(); i++) {
+            r.append("#" + (i+1) + " - ").append(exercises.get(i).toString()).append("\n\n");
         }
         return r.toString();
     }
