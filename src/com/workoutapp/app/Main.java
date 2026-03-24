@@ -1,6 +1,7 @@
 package com.workoutapp.app;
 
 import com.workoutapp.models.*;
+import com.workoutapp.services.*;
 
 public class Main{
     public static void main(String[] args){
@@ -13,6 +14,7 @@ public class Main{
         r.addExercise(e3);
         Profile user = new Profile("User");
         user.addRoutine(r);
+        
         System.out.println(user);
     }    
 }
