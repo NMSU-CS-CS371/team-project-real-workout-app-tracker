@@ -13,10 +13,9 @@ import java.lang.reflect.Type;
  *  The generic implementation allows this class to be used for different types of data, such as exercises, routines, profiles, or calendar events.
  *  
  *  Each object's service class will create an instance of DataStorage, specifying the filePath and type by using a TypeToken.
- *  This allows for each more straightforward saving and loading of data, while keeping individual service classes focused on managing their specific models.
+ *  This is a more straightforward method for saving and loading data, which keeps individual service classes focused on managing their specific models.
  * 
  */
-
 
 public class DataStorage <T> {
 
