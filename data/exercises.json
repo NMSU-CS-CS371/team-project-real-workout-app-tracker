@@ -1,1 +1,17 @@
-[{"name":"Treadmill","description":"Warm up","type":"CARDIO"}]
+[
+  {
+    "name": "Push-Up",
+    "description": "description",
+    "type": "CHEST"
+  },
+  {
+    "name": "Squat",
+    "description": "description",
+    "type": "LEGS"
+  },
+  {
+    "name": "Plank",
+    "description": "description",
+    "type": "CORE"
+  }
+]
