@@ -1,0 +1,22 @@
+[
+  {
+    "routineName": "test",
+    "exercises": [
+      {
+        "name": "Push-Up",
+        "description": "description",
+        "type": "CHEST"
+      },
+      {
+        "name": "Squat",
+        "description": "description",
+        "type": "LEGS"
+      },
+      {
+        "name": "Plank",
+        "description": "description",
+        "type": "CORE"
+      }
+    ]
+  }
+]
