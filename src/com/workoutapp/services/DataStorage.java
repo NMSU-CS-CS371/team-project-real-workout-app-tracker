@@ -1,5 +1,6 @@
 package com.workoutapp.services;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.LinkedList;
@@ -25,7 +26,7 @@ public class DataStorage <T> {
     // Constructor - initializes file path and Gson instancee
     public DataStorage(String filePath) {
         this.filePath = filePath;
-        this.gson = new Gson(); // Initialize Gson instance, which converts Java objects to JSON and vice versa
+        this.gson = new GsonBuilder().setPrettyPrinting().create(); // Initialize Gson instance, which converts Java objects to JSON and vice versa
 
     }
 
@@ -48,6 +49,11 @@ public class DataStorage <T> {
         try (FileReader reader = new FileReader(filePath)) { // Create a file reader to read from the specified file path
             
             LinkedList<T> data = gson.fromJson(reader, listType); // Create a linked list of type T that is populated with the file data, which is converted from JSON to java objects
+            
+            if (data == null) { // if the file is empty, return an empty linked list.
+                return new LinkedList<>();
+            }
+
             return data; // Return the loaded data
 
         } catch (Exception e) {
