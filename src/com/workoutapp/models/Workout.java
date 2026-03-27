@@ -5,9 +5,23 @@ public class Workout {
 
     private LinkedList<ExerciseInstance> exercises;
 
-    // Constructor
+    // No-arg constructor for creating a workout manually, initializes the exercises list
     public Workout() {
         this.exercises = new LinkedList<>();
+    }
+
+    // Constructor for creating a workout using a routine - takes a routine and creates a workout with the exercises as exercise instances
+    public Workout(Routine routine) {
+        this.exercises = new LinkedList<>();
+        for (Exercise e : routine.getExercises()) {
+            if (e.getType() == ExerciseType.CARDIO) {
+                // if the exercise is a cardio exercise, initialize the exercise instances with a duration of 0.
+                exercises.add(new ExerciseInstance(e, 0));
+            } else {
+                // if the exercise is a strength exercise, set default values for sets, reps, and weight.
+                exercises.add(new ExerciseInstance(e, 0, 0, 0.0));
+            }
+        }  
     }
     
     // Returns a copy of the exercises in the workout
