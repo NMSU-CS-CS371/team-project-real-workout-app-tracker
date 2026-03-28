@@ -6,10 +6,6 @@ import java.util.LinkedList;
 
 /*  
 *   ExerciseService
-*
-*
-*
-*
 */
 
 public class ExerciseService {

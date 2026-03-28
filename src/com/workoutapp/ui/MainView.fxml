@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.workoutapp.ui.MainController">
+
+    <items>
+
+        <!-- LEFT SIDE: Exercise list -->
+        <VBox spacing="10" prefWidth="250">
+            <Label text="Exercises"/>
+            <ListView fx:id="exerciseList" />
+        </VBox>
+
+        <!-- RIGHT SIDE: Routine list + save button -->
+        <VBox spacing="10" prefWidth="250">
+            <Label text="Routine"/>
+            <ListView fx:id="routineList" />
+            <Button fx:id="saveButton" text="Save Routine"/>
+        </VBox>
+
+    </items>
+
+</SplitPane>
