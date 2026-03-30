@@ -1,0 +1,22 @@
+[
+  {
+    "routineName": "UI Routine",
+    "exercises": [
+      {
+        "name": "Treadmill",
+        "description": "description",
+        "type": "CARDIO"
+      },
+      {
+        "name": "Plank",
+        "description": "description",
+        "type": "CORE"
+      },
+      {
+        "name": "Push-Up",
+        "description": "description",
+        "type": "CHEST"
+      }
+    ]
+  }
+]
