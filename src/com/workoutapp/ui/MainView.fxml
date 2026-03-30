@@ -12,13 +12,24 @@
         <VBox spacing="10" prefWidth="250">
             <Label text="Exercises"/>
             <ListView fx:id="exerciseList" />
+
+            <HBox spacing="5">
+                <Button fx:id="deleteButton" text="Delete"/>
+                <Button text="Up" fx:id="moveUpButton"/>
+                <Button text="Down" fx:id="moveDownButton"/>
+            </HBox>
         </VBox>
 
         <!-- RIGHT SIDE: Routine list + save button -->
         <VBox spacing="10" prefWidth="250">
             <Label text="Routine"/>
-            <ListView fx:id="routineList" />
-            <Button fx:id="saveButton" text="Save Routine"/>
+            <ListView fx:id="routineList" /> 
+
+            <HBox spacing="5">
+                <Button fx:id="clearButton" text="Clear"/>
+                <Button fx:id="saveButton" text="Save Routine"/>
+            </HBox>
+
         </VBox>
 
     </items>
