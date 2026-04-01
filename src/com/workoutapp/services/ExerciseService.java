@@ -30,44 +30,55 @@ public class ExerciseService {
 
     // getExercises - returns the list of exercises currently being managed by the ExerciseService instance
     public LinkedList<Exercise> getExercises() {
+        if (this.exercises == null) {
+            this.exercises = new LinkedList<>();
+        }
         return exercises;
     }
 
     // addExercise adds a new exercise to the list of all exercises, and then saves the updated list using the DataStorage instance
     public void addExercise(Exercise exercise) {
-
+        if (exercise == null) {
+            throw new IllegalArgumentException("Exercise cannot be null");
+        }
         if (checkExerciseExists(exercise.getName())) { // check if an exercise with the same name exists before adding the new exercise
             System.out.println("An exercise with the name " + exercise.getName() + " already exists."); // if the exercise already exists, print an error message
             return;
         }
-
-        exercises.add(exercise); // add the new exercise to the list of exercises
+        if (this.exercises == null) {
+            this.exercises = new LinkedList<>();
+        }
+        this.exercises.add(exercise); // add the new exercise to the list of exercises
         System.out.println("Exercise " + exercise.getName() + " added successfully."); // print a success message confirming that the exercise was added
         storage.save(exercises); // save the new list of exercises to the file using DataStorage's save method
-
     }
 
     // checkExerciseExists - helper method for use in addExercise method: checks if an exercise with entered name already exists. Returns true or false.
     public boolean checkExerciseExists(String name) {
-
-        for (Exercise e: exercises) { // iterate through the list of exercises, and check if any of them have the name of the exercise being added
-            if (e.getName().equalsIgnoreCase(name)) { // if an exercise with the same name is found, return true
+        if (name == null) {
+            return false;
+        }
+        if (this.exercises == null) {
+            this.exercises = new LinkedList<>();
+        }
+        for (Exercise e: exercises) {
+            if (e.getName().equalsIgnoreCase(name)) {
                 return true;
-            } else { // if the exercise being checked does not have the same name as the exercise being added, continue checking the rest of the exercises
-                continue;
             }
         }
-
-        return false; // if there is no exercise with the same name already in the list, return false
-
+        return false;
     }
 
     // removeExercise removes an exercise, then saves the updated list using the DataStorage instance
-    public void removeExercise(Exercise exercise) {
-
-        exercises.remove(exercise); // remove the specified exercise from the list of exercises
-        storage.save(exercises); // save the new list of exercises to the file using DataStorage
-
+    public boolean removeExercise(Exercise exercise) {
+        if (exercise == null || this.exercises == null) {
+            return false;
+        }
+        boolean removed = this.exercises.remove(exercise); // remove the specified exercise from the list of exercises
+        if (removed) {
+            storage.save(exercises); // save the new list of exercises to the file using DataStorage
+        }
+        return removed;
     }
 
 } // end of ExerciseService class
