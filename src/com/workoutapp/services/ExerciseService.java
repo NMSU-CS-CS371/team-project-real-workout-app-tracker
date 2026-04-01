@@ -16,11 +16,33 @@ public class ExerciseService {
         this.exercises = storage.load(exerciseListType); // Loads the list of exercises from the specified file path by using DataStorage's load method with the specified object type.
     }
 
+    public void addExercise(Exercise exercise) {
+        if (exercise == null) {
+            throw new IllegalArgumentException("Exercise cannot be null");
+        }
+        if (this.exercises == null) {
+            this.exercises = new LinkedList<>();
+        }
+        this.exercises.add(exercise);
+        storage.save(exercises);
+    }
 
-// getExercises returns the list of exercises
+    public LinkedList<Exercise> getExercises() {
+        if (this.exercises == null) {
+            this.exercises = new LinkedList<>();
+        }
+        return this.exercises;
+    }
 
-// addExercise adds a new exercise to the list of all exercises, and then saves the updated list using the DataStorage instance
-
-// removeExercise
+    public boolean removeExercise(Exercise exercise) {
+        if (exercise == null || this.exercises == null) {
+            return false;
+        }
+        boolean removed = this.exercises.remove(exercise);
+        if (removed) {
+            storage.save(exercises);
+        }
+        return removed;
+    }
 
 } // end of ExerciseService class
