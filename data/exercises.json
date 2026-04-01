@@ -13,5 +13,10 @@
     "name": "Plank",
     "description": "description",
     "type": "CORE"
+  },
+  {
+    "name": "Treadmill",
+    "description": "description",
+    "type": "CARDIO"
   }
 ]

@@ -11,15 +11,15 @@
     <property name="test.src.dir"     value="src/com/workoutapptests/"/>
     <property name="test.classes.dir"     value="${build.dir}/classes"/>
 
-    <!-- run the application-->
-    <target name="run" depends="compile">
-        <java classname="com.workoutapp.app.Main" fork="true">
-            <classpath>
-                <pathelement path="${classes.dir}"/>
-                <fileset dir="${lib.dir}" includes="**/*.jar"/>
-            </classpath>
-        </java>
-    </target>
+    <!-- Windows JavaFX path -->
+    <condition property="javafx.lib" value="C:/Program Files/Java/javafx-sdk-21.0.10/lib">
+        <os family="windows"/>
+    </condition>
+
+    <!-- Linux JavaFX path -->
+    <condition property="javafx.lib" value="../javafx-sdk-21.0.10/lib">
+        <os family="unix"/>
+    </condition>
 
     <!-- classpath for compilation and tests -->
     <path id="compile.classpath">
@@ -35,11 +35,21 @@
     <!-- compile main sources -->
     <target name="compile" depends="clean">
         <mkdir dir="${classes.dir}"/>
+        <copy todir="${classes.dir}">
+            <fileset dir="src" includes="**/*.fxml"/>
+        </copy>
         <javac srcdir="${src.dir}"
                destdir="${classes.dir}"
                includeantruntime="false"
                classpathref="compile.classpath"
-               release="17" target="17"/>
+               release="17" target="17">
+    
+            <!-- JavaFX module path -->
+            <compilerarg value="--module-path"/>
+            <compilerarg value="${javafx.lib}"/>
+            <compilerarg value="--add-modules"/>
+            <compilerarg value="javafx.controls,javafx.fxml"/>  
+        </javac>  
     </target>
 
     <!-- compile test sources -->
@@ -53,28 +63,44 @@
     </target>
 
     <!-- run junit tests -->
-<target name="test" depends="compile-tests">
-    <java jar="${junitjar}" fork="true" failonerror="true">
-        <!-- Run the JUnit Console Launcher -->
-        <arg value="execute"/>
+    <target name="test" depends="compile-tests">
+        <java jar="${junitjar}" fork="true" failonerror="true">
+            <!-- Run the JUnit Console Launcher -->
+            <arg value="execute"/>
 
-        <!-- Point to compiled classes -->
-        <arg value="--class-path"/>
-        <arg value="${classes.dir}:${lib.dir}/*"/>
+            <!-- Point to compiled classes -->
+            <arg value="--class-path"/>
+            <arg value="${classes.dir}:${lib.dir}/*"/>
 
-        <!-- Automatically discover all tests -->
-        <arg value="--scan-class-path"/>
+            <!-- Automatically discover all tests -->
+            <arg value="--scan-class-path"/>
 
-        <!-- Optional: pretty output -->
-        <arg value="--details"/>
-        <arg value="tree"/>
+            <!-- Optional: pretty output -->
+            <arg value="--details"/>
+            <arg value="tree"/>
 
-        <arg value="--details-theme"/>
-        <arg value="ascii"/>
+            <arg value="--details-theme"/>
+            <arg value="ascii"/>
 
-        <arg value="--include-classname"/>
-        <arg value=".*Test"/>
-    </java>
-</target>
+            <arg value="--include-classname"/>
+            <arg value=".*Test"/>
+        </java>
+    </target>
+
+    <!-- run the application-->
+    <target name="run" depends="compile">
+        <java classname="com.workoutapp.app.Main" fork="true">
+            <classpath>
+                <pathelement path="${classes.dir}"/>
+                <fileset dir="${lib.dir}" includes="**/*.jar"/>
+            </classpath>
+
+            <!-- JavaFX runtime module path -->
+            <jvmarg value="--module-path"/>
+            <jvmarg value="${javafx.lib}"/>
+            <jvmarg value="--add-modules"/>
+            <jvmarg value="javafx.controls,javafx.fxml"/>
+        </java>
+    </target>
 
 </project>

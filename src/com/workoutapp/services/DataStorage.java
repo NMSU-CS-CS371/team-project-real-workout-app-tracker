@@ -38,9 +38,8 @@ public class DataStorage <T> {
             gson.toJson(data, writer); // Convert the data fed from the LinkedList to JSON format and write it to the file
 
         } catch (Exception e) {
-
-            System.out.println("Error writing to file");
-
+            System.out.println("Error writing to file" + e.getMessage());
+            e.printStackTrace();
         }
     }
 
