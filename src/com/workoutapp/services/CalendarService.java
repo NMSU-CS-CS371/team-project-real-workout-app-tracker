@@ -23,8 +23,8 @@ public class CalendarService {
     private DataStorage<CalendarEvent> storage; // instance of DataStorage to handle saving and loading events
     private Type eventListType; // type object used to specify the type of data being loaded/saved
 
-    public CalendarService() {
-        this.storage = new DataStorage<>("data/calendar_events.json"); // Initializes DataStorage with the file path for calendar events
+    public CalendarService(String profileName) {
+        this.storage = new DataStorage<>("data/" + profileName + "/calendar_events.json"); // Initializes DataStorage with the file path for calendar events under the profile
         this.eventListType = new TypeToken<LinkedList<CalendarEvent>>(){}.getType(); // Initializes the type object for a LinkedList of CalendarEvent objects
         this.events = storage.load(eventListType); // Loads the list of events from the specified file path
     }

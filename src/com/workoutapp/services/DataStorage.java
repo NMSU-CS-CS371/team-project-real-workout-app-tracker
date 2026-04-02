@@ -1,10 +1,13 @@
 package com.workoutapp.services;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.LinkedList;
 import java.lang.reflect.Type;
+import java.time.LocalDateTime;
+
 
 /* 
  * 
@@ -26,7 +29,11 @@ public class DataStorage <T> {
     // Constructor - initializes file path and Gson instancee
     public DataStorage(String filePath) {
         this.filePath = filePath;
-        this.gson = new GsonBuilder().setPrettyPrinting().create(); // Initialize Gson instance, which converts Java objects to JSON and vice versa
+        new File(filePath).getParentFile().mkdirs(); // Make sure the profile directory exists before trying to read/write to files
+        this.gson = new GsonBuilder()
+            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+            .setPrettyPrinting()
+            .create(); // Initialize Gson instance, which converts Java objects to JSON and vice versa
 
     }
 
@@ -57,7 +64,7 @@ public class DataStorage <T> {
 
         } catch (Exception e) {
 
-            System.out.println("Error reading from file");
+            //System.out.println("Error reading from file");
             return new LinkedList<>(); // Return an empty linked list if there was an error reading the file
 
         }

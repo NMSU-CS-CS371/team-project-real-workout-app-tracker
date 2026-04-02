@@ -14,8 +14,8 @@ public class RoutineService {
     private Type routineListType;           // type object used to specify the type of data being loaded/saved, so that DataStorage can properly rebuild the list of routines from the Json file
 
     // constructor - initializes a DataStorage instance for routines, sets the routineListType using type token, and loads the existing routines from the routine json file
-    public RoutineService() { 
-        this.storage = new DataStorage<>("data/routines.json");
+    public RoutineService(String profileName) { 
+        this.storage = new DataStorage<>("data/" + profileName + "/routines.json");
         this.routineListType = new TypeToken<LinkedList<Routine>>() {}.getType();
         this.routines = storage.load(routineListType);
     }
@@ -25,21 +25,26 @@ public class RoutineService {
     }
 
     public void addRoutine(Routine routine) {   // adds a new routine to the list of routines after performing a check to ensure that the routine isn't null or already created.
-        if (routine == null || routine.getRoutineName() == null || routine.getRoutineName().isBlank()) {
+
+        if (routine == null || routine.getRoutineName() == null) {  // if the routine is empty or has no name, print a message and return without adding the routine
             System.out.println("Routine name is required.");
             return;
         }
 
-        if (checkRoutineExists(routine.getRoutineName())) {
+        if (checkRoutineExists(routine.getRoutineName())) { // if a routine with the name already exists, print a message and return without adding the routine
             System.out.println("A routine with the name " + routine.getRoutineName() + " already exists.");
             return;
         }
 
-        routines.add(routine);
-        storage.save(routines);
+        routines.add(routine);  // add the routine to the list of routines
+        storage.save(routines); // save the updated routine list
     }
 
+    
+    // check if a routine with the entered name already exists, return true or false
     public boolean checkRoutineExists(String routineName) {
+
+        // Iterate through the routine list and check for a duplicate routine name. Return true if a duplicate is found, otherwise return false.
         for (Routine r : routines) {
             if (r.getRoutineName().equalsIgnoreCase(routineName)) {
                 return true;
@@ -48,22 +53,29 @@ public class RoutineService {
         return false;
     }
 
+    // find and return the routine with the entered name, or return null if not found
     public Routine findRoutine(String routineName) {
+
+        // iterate through the routine list and check for a name match. if found, return the routine, otherwise return null
         for (Routine r : routines) {
             if (r.getRoutineName().equalsIgnoreCase(routineName)) {
                 return r;
             }
         }
         return null;
-    }
+    }  
 
+    // remove the routine from the routine list and save the updated list
     public void removeRoutine(Routine routine) {
         routines.remove(routine);
         storage.save(routines);
     }
 
+
     public void addExercise(String routineName, Exercise exercise) {
+
         Routine routine = findRoutine(routineName);
+
         if (routine == null) {
             System.out.println("Routine not found: " + routineName);
             return;
@@ -86,7 +98,9 @@ public class RoutineService {
     }
 
     public void removeExercise(String routineName, String exerciseName) {
+
         Routine routine = findRoutine(routineName);
+        
         if (routine == null) {
             System.out.println("Routine not found: " + routineName);
             return;
