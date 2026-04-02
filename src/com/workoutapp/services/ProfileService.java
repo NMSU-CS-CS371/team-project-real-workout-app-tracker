@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 /*
  * ProfileService manages a collection of profile names that are persisted to data/profiles.json.
- * Each profile serves as a namespace for that user's exercises, routines, calendar events, etc.
+ * Each profile serves as a reference to a directory used for storing that user's exercises, routines, calendar events, etc.
  * The service provides methods to create, retrieve, and delete profiles.
  */
 public class ProfileService {
