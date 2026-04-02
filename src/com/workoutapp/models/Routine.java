@@ -38,6 +38,12 @@ public class Routine {
         exercises.add(exercise);
     }
 
+    // Adds an exercise to the routine at index
+    public void addExercise(Exercise exercise, int index) {
+        exercises.add(index, exercise);
+    }
+
+
     // Removes an exercise from the routine
     public void removeExercise(Exercise exercise) {
         exercises.remove(exercise);
