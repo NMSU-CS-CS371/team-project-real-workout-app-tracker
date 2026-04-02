@@ -5,11 +5,9 @@ import java.lang.reflect.Type;
 import java.util.LinkedList;
 
 /*  
-*   ExerciseService
-*
-*
-*
-*
+*   ExerciseService is used to manage a collection of exercise objects that are persisted to a json file.
+*   The service provides methods to add, remove, and find/retrieve exercises, and uses an instance of DataStorage
+*   to handle saving and loading exercises to and from the json file.
 */
 
 public class ExerciseService {
@@ -18,8 +16,8 @@ public class ExerciseService {
     private DataStorage<Exercise> storage; // instance of DataStorage to handle saving and loading exercises
     private Type exerciseListType; // type object used to specify the type of data being loaded/saved, so that DataStorage can properly rebuild the list of exercises from JSON
 
-    public ExerciseService() {
-        this.storage = new DataStorage<>("data/exercises.json"); // Initializes DataStorage with the file path for the list of global exercises)
+    public ExerciseService(String profileName) {
+        this.storage = new DataStorage<>("data/" + profileName + "/exercises.json"); // Initializes DataStorage with the file path for exercises under the profile
         this.exerciseListType = new TypeToken<LinkedList<Exercise>>(){}.getType(); // Initializes the type object for a LinkedList of Exercise objects, which is used when loading/saving exercises
         this.exercises = storage.load(exerciseListType); // Loads the list of exercises from the specified file path by using DataStorage's load method with the specified object type.
     }
@@ -40,6 +38,7 @@ public void addExercise(Exercise exercise) {
     }
 
     exercises.add(exercise); // add the new exercise to the list of exercises
+    System.out.println("Exercise " + exercise.getName() + " added successfully."); // print a success message confirming that the exercise was added
     storage.save(exercises); // save the new list of exercises to the file using DataStorage's save method
 
 }

@@ -8,9 +8,12 @@ public class Main{
     public static void main(String[] args) {
 
         // initialize services
-        ExerciseService exerciseService = new ExerciseService();
-        RoutineService routineService = new RoutineService();
-        CalendarService calendarService = new CalendarService();
+        String profileName = "test_prof"; // test profile name
+        ProfileService profileService = new ProfileService();
+        ExerciseService exerciseService = new ExerciseService(profileName);
+        RoutineService routineService = new RoutineService(profileName);
+        CalendarService calendarService = new CalendarService(profileName);
+
 
         // create some exercises
         Exercise pushUp = new Exercise("Push-Up", "description", ExerciseType.CHEST);
@@ -31,10 +34,12 @@ public class Main{
         // refetch the routine to ensure it has all exercises
         test = routineService.findRoutine("test");
 
-        test.toString();
+        System.out.println(test.toString());
 
         Workout workout = new Workout(test);
         System.out.println(workout.toString());
+
+
 
         // create calendar event with the workout
         CalendarEvent event = new CalendarEvent(LocalDateTime.now(), workout, "Demo workout session");
