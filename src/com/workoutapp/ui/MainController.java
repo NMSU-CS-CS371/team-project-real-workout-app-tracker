@@ -21,8 +21,8 @@ public class MainController {
 
     @FXML
     public void initialize(){
-        exerciseService = new ExerciseService();
-        routineService = new RoutineService();
+        ExerciseService exerciseService = new ExerciseService("demo_user");
+        RoutineService routineService = new RoutineService("demo_user");
 
         // Load exercises into left list
         exerciseList.getItems().addAll(exerciseService.getExercises());
