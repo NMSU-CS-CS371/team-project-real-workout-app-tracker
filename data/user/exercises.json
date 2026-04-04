@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Treadmill",
+    "description": "",
+    "type": "CARDIO"
+  },
+  {
+    "name": "Elliptical",
+    "description": "",
+    "type": "CARDIO"
+  },
+  {
+    "name": "Curls",
+    "description": "",
+    "type": "ARMS"
+  },
+  {
+    "name": "Push Up",
+    "description": "",
+    "type": "CORE"
+  },
+  {
+    "name": "Bench Press",
+    "description": "",
+    "type": "CHEST"
+  }
+]
