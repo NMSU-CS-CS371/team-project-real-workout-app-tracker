@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.workoutapp.ui.RoutineEditorController">
+
+    <items>
+
+        <!-- LEFT SIDE: Exercise list -->
+        <VBox spacing="10" prefWidth="250">
+            <Label text="Exercises (click to add)"/>
+            <ListView fx:id="exerciseList" />
+
+            <HBox spacing="5">
+                <Button fx:id="createExerciseButton" text="Create Exercise"/>
+                <Button fx:id="deleteButton" text="Delete"/>
+                <Button text="Up" fx:id="moveUpButton"/>
+                <Button text="Down" fx:id="moveDownButton"/>
+            </HBox>
+        </VBox>
+
+        <!-- RIGHT SIDE: Routine list + save button -->
+        <VBox spacing="10" prefWidth="250">
+            <Label text="Routine"/>
+            <ListView fx:id="routineList" /> 
+
+            <HBox spacing="5">
+                <Button fx:id="clearButton" text="Clear"/>
+                <Button fx:id="saveButton" text="Save Routine"/>
+            </HBox>
+
+        </VBox>
+
+    </items>
+
+</SplitPane>
