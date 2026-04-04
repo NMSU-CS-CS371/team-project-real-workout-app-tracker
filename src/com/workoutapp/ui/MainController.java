@@ -40,6 +40,8 @@ public class MainController {
         profileCombo.getSelectionModel().selectedItemProperty().addListener(
             (obs, oldVal, newVal) -> onProfileSelected(newVal)
         );
+        
+        profileCombo.getSelectionModel().selectFirst();
 
         //Initialize buttons
         newProfileButton.setOnAction(e -> createProfile());
