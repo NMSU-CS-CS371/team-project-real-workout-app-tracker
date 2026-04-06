@@ -16,7 +16,7 @@ public class Main extends Application{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/workoutapp/ui/MainView.fxml"));
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);
-        stage.setTitle("Workout Routine Builder");
+        stage.setTitle("Workout Tracker");
         stage.show();
     }
     public static void main(String[] args) {
