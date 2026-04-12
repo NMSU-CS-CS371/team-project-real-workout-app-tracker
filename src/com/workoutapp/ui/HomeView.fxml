@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.workoutapp.ui.HomeController" minWidth="630" minHeight="400">
+
+    <!-- LEFT SIDE: Recent Workouts -->
+    <left>
+        <VBox spacing="15" prefWidth="350">
+            <padding>
+                <Insets top="20" left="20" bottom="20" right="10"/>
+            </padding>
+
+            <Label text="Recent Workouts" style="-fx-font-size: 18;" alignment="CENTER" maxWidth="Infinity"/>
+            <ListView fx:id="recentWorkoutsList" prefHeight="300"/>
+        </VBox>
+    </left>
+
+    <!-- RIGHT SIDE: Navigation Buttons + Recovery Suggestions -->
+    <right>
+        <VBox spacing="20" prefWidth="300">
+            <padding>
+                <Insets top="22" right="20" bottom="20" left="10"/>
+            </padding>
+
+            <!-- Top-right: Start Workout, Workout History, Routine Editor -->
+            <Button fx:id="startWorkoutButton" text="Start Workout" 
+                    maxWidth="Infinity" 
+                    style="-fx-font-size: 14;"/>
+
+            <Button fx:id="historyButton" text="Workout History"  
+                    maxWidth="Infinity" 
+                    style="-fx-font-size: 14;"/>
+
+            <Button fx:id="routineEditorButton" text="Routine Editor"
+                    maxWidth="Infinity"
+                    style="-fx-font-size: 14;" />
+
+            <!-- Bottom-right: Recovery Suggestions -->
+            <TitledPane text="Recovery Suggestions" expanded="true">
+                <VBox fx:id="recoveryBox" spacing="10">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                    <Label text="(Recovery suggestions will appear here.)"/>
+                </VBox>
+            </TitledPane>
+        </VBox>
+    </right>
+
+</BorderPane>
