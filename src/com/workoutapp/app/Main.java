@@ -17,6 +17,8 @@ public class Main extends Application{
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);
         stage.setTitle("Workout Routine Builder");
+        stage.setMinWidth(660);
+        stage.setMinHeight(480);
         stage.show();
     }
     public static void main(String[] args) {
