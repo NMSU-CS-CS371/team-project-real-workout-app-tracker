@@ -8,7 +8,6 @@ import java.util.LinkedList;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 
-
 /* 
  * 
  *  DataStorage is a generic class that provides methods to save and load data of type T to and from Json files. 
@@ -17,10 +16,9 @@ import java.time.LocalDateTime;
  *  The generic implementation allows this class to be used for different types of data, such as exercises, routines, profiles, or calendar events.
  *  
  *  Each object's service class will create an instance of DataStorage, specifying the filePath and type by using a TypeToken.
- *  This is a more straightforward method for saving and loading data, which keeps individual service classes focused on managing their specific models.
+ *  This allows for each more straightforward saving and loading of data, while keeping individual service classes focused on managing their specific models.
  * 
  */
-
 public class DataStorage <T> {
 
     private String filePath;
@@ -59,12 +57,10 @@ public class DataStorage <T> {
             if (data == null) { // if the file is empty, return an empty linked list.
                 return new LinkedList<>();
             }
-
             return data; // Return the loaded data
 
         } catch (Exception e) {
-
-            //System.out.println("Error reading from file");
+            System.out.println("Error reading from file");
             return new LinkedList<>(); // Return an empty linked list if there was an error reading the file
 
         }

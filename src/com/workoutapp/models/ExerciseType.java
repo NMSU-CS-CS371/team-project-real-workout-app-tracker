@@ -5,7 +5,10 @@ public enum ExerciseType {
     CHEST,
     BACK,
     LEGS,
-    ARMS,
     SHOULDERS,
-    CORE
+    ARMS,
+    BICEPS,
+    TRICEPS,
+    CORE,
+    ABS
 }
