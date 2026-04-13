@@ -72,4 +72,8 @@ public class MainController {
     public String getCurrentProfile() {
         return currentProfile;
     }
+
+    public ComboBox<String> getProfileDropDown() {
+        return profileDropDown;
+    }
 }
