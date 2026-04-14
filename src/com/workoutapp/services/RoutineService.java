@@ -122,4 +122,9 @@ public class RoutineService {
         routine.removeExercise(ex);
         storage.save(routines);
     }
+
+    //Save all routines in this service to file
+    public void saveAll() {
+        storage.save(routines);
+    }
 }

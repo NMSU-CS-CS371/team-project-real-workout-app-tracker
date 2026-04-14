@@ -81,4 +81,9 @@ public class ExerciseService {
         return removed;
     }
 
+    //Save exercises to file
+    public void saveExercises() {
+        storage.save(exercises);
+    }
+
 } // end of ExerciseService class

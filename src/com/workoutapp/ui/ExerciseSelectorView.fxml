@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.workoutapp.ui.ExerciseSelectorController">
+
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" left="10" bottom="10" right="10"/>
+            </padding>
+
+            <Label text="Exercises" style="-fx-font-size: 16;"/>
+
+            <!-- List of exercises -->
+            <ListView fx:id="exerciseListView" prefHeight="250" editable="true"/>
+
+            <!-- Inline editing fields -->
+            <GridPane hgap="5" vgap="5">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="20"/>
+                    <ColumnConstraints percentWidth="80"/>
+                </columnConstraints>
+
+                <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Description:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextArea fx:id="descriptionField" prefRowCount="1"
+                          GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <Label text="Type:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="typeDropDown" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <HBox spacing="10">
+                <Button fx:id="createExerciseButton" text="New Exercise"/>
+                <Button fx:id="editExerciseButton" text="Save Changes"/>
+                <Button fx:id="addToRoutineButton" text="Add to Routine" style="-fx-font-weight: bold;"/>
+                <Button fx:id="closeButton" text="Cancel"/>
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>

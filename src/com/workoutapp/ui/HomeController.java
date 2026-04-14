@@ -28,7 +28,7 @@ public class HomeController implements ScreenController {
         //Navigation buttons
         startWorkoutButton.setOnAction(e -> main.loadView("WorkoutView.fxml"));
         historyButton.setOnAction(e -> main.loadView("WorkoutHistoryView.xml"));
-        routineEditorButton.setOnAction(e -> main.loadView("RoutineView.fxml"));
+        routineEditorButton.setOnAction(e -> main.loadView("RoutineEditorView.fxml"));
     }
 
     @Override
