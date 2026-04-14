@@ -1,10 +1,7 @@
 package com.workoutapp.ui;
 
-import com.workoutapp.models.Exercise;
-import com.workoutapp.models.ExerciseType;
-import com.workoutapp.models.Routine;
-import com.workoutapp.services.ExerciseService;
-import com.workoutapp.services.RoutineService;
+import com.workoutapp.models.*;
+import com.workoutapp.services.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,35 +10,30 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.LinkedList;
 
 public class ExerciseSelectorController {
-
+    //Components from FXML file
     @FXML private ListView<Exercise> exerciseListView;
     @FXML private TextField nameField;
     @FXML private TextArea descriptionField;
-
     @FXML private Button createExerciseButton;
     @FXML private Button editExerciseButton;
     @FXML private Button addToRoutineButton;
     @FXML private Button closeButton;
+    @FXML private ComboBox<ExerciseType> typeDropDown;
 
     private ExerciseService exerciseService;
     private RoutineService routineService;
     private Routine targetRoutine;
     private ObservableList<Exercise> exerciseItems;
     private ObservableList<Exercise> routineExerciseItems; // reference from RoutineEditor
-
     private Stage stage;
 
-    // Static helper to open the selector
-    public static void showSelector(MainController main,
-                                    ExerciseService exerciseService,
-                                    Routine targetRoutine,
-                                    ObservableList<Exercise> routineExerciseItems,
-                                    RoutineService routineService) {
+    // Open selector window
+    public static void showSelector(MainController main, ExerciseService exerciseService, Routine targetRoutine,
+                ObservableList<Exercise> routineExerciseItems, RoutineService routineService) {
         try {
             FXMLLoader loader = new FXMLLoader(ExerciseSelectorController.class.getResource("ExerciseSelectorView.fxml"));
             Scene scene = new Scene(loader.load());
@@ -60,16 +52,17 @@ public class ExerciseSelectorController {
         }
     }
 
-    public void init(ExerciseService exerciseService,
-                     RoutineService routineService,
-                     Routine targetRoutine,
-                     ObservableList<Exercise> routineExerciseItems,
-                     Stage stage) {
+    //Initialize selector view
+    public void init(ExerciseService exerciseService, RoutineService routineService, Routine targetRoutine,
+                     ObservableList<Exercise> routineExerciseItems, Stage stage) {
+        //Initialize services
         this.exerciseService = exerciseService;
         this.routineService = routineService;
         this.targetRoutine = targetRoutine;
         this.routineExerciseItems = routineExerciseItems;
         this.stage = stage;
+        typeDropDown.getItems().addAll(ExerciseType.values());
+        typeDropDown.getSelectionModel().selectFirst();
 
         LinkedList<Exercise> all = exerciseService.getExercises();
         exerciseItems = FXCollections.observableArrayList(all);
@@ -82,7 +75,7 @@ public class ExerciseSelectorController {
                 if (empty || item == null) {
                     setText(null);
                 } else {
-                    setText(item.getName() + " (" + item.getType() + ")");
+                    setText(item.getName() + " (" + item.getType() + ")\t" + item.getDesc());
                 }
             }
         });
@@ -91,6 +84,7 @@ public class ExerciseSelectorController {
             if (newE != null) {
                 nameField.setText(newE.getName());
                 descriptionField.setText(newE.getDesc());
+                typeDropDown.getSelectionModel().select(newE.getType());
             }
         });
 
@@ -101,14 +95,17 @@ public class ExerciseSelectorController {
             }
         });
 
+        //Define actions of buttons
         createExerciseButton.setOnAction(e -> onCreateExercise());
         editExerciseButton.setOnAction(e -> onEditExercise());
         addToRoutineButton.setOnAction(e -> onAddToRoutine());
         closeButton.setOnAction(e -> stage.close());
     }
 
+    //Create new exercise and update
     private void onCreateExercise() {
-        Exercise ex = new Exercise("New Exercise", "", ExerciseType.CARDIO);
+        if(nameField.getText().equals("") || nameField.getText() == null) return;
+        Exercise ex = new Exercise(nameField.getText(), descriptionField.getText(), typeDropDown.getValue());
         exerciseService.addExercise(ex); // persists
         exerciseItems.add(ex);
         exerciseListView.getSelectionModel().select(ex);
@@ -116,21 +113,21 @@ public class ExerciseSelectorController {
         nameField.selectAll();
     }
 
+    //Edit exercise name, description or type
     private void onEditExercise() {
         Exercise selected = exerciseListView.getSelectionModel().getSelectedItem();
         if (selected == null) return;
-
         selected.setName(nameField.getText());
         selected.setDesc(descriptionField.getText());
-        // Type editing could be added with a ComboBox if you want
         exerciseListView.refresh();
 
-        // Persist: re-save all exercises
+        // Re-save all exercises
         exerciseService.getExercises().clear();
         exerciseService.getExercises().addAll(exerciseItems);
-        // Add a saveAll() method to ExerciseService similar to RoutineService if you want explicit save
+        exerciseService.saveExercises(); //Persist
     }
 
+    //Add to routine button clicked
     private void onAddToRoutine() {
         Exercise selected = exerciseListView.getSelectionModel().getSelectedItem();
         if (selected == null || targetRoutine == null) return;
@@ -141,7 +138,6 @@ public class ExerciseSelectorController {
 
         // Persist via RoutineService
         routineService.addExercise(targetRoutine.getRoutineName(), selected);
-
-        stage.close();
+        stage.close();  //Close view and return to RoutineEditor
     }
 }

@@ -21,16 +21,6 @@
         "name": "Elliptical",
         "description": "",
         "type": "CARDIO"
-      },
-      {
-        "name": "Elliptical",
-        "description": "",
-        "type": "CARDIO"
-      },
-      {
-        "name": "Bench Press",
-        "description": "",
-        "type": "CHEST"
       }
     ]
   },
@@ -41,6 +31,16 @@
         "name": "Curls",
         "description": "",
         "type": "ARMS"
+      },
+      {
+        "name": "New Exercise",
+        "description": "",
+        "type": "CARDIO"
+      },
+      {
+        "name": "Test Exercise",
+        "description": "Test exercise",
+        "type": "TRICEPS"
       }
     ]
   }

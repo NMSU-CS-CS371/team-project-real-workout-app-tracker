@@ -6,11 +6,10 @@ import javafx.collections.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.StringConverter;
-
 import java.util.LinkedList;
 
 public class RoutineEditorController implements ScreenController {
-
+    //Import FXML parameters
     @FXML private ListView<Routine> routineListView;
     @FXML private ListView<Exercise> exerciseListView;
     @FXML private Label routineTitleLabel;
@@ -31,40 +30,45 @@ public class RoutineEditorController implements ScreenController {
     private MainController main;
     private RoutineService routineService;
     private ExerciseService exerciseService;
-
     private ObservableList<Routine> routineItems = FXCollections.observableArrayList();
     private ObservableList<Exercise> exerciseItems = FXCollections.observableArrayList();
 
+    //Set main controller from interface
     @Override
     public void setMainController(MainController mainController) {
         this.main = mainController;
     }
 
+    //Set up services when changing profiles or opening window
     @Override
     public void onProfileChanged(String profileName) {
         if (profileName == null) return;
 
-        // Services are per-profile
+        // Set up per-profile services
         this.routineService = new RoutineService(profileName);
         this.exerciseService = new ExerciseService(profileName);
-
         initRoutineList();
         initHandlers();
     }
 
+    //Initialize routine list to display profile's routines
     private void initRoutineList() {
         LinkedList<Routine> routines = routineService.getRoutines();
         routineItems.setAll(routines);
         routineListView.setItems(routineItems);
 
-        // Show "name (#exercises)" in the list
+        // Show "name (# exercises)" in the list
         routineListView.setCellFactory(list -> new ListCell<>() {
             @Override
             protected void updateItem(Routine item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setText(null);
-                } else {
+                } else if(item.getNumExercises() == 0){
+                    setText(item.getRoutineName() + " (No exercises)");
+                } else if(item.getNumExercises() == 1){
+                    setText(item.getRoutineName() + " (1 exercise)");
+                } else{
                     int count = item.getNumExercises();
                     setText(item.getRoutineName() + " (" + count + " exercises)");
                 }
@@ -77,6 +81,7 @@ public class RoutineEditorController implements ScreenController {
         });
     }
 
+    //Initialize buttons
     private void initHandlers() {
         createRoutineButton.setOnAction(e -> onCreateRoutine());
         deleteRoutineButton.setOnAction(e -> onDeleteRoutine());
@@ -99,20 +104,23 @@ public class RoutineEditorController implements ScreenController {
             }
         });
 
-        // Show exercises nicely
+        // Show exercises neatly
         exerciseListView.setCellFactory(list -> new ListCell<>() {
             @Override
             protected void updateItem(Exercise item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setText(null);
-                } else {
+                } else if (item.getDesc() == null || item.getDesc().equals("")){
                     setText(item.getName() + " (" + item.getType() + ")");
+                } else {
+                    setText(item.getName() + " (" + item.getType() + ") - " + item.getDesc());
                 }
             }
         });
     }
 
+    //Update exercise list view for currently selected routine
     private void onRoutineSelected(Routine routine) {
         if (routine == null) {
             routineTitleLabel.setText("Select a routine...");
@@ -120,11 +128,12 @@ public class RoutineEditorController implements ScreenController {
             exerciseListView.setItems(exerciseItems);
             return;
         }
-        routineTitleLabel.setText("Routine: " + routine.getRoutineName());
+        routineTitleLabel.setText("Editing \"" + routine.getRoutineName() + "\"");
         exerciseItems.setAll(routine.getExercises());
         exerciseListView.setItems(exerciseItems);
     }
 
+    //Create new routine
     private void onCreateRoutine() {
         Routine newRoutine = new Routine("New Routine");
         routineService.addRoutine(newRoutine); // will save
@@ -134,6 +143,7 @@ public class RoutineEditorController implements ScreenController {
         routineNameField.selectAll();
     }
 
+    //Remove routine
     private void onDeleteRoutine() {
         Routine selected = routineListView.getSelectionModel().getSelectedItem();
         if (selected == null) return;
@@ -143,19 +153,15 @@ public class RoutineEditorController implements ScreenController {
         exerciseItems.clear();
     }
 
+    //Rename routine
     private void onRenameRoutine() {
         Routine selected = routineListView.getSelectionModel().getSelectedItem();
         if (selected == null) return;
-
         String newName = routineNameField.getText();
         if (newName == null || newName.isBlank()) return;
 
         selected.setRoutineName(newName);
-        // Persist: simplest is to save the whole list again
-        routineService.getRoutines().clear();
-        routineService.getRoutines().addAll(routineItems);
-        // routineService internally saves on add/remove; here we can call save via a helper or reuse saveRoutineButton
-        onSaveRoutine(); // reuse save logic
+        routineService.saveAll();
         routineListView.refresh();
         routineTitleLabel.setText("Routine: " + selected.getRoutineName());
     }
@@ -167,6 +173,7 @@ public class RoutineEditorController implements ScreenController {
         ExerciseSelectorController.showSelector(main, exerciseService, selectedRoutine, exerciseItems, routineService);
     }
 
+    //Remove exercise from routine
     private void onDeleteExercise() {
         Routine selectedRoutine = routineListView.getSelectionModel().getSelectedItem();
         Exercise selectedExercise = exerciseListView.getSelectionModel().getSelectedItem();
@@ -174,8 +181,11 @@ public class RoutineEditorController implements ScreenController {
 
         selectedRoutine.removeExercise(selectedExercise);
         exerciseItems.remove(selectedExercise);
+        routineService.saveAll();
+        
     }
 
+    //Move exercises up or down in routine
     private void onMoveExercise(int direction) {
         int index = exerciseListView.getSelectionModel().getSelectedIndex();
         if (index < 0) return;
@@ -187,30 +197,27 @@ public class RoutineEditorController implements ScreenController {
         exerciseItems.add(newIndex, ex);
         exerciseListView.getSelectionModel().select(newIndex);
 
-        // Also update underlying routine list
+        // Update underlying routine list
         Routine selectedRoutine = routineListView.getSelectionModel().getSelectedItem();
         if (selectedRoutine != null) {
             selectedRoutine.getExercises().clear();
             selectedRoutine.getExercises().addAll(exerciseItems);
+            routineService.saveAll();
         }
     }
 
+    //Clear routine
     private void onClearExercises() {
         Routine selectedRoutine = routineListView.getSelectionModel().getSelectedItem();
         if (selectedRoutine == null) return;
 
         selectedRoutine.getExercises().clear();
         exerciseItems.clear();
+        routineService.saveAll();
     }
 
+    //Save changes to routines
     private void onSaveRoutine() {
-        // Persist current state of routines list
-        // RoutineService saves on add/remove; here we can force a save by re-saving the list
-        // Simple approach: remove and re-add all routines
-        LinkedList<Routine> backing = routineService.getRoutines();
-        backing.clear();
-        backing.addAll(routineItems);
-        // storage.save(backing) is called inside RoutineService methods; if you want explicit save,
-        // you can add a saveAll() method to RoutineService that calls storage.save(routines).
+        routineService.saveAll();
     }
 }
