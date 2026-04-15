@@ -123,6 +123,15 @@ public class RoutineService {
         storage.save(routines);
     }
 
+    //Get routine names
+    public LinkedList<String> getRoutineNames(){
+        LinkedList<String> names = new LinkedList<String>();
+        for(Routine r : routines){
+            names.add(r.getRoutineName());
+        }
+        return names;
+    }
+
     //Save all routines in this service to file
     public void saveAll() {
         storage.save(routines);
