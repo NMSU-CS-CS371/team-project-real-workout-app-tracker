@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.workoutapp.ui.HomeController" minWidth="700" minHeight="400">
+            fx:controller="com.workoutapp.ui.HomeController" minWidth="650" minHeight="500">
 
     <!-- LEFT SIDE: Recent Workouts -->
     <left>

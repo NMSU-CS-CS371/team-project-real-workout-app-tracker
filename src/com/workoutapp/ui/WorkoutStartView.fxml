@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.workoutapp.ui.WorkoutStartController"
+      spacing="20" alignment="TOP_CENTER">
+
+    <padding>
+        <Insets top="30" left="30" right="30" bottom="30"/>
+    </padding>
+
+    <Label text="Start Workout"
+           style="-fx-font-size: 22; -fx-font-weight: bold;"/>
+
+    <Label text="Select routine (double‑click):"/>
+
+    <ListView fx:id="routineList" prefWidth="300" prefHeight="250"/>
+
+    <Button fx:id="startScratchButton"
+            text="Start Empty Workout"
+            maxWidth="300"/>
+
+    <Button fx:id="cancelButton"
+            text="Cancel"
+            maxWidth="300"/>
+
+</VBox>

@@ -27,11 +27,13 @@ public class ExerciseSelectorController {
     private ExerciseService exerciseService;
     private RoutineService routineService;
     private Routine targetRoutine;
+    private WorkoutService workoutService;
+    private boolean workoutMode = false;
     private ObservableList<Exercise> exerciseItems;
     private ObservableList<Exercise> routineExerciseItems; // reference from RoutineEditor
     private Stage stage;
-
-    // Open selector window
+ 
+    // Open selector window for routine editor
     public static void showSelector(MainController main, ExerciseService exerciseService, Routine targetRoutine,
                 ObservableList<Exercise> routineExerciseItems, RoutineService routineService) {
         try {
@@ -52,6 +54,26 @@ public class ExerciseSelectorController {
         }
     }
 
+    //Open selector for mid-workout
+    public static void showSelectorForWorkout(MainController main, ExerciseService exerciseService, WorkoutService workoutService,  RoutineService routineService) {
+        try {
+            FXMLLoader loader = new FXMLLoader(ExerciseSelectorController.class.getResource("ExerciseSelectorView.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage dialog = new Stage();
+            dialog.setTitle("Select Exercise");
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner(main.getProfileDropDown().getScene().getWindow());
+            dialog.setScene(scene);
+
+            ExerciseSelectorController controller = loader.getController();
+            controller.initForWorkout(exerciseService, routineService, workoutService, dialog);
+
+            dialog.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     //Initialize selector view
     public void init(ExerciseService exerciseService, RoutineService routineService, Routine targetRoutine,
                      ObservableList<Exercise> routineExerciseItems, Stage stage) {
@@ -61,6 +83,40 @@ public class ExerciseSelectorController {
         this.targetRoutine = targetRoutine;
         this.routineExerciseItems = routineExerciseItems;
         this.stage = stage;
+        this.workoutMode = false;
+
+        setupUI();
+    }
+
+    //Initialize selector view mid workout
+    public void initForWorkout(
+            ExerciseService exerciseService,
+            RoutineService routineService,
+            WorkoutService workoutService,
+            Stage stage) {
+
+        this.exerciseService = exerciseService;
+        this.routineService = routineService;
+        this.workoutService = workoutService;
+        this.stage = stage;
+        this.workoutMode = true;
+
+        setupUI();
+    }
+
+    //Create new exercise and update
+    private void onCreateExercise() {
+        if(nameField.getText().equals("") || nameField.getText() == null) return;
+        Exercise ex = new Exercise(nameField.getText(), descriptionField.getText(), typeDropDown.getValue());
+        exerciseService.addExercise(ex); // persists
+        exerciseItems.add(ex);
+        exerciseListView.getSelectionModel().select(ex);
+        nameField.requestFocus();
+        nameField.selectAll();
+    }
+
+    //Set up UI for initialziation
+    public void setupUI(){
         typeDropDown.getItems().addAll(ExerciseType.values());
         typeDropDown.getSelectionModel().selectFirst();
 
@@ -91,26 +147,18 @@ public class ExerciseSelectorController {
         // Double-click to add to routine
         exerciseListView.setOnMouseClicked(e -> {
             if (e.getClickCount() == 2) {
-                onAddToRoutine();
+                onAdd();
             }
         });
 
         //Define actions of buttons
         createExerciseButton.setOnAction(e -> onCreateExercise());
         editExerciseButton.setOnAction(e -> onEditExercise());
-        addToRoutineButton.setOnAction(e -> onAddToRoutine());
+        addToRoutineButton.setOnAction(e -> onAdd());
         closeButton.setOnAction(e -> stage.close());
-    }
-
-    //Create new exercise and update
-    private void onCreateExercise() {
-        if(nameField.getText().equals("") || nameField.getText() == null) return;
-        Exercise ex = new Exercise(nameField.getText(), descriptionField.getText(), typeDropDown.getValue());
-        exerciseService.addExercise(ex); // persists
-        exerciseItems.add(ex);
-        exerciseListView.getSelectionModel().select(ex);
-        nameField.requestFocus();
-        nameField.selectAll();
+        if (workoutMode) {
+            addToRoutineButton.setText("Add to Workout");
+        }
     }
 
     //Edit exercise name, description or type
@@ -128,16 +176,22 @@ public class ExerciseSelectorController {
     }
 
     //Add to routine button clicked
-    private void onAddToRoutine() {
+    private void onAdd() {
         Exercise selected = exerciseListView.getSelectionModel().getSelectedItem();
-        if (selected == null || targetRoutine == null) return;
+        if (selected == null) return;
 
-        // Add to routine (in-memory)
-        targetRoutine.addExercise(selected);
-        routineExerciseItems.add(selected);
+        if(workoutMode){
+            //Add to workout
+            workoutService.addExerciseToWorkout(selected.getName());
+            stage.close();
+            return;
+        }
 
-        // Persist via RoutineService
-        routineService.addExercise(targetRoutine.getRoutineName(), selected);
-        stage.close();  //Close view and return to RoutineEditor
+        if(targetRoutine != null){
+            targetRoutine.addExercise(selected);
+            routineExerciseItems.add(selected);
+            routineService.addExercise(targetRoutine.getRoutineName(), selected);
+            stage.close();  //Close view and return to RoutineEditor
+        }
     }
 }

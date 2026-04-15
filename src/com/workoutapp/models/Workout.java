@@ -52,9 +52,8 @@ public class Workout {
     // Prints the workout details
     public String toString() {
         StringBuilder r = new StringBuilder();
-        r.append("Workout\n-------------\n");
         for (int i = 0; i < exercises.size(); i++) {
-            r.append("#" + (i+1) + " - ").append(exercises.get(i).toString()).append("\n\n");
+            r.append("#" + (i+1) + " - ").append(exercises.get(i).toString()).append("\n");
         }
         return r.toString();
     }

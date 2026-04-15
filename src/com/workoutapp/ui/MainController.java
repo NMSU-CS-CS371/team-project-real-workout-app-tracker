@@ -26,6 +26,7 @@ public class MainController {
     @FXML
     public void initialize(){
         //Set up profile service
+        System.out.println(getClass().getResource("/com/workoutapp/ui/WorkoutView.fxml"));
         profileService = new ProfileService();
         profileDropDown.getItems().setAll(profileService.getProfiles());
         profileDropDown.getSelectionModel().selectedItemProperty().addListener(
@@ -52,10 +53,9 @@ public class MainController {
     //Load views within UI
     public void loadView(String fxml) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/workoutapp/ui/" + fxml));
             Parent view = loader.load();
 
-            // Give child controllers access to MainController
             Object controller = loader.getController();
             if (controller instanceof ScreenController sc) {
                 sc.setMainController(this);
@@ -69,6 +69,23 @@ public class MainController {
         }
     }
 
+    // NEW unified loader for workout screen
+    public void loadWorkoutView(String routineName) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/workoutapp/ui/WorkoutView.fxml"));
+            Parent view = loader.load();
+
+            WorkoutController wc = loader.getController();
+            wc.setMainController(this);
+            wc.initializeWorkout(currentProfile, routineName);
+
+            contentPane.getChildren().setAll(view);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public String getCurrentProfile() {
         return currentProfile;
     }
@@ -76,4 +93,5 @@ public class MainController {
     public ComboBox<String> getProfileDropDown() {
         return profileDropDown;
     }
+
 }
