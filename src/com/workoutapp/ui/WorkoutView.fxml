@@ -14,7 +14,7 @@
     </padding>
 
     <!-- HEADER -->
-    <Label text="Workout In Progress"
+    <Label text="Workout In Progress" fx:id="topHeaderLabel"
            style="-fx-font-size: 22; -fx-font-weight: bold;"/>
 
     <HBox spacing="20" alignment="CENTER" prefWidth="300">
@@ -70,7 +70,6 @@
         <Button fx:id="cancelButton"
             text="Cancel Workout" prefWidth="150"
             style="-fx-background-color: #FF4040; -fx-text-fill: white;"/>
-        <Button fx:id="restButton" text="Start Rest Timer" prefWidth="200"/>
         <Button fx:id="finishButton"
             text="Finish Workout" style="-fx-background-color: #4CAF50; 
             -fx-text-fill: white;" prefWidth="150"/>
