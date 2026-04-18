@@ -6,6 +6,11 @@
         "name": "Treadmill",
         "description": "",
         "type": "CARDIO"
+      },
+      {
+        "name": "Bench Press",
+        "description": "",
+        "type": "CHEST"
       }
     ]
   }

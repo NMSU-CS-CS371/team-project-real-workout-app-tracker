@@ -1,6 +1,8 @@
 package com.workoutapp.services;
 
 import com.workoutapp.models.*;
+import com.workoutapp.services.WorkoutService.WorkoutSummary;
+
 import java.time.*;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
@@ -167,6 +169,11 @@ public class WorkoutService {
     public CompletableFuture<Void> startRestTimer() {
         return startRestTimer(defaultRestTimeSeconds);
     }
+    
+    //Get default rest time
+    public int getDefaultRestTime() {
+        return defaultRestTimeSeconds;
+    }
 
     // Sets the default rest time
     public void setDefaultRestTime(int seconds) {
@@ -237,13 +244,11 @@ public class WorkoutService {
     //Gets a user-friendly status message for the current workout state
     public String getWorkoutStatusMessage() {
         if (!workoutActive) return "No active workout";
-
-        long duration = getCurrentWorkoutDurationMinutes();
         int currentIndex = getCurrentExerciseIndex();
         int totalExercises = currentWorkout.getNumExercises();
 
-        return String.format("Exercise %d of %d",
-                           duration, currentIndex + 1, totalExercises);
+        if(totalExercises == 0)     return "No exercises";
+        return String.format("Exercise %d of %d", currentIndex + 1, totalExercises);
     }
 
     //Gets formatted duration string (MM:SS or HH:MM:SS)

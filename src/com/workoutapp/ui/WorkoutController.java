@@ -25,6 +25,7 @@ public class WorkoutController implements ScreenController {
     @FXML private Label durationLabel;
     @FXML private Label volumeLabel;
     @FXML private Label currentExerciseLabel;
+    @FXML private Label topHeaderLabel;
     @FXML private ProgressBar progressBar;
     @FXML private ListView<ExerciseInstance> exerciseList;
     @FXML private Spinner<Integer> setsSpinner;
@@ -33,7 +34,6 @@ public class WorkoutController implements ScreenController {
     @FXML private Spinner<Integer> durationSpinner;
     @FXML private Button prevButton;
     @FXML private Button nextButton;
-    @FXML private Button restButton;
     @FXML private Button finishButton;
     @FXML private Button cancelButton;
 
@@ -86,7 +86,6 @@ public class WorkoutController implements ScreenController {
         setupExerciseListSelection();
         setupSpinnerListeners();
         onNavigationButtons();
-        onRestTimer();
         finishWorkout();
         onAddExercise();
         startDurationTimer();
@@ -182,12 +181,41 @@ public class WorkoutController implements ScreenController {
         durationTimer.play();
     }
 
+    //Start Rest Timer
+    public void startRestPeriod(int seconds){
+        //Disable bindings
+        nextButton.setDisable(true);
+        prevButton.setDisable(true);
+
+        final int[] secondsRemaining = {seconds};
+        Timeline restTimeline = new Timeline(
+            new KeyFrame(Duration.seconds(1), e -> {
+                secondsRemaining[0]--;
+                topHeaderLabel.setText("Resting - " + secondsRemaining[0] + "s remaining");
+            })
+        );
+
+        restTimeline.setCycleCount(seconds);
+        restTimeline.setOnFinished(e ->{
+            //Restore bindings
+            nextButton.setDisable(false);
+            prevButton.setDisable(false);
+
+            //Move to next exercise
+            workoutService.moveToNextExercise();
+            exerciseList.getSelectionModel().select(workoutService.getCurrentExerciseIndex());
+            updateExerciseControls();
+            topHeaderLabel.setText("Workout in Progress");
+        });
+        restTimeline.play();
+    }
+
     //Set up exercise navigation buttons
     private void onNavigationButtons(){
         nextButton.setOnAction(e -> {
             if(workoutService.moveToNextExercise()) {
-                exerciseList.getSelectionModel().select(workoutService.getCurrentExerciseIndex());
-                updateExerciseControls();
+                int restSeconds = workoutService.getDefaultRestTime(); // or fixed 30
+                startRestPeriod(restSeconds);
             } 
         });
         prevButton.setOnAction(e -> {
@@ -195,20 +223,6 @@ public class WorkoutController implements ScreenController {
                 exerciseList.getSelectionModel().select(workoutService.getCurrentExerciseIndex());
                 updateExerciseControls();
             } 
-        });
-    }
-
-    //Rest button timer
-    private void onRestTimer(){
-        restButton.setOnAction(e -> {
-            restButton.setDisable(true);
-            restButton.setText("Resting...");
-            workoutService.startRestTimer().thenRun(() -> {
-                Platform.runLater(() -> {
-                    restButton.setDisable(false);
-                    restButton.setText("Start Rest Timer");
-                });
-            });
         });
     }
 

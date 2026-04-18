@@ -1,84 +1,5 @@
 [
   {
-    "dateTime": "2026-04-15T01:52:46.7924422",
-    "workout": {
-      "exercises": [
-        {
-          "exercise": {
-            "name": "Curls",
-            "description": "",
-            "type": "ARMS"
-          },
-          "sets": 3,
-          "reps": 10,
-          "weight": 20.0,
-          "durationMinutes": 0
-        },
-        {
-          "exercise": {
-            "name": "New Exercise",
-            "description": "",
-            "type": "CARDIO"
-          },
-          "sets": 0,
-          "reps": 0,
-          "weight": 0.0,
-          "durationMinutes": 45
-        },
-        {
-          "exercise": {
-            "name": "Test Exercise",
-            "description": "Test exercise",
-            "type": "TRICEPS"
-          },
-          "sets": 3,
-          "reps": 10,
-          "weight": 0.0,
-          "durationMinutes": 0
-        }
-      ]
-    },
-    "notes": "No notes"
-  },
-  {
-    "dateTime": "2026-04-15T02:01:53.9786611",
-    "workout": {
-      "exercises": [
-        {
-          "exercise": {
-            "name": "Treadmill",
-            "description": "",
-            "type": "CARDIO"
-          },
-          "sets": 0,
-          "reps": 0,
-          "weight": 0.0,
-          "durationMinutes": 72
-        }
-      ]
-    },
-    "notes": "No notes"
-  },
-  {
-    "dateTime": "2026-04-15T02:08:19.9219195",
-    "workout": {
-      "exercises": [
-        {
-          "exercise": {
-            "name": "Treadmill",
-            "description": "",
-            "type": "CARDIO"
-          },
-          "sets": 0,
-          "reps": 0,
-          "weight": 0.0,
-          "durationMinutes": 20
-        }
-      ]
-    },
-    "notes": "No notes"
-  },
-  {
     "dateTime": "2026-04-15T03:01:43.1876065",
     "workout": {
       "exercises": [
@@ -162,5 +83,65 @@
       ]
     },
     "notes": "No notes"
+  },
+  {
+    "dateTime": "2026-04-15T02:01:00",
+    "workout": {
+      "exercises": [
+        {
+          "exercise": {
+            "name": "Treadmill",
+            "description": "",
+            "type": "CARDIO"
+          },
+          "sets": 0,
+          "reps": 0,
+          "weight": 0.0,
+          "durationMinutes": 72
+        }
+      ]
+    },
+    "notes": "No notes"
+  },
+  {
+    "dateTime": "2026-04-17T01:52:00",
+    "workout": {
+      "exercises": [
+        {
+          "exercise": {
+            "name": "Curls",
+            "description": "",
+            "type": "ARMS"
+          },
+          "sets": 3,
+          "reps": 10,
+          "weight": 20.0,
+          "durationMinutes": 0
+        },
+        {
+          "exercise": {
+            "name": "New Exercise",
+            "description": "",
+            "type": "CARDIO"
+          },
+          "sets": 0,
+          "reps": 0,
+          "weight": 0.0,
+          "durationMinutes": 45
+        },
+        {
+          "exercise": {
+            "name": "Test Exercise",
+            "description": "Test exercise",
+            "type": "TRICEPS"
+          },
+          "sets": 3,
+          "reps": 10,
+          "weight": 0.0,
+          "durationMinutes": 0
+        }
+      ]
+    },
+    "notes": "Notes"
   }
 ]
