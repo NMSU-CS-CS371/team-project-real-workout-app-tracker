@@ -135,7 +135,7 @@ public class RoutineEditorController implements ScreenController {
 
     //Create new routine
     private void onCreateRoutine() {
-        Routine newRoutine = new Routine("New Routine");
+        Routine newRoutine = new Routine(routineNameField.getText());
         routineService.addRoutine(newRoutine); // will save
         routineItems.add(newRoutine);
         routineListView.getSelectionModel().select(newRoutine);

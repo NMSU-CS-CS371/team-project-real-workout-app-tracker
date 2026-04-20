@@ -1,8 +1,38 @@
 [
   {
-    "dateTime": "2026-04-15T03:01:43.1876065",
+    "dateTime": "2026-04-20T14:17:41.61254002",
     "workout": {
       "exercises": [
+        {
+          "exercise": {
+            "name": "Bench Press",
+            "description": "",
+            "type": "CHEST"
+          },
+          "sets": 3,
+          "reps": 10,
+          "weight": 20.0,
+          "durationMinutes": 0
+        }
+      ]
+    },
+    "notes": ""
+  },
+  {
+    "dateTime": "2026-04-14T14:18:00",
+    "workout": {
+      "exercises": [
+        {
+          "exercise": {
+            "name": "Treadmill",
+            "description": "",
+            "type": "CARDIO"
+          },
+          "sets": 0,
+          "reps": 0,
+          "weight": 0.0,
+          "durationMinutes": 30
+        },
         {
           "exercise": {
             "name": "Curls",
@@ -10,138 +40,12 @@
             "type": "ARMS"
           },
           "sets": 5,
-          "reps": 7,
-          "weight": 20.0,
-          "durationMinutes": 0
-        },
-        {
-          "exercise": {
-            "name": "Test Exercise",
-            "description": "Test exercise",
-            "type": "TRICEPS"
-          },
-          "sets": 3,
           "reps": 10,
           "weight": 20.0,
-          "durationMinutes": 0
-        },
-        {
-          "exercise": {
-            "name": "Curls",
-            "description": "",
-            "type": "ARMS"
-          },
-          "sets": 6,
-          "reps": 10,
-          "weight": 14.0,
-          "durationMinutes": 0
-        },
-        {
-          "exercise": {
-            "name": "Curls",
-            "description": "",
-            "type": "ARMS"
-          },
-          "sets": 7,
-          "reps": 10,
-          "weight": 22.0,
-          "durationMinutes": 0
-        },
-        {
-          "exercise": {
-            "name": "Bench Press",
-            "description": "",
-            "type": "CHEST"
-          },
-          "sets": 3,
-          "reps": 10,
-          "weight": 22.0,
-          "durationMinutes": 0
-        },
-        {
-          "exercise": {
-            "name": "Treadmill",
-            "description": "",
-            "type": "CARDIO"
-          },
-          "sets": 0,
-          "reps": 0,
-          "weight": 0.0,
-          "durationMinutes": 40
-        },
-        {
-          "exercise": {
-            "name": "Bench Press",
-            "description": "",
-            "type": "CHEST"
-          },
-          "sets": 3,
-          "reps": 10,
-          "weight": 14.0,
           "durationMinutes": 0
         }
       ]
     },
-    "notes": "No notes"
-  },
-  {
-    "dateTime": "2026-04-15T02:01:00",
-    "workout": {
-      "exercises": [
-        {
-          "exercise": {
-            "name": "Treadmill",
-            "description": "",
-            "type": "CARDIO"
-          },
-          "sets": 0,
-          "reps": 0,
-          "weight": 0.0,
-          "durationMinutes": 72
-        }
-      ]
-    },
-    "notes": "No notes"
-  },
-  {
-    "dateTime": "2026-04-17T01:52:00",
-    "workout": {
-      "exercises": [
-        {
-          "exercise": {
-            "name": "Curls",
-            "description": "",
-            "type": "ARMS"
-          },
-          "sets": 3,
-          "reps": 10,
-          "weight": 20.0,
-          "durationMinutes": 0
-        },
-        {
-          "exercise": {
-            "name": "New Exercise",
-            "description": "",
-            "type": "CARDIO"
-          },
-          "sets": 0,
-          "reps": 0,
-          "weight": 0.0,
-          "durationMinutes": 45
-        },
-        {
-          "exercise": {
-            "name": "Test Exercise",
-            "description": "Test exercise",
-            "type": "TRICEPS"
-          },
-          "sets": 3,
-          "reps": 10,
-          "weight": 0.0,
-          "durationMinutes": 0
-        }
-      ]
-    },
-    "notes": "Notes"
+    "notes": "Test"
   }
 ]

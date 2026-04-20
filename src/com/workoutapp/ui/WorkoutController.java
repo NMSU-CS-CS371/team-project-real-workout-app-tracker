@@ -244,7 +244,7 @@ public class WorkoutController implements ScreenController {
     //Finish and save workout to log
     private void finishWorkout() {
         finishButton.setOnAction(e -> {
-            WorkoutService.WorkoutSummary summary = workoutService.endWorkout("No notes");
+            WorkoutService.WorkoutSummary summary = workoutService.endWorkout("");
             durationTimer.stop();
             main.loadView("HomeView.fxml");
         });

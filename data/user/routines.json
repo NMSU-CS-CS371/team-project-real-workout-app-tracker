@@ -1,6 +1,6 @@
 [
   {
-    "routineName": "Routine 1",
+    "routineName": "Routine",
     "exercises": [
       {
         "name": "Treadmill",
@@ -8,9 +8,9 @@
         "type": "CARDIO"
       },
       {
-        "name": "Bench Press",
+        "name": "Curls",
         "description": "",
-        "type": "CHEST"
+        "type": "ARMS"
       }
     ]
   }

@@ -47,7 +47,10 @@ public class ExerciseSelectorController {
 
             ExerciseSelectorController controller = loader.getController();
             controller.init(exerciseService, routineService, targetRoutine, routineExerciseItems, dialog);
-
+            
+            //Force minimum window size for exercise selector
+            dialog.setMinWidth(293);
+            dialog.setMinHeight(500);
             dialog.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -68,6 +71,9 @@ public class ExerciseSelectorController {
             ExerciseSelectorController controller = loader.getController();
             controller.initForWorkout(exerciseService, routineService, workoutService, dialog);
 
+            //Force minimum window size for exercise selector
+            dialog.setMinWidth(293);
+            dialog.setMinHeight(500);
             dialog.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();

@@ -51,7 +51,7 @@ public class HomeController implements ScreenController {
                     return;
                 }
                 String formatted = event.getDateTime().format(fmt);
-                setText("Workout\t" + formatted + "\n" + event.getWorkout().toString() + "\n");
+                setText("Workout\t" + formatted + "\n" + event.getWorkout().toString() + "Notes: " + event.getNotes() + "\n\n");
             }
 }       );
 
