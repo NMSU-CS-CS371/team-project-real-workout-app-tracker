@@ -135,8 +135,20 @@ public class RoutineEditorController implements ScreenController {
 
     //Create new routine
     private void onCreateRoutine() {
-        Routine newRoutine = new Routine(routineNameField.getText());
-        routineService.addRoutine(newRoutine); // will save
+        //Prevent empty routine name or duplicate
+        String inputName = routineNameField.getText();
+        String finalName;
+
+        if(inputName == null || inputName.trim().isEmpty()){
+            inputName = "New Routine";
+        } 
+        if(routineService.getRoutineNames().contains(inputName.trim())){
+            System.out.println("Duplicate routine name");
+            inputName = inputName + "*";
+        }
+        finalName = inputName.trim();
+        Routine newRoutine = new Routine(finalName);
+        routineService.addRoutine(newRoutine);
         routineItems.add(newRoutine);
         routineListView.getSelectionModel().select(newRoutine);
         routineNameField.requestFocus();

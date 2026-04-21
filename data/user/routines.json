@@ -1,16 +1,31 @@
 [
   {
-    "routineName": "Routine",
+    "routineName": "Routine 1",
     "exercises": [
       {
-        "name": "Treadmill",
+        "name": "Elliptical",
         "description": "",
         "type": "CARDIO"
+      },
+      {
+        "name": "Push Up",
+        "description": "",
+        "type": "CORE"
       },
       {
         "name": "Curls",
         "description": "",
         "type": "ARMS"
+      },
+      {
+        "name": "Bench Press",
+        "description": "",
+        "type": "CHEST"
+      },
+      {
+        "name": "Treadmill",
+        "description": "",
+        "type": "CARDIO"
       }
     ]
   }

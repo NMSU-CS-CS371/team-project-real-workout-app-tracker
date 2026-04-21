@@ -1,8 +1,60 @@
 [
   {
-    "dateTime": "2026-04-20T14:17:41.61254002",
+    "dateTime": "2026-04-21T02:12:16.1754461",
     "workout": {
       "exercises": [
+        {
+          "exercise": {
+            "name": "New Exercise",
+            "description": "",
+            "type": "CARDIO"
+          },
+          "sets": 0,
+          "reps": 0,
+          "weight": 0.0,
+          "durationMinutes": 30
+        }
+      ]
+    },
+    "notes": ""
+  },
+  {
+    "dateTime": "2026-04-21T02:11:23.5024843",
+    "workout": {
+      "exercises": [
+        {
+          "exercise": {
+            "name": "Elliptical",
+            "description": "",
+            "type": "CARDIO"
+          },
+          "sets": 0,
+          "reps": 0,
+          "weight": 0.0,
+          "durationMinutes": 15
+        },
+        {
+          "exercise": {
+            "name": "Push Up",
+            "description": "",
+            "type": "CORE"
+          },
+          "sets": 3,
+          "reps": 10,
+          "weight": 10.0,
+          "durationMinutes": 0
+        },
+        {
+          "exercise": {
+            "name": "Curls",
+            "description": "",
+            "type": "ARMS"
+          },
+          "sets": 3,
+          "reps": 10,
+          "weight": 25.0,
+          "durationMinutes": 0
+        },
         {
           "exercise": {
             "name": "Bench Press",
@@ -11,17 +63,9 @@
           },
           "sets": 3,
           "reps": 10,
-          "weight": 20.0,
+          "weight": 85.0,
           "durationMinutes": 0
-        }
-      ]
-    },
-    "notes": ""
-  },
-  {
-    "dateTime": "2026-04-14T14:18:00",
-    "workout": {
-      "exercises": [
+        },
         {
           "exercise": {
             "name": "Treadmill",
@@ -31,21 +75,29 @@
           "sets": 0,
           "reps": 0,
           "weight": 0.0,
-          "durationMinutes": 30
-        },
+          "durationMinutes": 17
+        }
+      ]
+    },
+    "notes": ""
+  },
+  {
+    "dateTime": "2026-04-21T02:10:57.6699404",
+    "workout": {
+      "exercises": [
         {
           "exercise": {
-            "name": "Curls",
+            "name": "Push Up",
             "description": "",
-            "type": "ARMS"
+            "type": "CORE"
           },
-          "sets": 5,
+          "sets": 3,
           "reps": 10,
-          "weight": 20.0,
+          "weight": 35.0,
           "durationMinutes": 0
         }
       ]
     },
-    "notes": "Test"
+    "notes": ""
   }
 ]
