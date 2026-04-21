@@ -54,13 +54,14 @@ public class Routine {
         exercises.remove(index);
     }
 
-    // Prints the routine details
+    // Returns routine name
     public String toString() {
-        StringBuilder r = new StringBuilder();
+        return routineName;
+        /*StringBuilder r = new StringBuilder();
         r.append(routineName).append("\n-------------\n");
         for (int i = 0; i < exercises.size(); i++) {
             r.append("#" + (i+1) + " - ").append(exercises.get(i).toString()).append("\n\n");
         }
-        return r.toString();
+        return r.toString();*/
     }
 }
