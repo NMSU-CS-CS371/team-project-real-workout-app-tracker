@@ -16,15 +16,17 @@ project-root/
 
 |   |--- app/           Main.java
 
+|   |--- controllers/   Controllers for UI 
+
 |   |--- models/        Core domain classes
 
-|   |--- services/      File I/O, JSON parsing, etc.
+|   |--- services/      File I/O, JSON parsing and object management classes
 
-|   |--- ui/            Future UI classes
+|   |--- views/         FXML files for UI views
 
 |
 
-|---sec/com/workoutapptests/          Junit Test Classes
+|---src/com/workoutapptests/          Junit Test Classes
 
 |   |---models/        Test classes in models folder
 
@@ -32,33 +34,27 @@ project-root/
 
 |
 
-|---data/           JSON Data Files
+|---data/           Serialized JSON Data Files
 
-|   |---
+|   |--- <profileName>/     JSON files for each profile - routines, exercises, events
+
+|   |---profiles.json       Stores list of profiles
+
+|   |---defaultExercises.json      Default list of exercises
 
 |
 
-|---libs/           External Libraries (JUnit, etc)
+|---lib/           External Libraries (JUnit, GSON, etc)
 
 |   |---junit-platform-console-standalone-6.1.0-M1.jar
 
-|---data/           Serialized data files
-
-|
-
-|---lib/            External Libraries (JUnit, etc)
-
-|
-
+|   |---gson-2.13.2.jar
     
 |---build.xml       Ant build file with commands
 
 |---.gitignore
 
 |---.README.md
-
-### Data Files
-Example JSON data files for testing and user storage
 
 # Build & Run
 

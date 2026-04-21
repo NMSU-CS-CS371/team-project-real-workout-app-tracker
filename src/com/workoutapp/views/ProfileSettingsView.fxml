@@ -6,7 +6,7 @@
 
 <VBox spacing="12"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.workoutapp.ui.ProfileSettingsController">
+      fx:controller="com.workoutapp.controllers.ProfileSettingsController">
 
     <padding>
         <Insets top="20" left="20" right="20" bottom="20"/>

@@ -1,4 +1,4 @@
-package com.workoutapp.ui;
+package com.workoutapp.controllers;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -53,7 +53,7 @@ public class MainController {
     //Load views within UI
     public void loadView(String fxml) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/workoutapp/ui/" + fxml));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/workoutapp/views/" + fxml));
             Parent view = loader.load();
 
             Object controller = loader.getController();
@@ -73,7 +73,7 @@ public class MainController {
     // NEW unified loader for workout screen
     public void loadWorkoutView(String routineName) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/workoutapp/ui/WorkoutView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/workoutapp/views/WorkoutView.fxml"));
             Parent view = loader.load();
 
             WorkoutController wc = loader.getController();

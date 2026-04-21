@@ -1,4 +1,4 @@
-package com.workoutapp.ui;
+package com.workoutapp.controllers;
 
 public interface ScreenController {
     void setMainController(MainController mainController);

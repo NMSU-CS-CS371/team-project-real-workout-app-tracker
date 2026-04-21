@@ -1,4 +1,4 @@
-package com.workoutapp.ui;
+package com.workoutapp.controllers;
 
 import com.workoutapp.models.*;
 import com.workoutapp.services.*;
