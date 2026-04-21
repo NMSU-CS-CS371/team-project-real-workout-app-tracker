@@ -1,4 +1,4 @@
-package com.workoutapp.ui;
+package com.workoutapp.controllers;
 
 import com.workoutapp.models.*;
 import com.workoutapp.services.*;
@@ -37,7 +37,7 @@ public class ExerciseSelectorController {
     public static void showSelector(MainController main, ExerciseService exerciseService, Routine targetRoutine,
                 ObservableList<Exercise> routineExerciseItems, RoutineService routineService) {
         try {
-            FXMLLoader loader = new FXMLLoader(ExerciseSelectorController.class.getResource("ExerciseSelectorView.fxml"));
+            FXMLLoader loader = new FXMLLoader(ExerciseSelectorController.class.getResource("/com/workoutapp/views/ExerciseSelectorView.fxml"));
             Scene scene = new Scene(loader.load());
             Stage dialog = new Stage();
             dialog.setTitle("Select Exercise");
@@ -60,7 +60,7 @@ public class ExerciseSelectorController {
     //Open selector for mid-workout
     public static void showSelectorForWorkout(MainController main, ExerciseService exerciseService, WorkoutService workoutService,  RoutineService routineService) {
         try {
-            FXMLLoader loader = new FXMLLoader(ExerciseSelectorController.class.getResource("ExerciseSelectorView.fxml"));
+            FXMLLoader loader = new FXMLLoader(ExerciseSelectorController.class.getResource("/com/workoutapp/views/ExerciseSelectorView.fxml"));
             Scene scene = new Scene(loader.load());
             Stage dialog = new Stage();
             dialog.setTitle("Select Exercise");

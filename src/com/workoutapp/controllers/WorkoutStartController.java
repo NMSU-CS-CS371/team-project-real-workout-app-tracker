@@ -1,4 +1,4 @@
-package com.workoutapp.ui;
+package com.workoutapp.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

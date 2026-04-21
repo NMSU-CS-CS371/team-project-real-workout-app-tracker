@@ -5,7 +5,7 @@
 <?import javafx.geometry.Insets?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.workoutapp.ui.WorkoutStartController"
+      fx:controller="com.workoutapp.controllers.WorkoutStartController"
       spacing="20" alignment="TOP_CENTER">
 
     <padding>
