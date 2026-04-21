@@ -29,6 +29,10 @@ public class CalendarService {
         this.events = storage.load(eventListType); // Loads the list of events from the specified file path
     }
 
+    public void saveEvents() {
+        storage.save(events);
+    }
+
     // Returns the list of all calendar events
     public LinkedList<CalendarEvent> getEvents() {
         return events;

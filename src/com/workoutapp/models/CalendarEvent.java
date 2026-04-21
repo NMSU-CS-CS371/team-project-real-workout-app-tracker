@@ -41,6 +41,10 @@ public class CalendarEvent implements Serializable {
     public void setNotes(String notes) { 
         this.notes = notes; 
     }
+
+    public String getRecoverySuggestion() {
+        return RecoverySuggestion.suggestRecovery(this.workout);
+    }
     
     // Simple text representation for debugging
     @Override

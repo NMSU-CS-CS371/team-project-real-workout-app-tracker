@@ -23,5 +23,15 @@
     "name": "Bench Press",
     "description": "",
     "type": "CHEST"
+  },
+  {
+    "name": "New Exercise",
+    "description": "",
+    "type": "CARDIO"
+  },
+  {
+    "name": "Test Exercise",
+    "description": "Test exercise",
+    "type": "TRICEPS"
   }
 ]

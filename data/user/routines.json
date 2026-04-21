@@ -1,51 +1,11 @@
 [
   {
-    "routineName": "New Routine",
+    "routineName": "Routine 1",
     "exercises": [
-      {
-        "name": "Bench Press",
-        "description": "",
-        "type": "CHEST"
-      },
-      {
-        "name": "Curls",
-        "description": "",
-        "type": "ARMS"
-      },
-      {
-        "name": "Treadmill",
-        "description": "",
-        "type": "CARDIO"
-      },
       {
         "name": "Elliptical",
         "description": "",
         "type": "CARDIO"
-      },
-      {
-        "name": "Elliptical",
-        "description": "",
-        "type": "CARDIO"
-      },
-      {
-        "name": "Bench Press",
-        "description": "",
-        "type": "CHEST"
-      }
-    ]
-  },
-  {
-    "routineName": "Routine 2",
-    "exercises": [
-      {
-        "name": "Curls",
-        "description": "",
-        "type": "ARMS"
-      },
-      {
-        "name": "Bench Press",
-        "description": "",
-        "type": "CHEST"
       },
       {
         "name": "Push Up",
@@ -53,7 +13,17 @@
         "type": "CORE"
       },
       {
-        "name": "Elliptical",
+        "name": "Curls",
+        "description": "",
+        "type": "ARMS"
+      },
+      {
+        "name": "Bench Press",
+        "description": "",
+        "type": "CHEST"
+      },
+      {
+        "name": "Treadmill",
         "description": "",
         "type": "CARDIO"
       }
