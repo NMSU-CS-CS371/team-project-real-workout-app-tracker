@@ -112,7 +112,7 @@ public class WorkoutHistoryController implements ScreenController{
             } else {
                 sb.append("Sets: ").append(ex.getSets())
                   .append("\tReps: ").append(ex.getReps())
-                  .append("\tWeight: ").append(ex.getWeight()).append(" lbs\n");
+                  .append("\t  Weight: ").append(ex.getWeight()).append(" lbs\n");
             }
             exerciseListView.getItems().add(sb.toString());
         }

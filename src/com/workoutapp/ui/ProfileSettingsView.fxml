@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="12"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.workoutapp.ui.ProfileSettingsController">
+
+    <padding>
+        <Insets top="20" left="20" right="20" bottom="20"/>
+    </padding>
+
+    <Label text="Profile Manager" style="-fx-font-size: 18px;"/>
+
+    <ListView fx:id="profilesList" prefHeight="200"/>
+
+    <HBox spacing="8">
+        <Label text="Name:"/>
+        <TextField fx:id="nameField" HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Button fx:id="createButton" text="Create"/>
+        <Button fx:id="renameButton" text="Rename"/>
+        <Button fx:id="deleteButton" text="Delete"/>
+        <Button fx:id="closeButton" text="Close"/>
+    </HBox>
+
+</VBox>

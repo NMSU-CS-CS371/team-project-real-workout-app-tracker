@@ -1,11 +1,8 @@
 package com.workoutapp.ui;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import java.nio.file.*;
+import java.util.*;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,32 +19,35 @@ public class MainController {
 
     private ProfileService profileService;
     private String currentProfile;    
+    private ScreenController currentScreenController;
 
     @FXML
     public void initialize(){
         //Set up profile service
-        System.out.println(getClass().getResource("/com/workoutapp/ui/WorkoutView.fxml"));
         profileService = new ProfileService();
         profileDropDown.getItems().setAll(profileService.getProfiles());
         profileDropDown.getSelectionModel().selectedItemProperty().addListener(
             (obs, oldVal, newVal) -> onProfileSelected(newVal)
         );
         
-        if (!profileDropDown.getItems().isEmpty()) {
-            profileDropDown.getSelectionModel().selectFirst();
-        } //Future: If empty, redirect to profile creation
-        
+        if (profileService.getProfiles().isEmpty()) {
+            promptForNewProfile();
+        }
+        refreshProfileDropdown();
+
         // Load home screen by default
         loadView("HomeView.fxml");
 
         profileSettingsButton.setOnAction(e -> loadView("ProfileSettingsView.fxml"));
     }
 
-    private void onProfileSelected(String profileName) {
+    public void onProfileSelected(String profileName) {
         if(profileName == null) return;
         currentProfile = profileName;
-
-        //TODO: Modify screens as needed
+        if(currentScreenController != null){
+            currentScreenController.onProfileChanged(profileName);
+        }
+    
     }
 
     //Load views within UI
@@ -58,6 +58,7 @@ public class MainController {
 
             Object controller = loader.getController();
             if (controller instanceof ScreenController sc) {
+                currentScreenController = sc;
                 sc.setMainController(this);
                 sc.onProfileChanged(currentProfile);
             }
@@ -86,8 +87,43 @@ public class MainController {
         }
     }
 
+    public void refreshProfileDropdown() {
+        profileDropDown.getItems().setAll(profileService.getProfiles());
+
+        if (currentProfile != null && profileDropDown.getItems().contains(currentProfile)) {
+            profileDropDown.getSelectionModel().select(currentProfile);
+        } else if (!profileDropDown.getItems().isEmpty()) {
+            currentProfile = profileDropDown.getItems().get(0);
+            profileDropDown.getSelectionModel().select(currentProfile);
+            onProfileSelected(currentProfile);
+        } else {
+            // No profiles left — force creation
+            promptForNewProfile();
+        }
+    }
+
+    //Prompt creation if no profiles found
+    private void promptForNewProfile() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Create Profile");
+        dialog.setHeaderText("No profiles found");
+        dialog.setContentText("Enter profile name:");
+
+        dialog.showAndWait().ifPresent(name -> {
+            String trimmed = name.trim();
+            if (!trimmed.isEmpty()) {
+                profileService.addProfile(trimmed);
+                refreshProfileDropdown();
+            }
+        });
+    }
+
     public String getCurrentProfile() {
         return currentProfile;
+    }
+
+    public ProfileService getProfileService(){
+        return profileService;
     }
 
     public ComboBox<String> getProfileDropDown() {
