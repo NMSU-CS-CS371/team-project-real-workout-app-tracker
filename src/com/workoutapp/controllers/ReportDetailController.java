@@ -17,7 +17,7 @@ public class ReportDetailController implements ScreenController {
     private String profileName;
     private CalendarEvent selectedEvent;
 
-    // Connects this detail controller to the main app controller and wires navigation.
+    // Connects the controller to the main app controller and wires navigation.
     @Override
     public void setMainController(MainController mainController) {
         this.main = mainController;
