@@ -5,7 +5,7 @@
 
     <!-- directories -->
     <property name="src.dir"     value="src/com/workoutapp"/>
-    <property name="build.dir"   value="build"/>
+    <property name="build.dir"   value="build"/>a
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="lib.dir"     value="lib"/>
     <property name="test.src.dir"     value="src/com/workoutapptests/"/>
@@ -17,7 +17,7 @@
     </condition>
 
     <!-- Linux JavaFX path -->
-    <condition property="javafx.lib" value="/home/*/javafx-sdk-23/lib">
+    <condition property="javafx.lib" value="${user.home}/javafx-sdk-21.0.10/lib">
         <os family="unix"/>
     </condition>
 
