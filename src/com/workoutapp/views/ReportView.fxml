@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.workoutapp.controllers.ReportController"
+            minWidth="650" minHeight="500"
+            style="-fx-background-color: #f5f7fb;">
+
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-width: 0 0 1 0;">
+            <padding>
+                <Insets top="16" right="16" bottom="12" left="16"/>
+            </padding>
+            <Button fx:id="backButton" text="Back"/>
+            <Label fx:id="titleLabel" text="Workout Report" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button fx:id="exportPdfButton" text="Export PDF" style="-fx-background-color: #2563eb; -fx-text-fill: white;"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fx:id="reportScrollPane" fitToWidth="true">
+            <content>
+                <VBox fx:id="reportContentBox" spacing="10">
+                    <padding>
+                        <Insets top="10" right="16" bottom="16" left="16"/>
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

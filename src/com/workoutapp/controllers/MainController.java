@@ -94,6 +94,21 @@ public class MainController {
         }
     }
 
+    public void loadReportDetailView(CalendarEvent selectedEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/workoutapp/views/ReportDetailView.fxml"));
+            Parent view = loader.load();
+
+            ReportDetailController controller = loader.getController();
+            controller.setMainController(this);
+            controller.loadEvent(currentProfile, selectedEvent);
+
+            contentPane.getChildren().setAll(view);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void refreshProfileDropdown() {
         profileDropDown.getItems().setAll(profileService.getProfiles());
 

@@ -38,6 +38,10 @@
                     maxWidth="Infinity"
                     style="-fx-font-size: 14;" />
 
+                <Button fx:id="reportButton" text="Reports"
+                    maxWidth="Infinity"
+                    style="-fx-font-size: 14;" />
+
             <!-- Bottom-right: Recovery Suggestions -->
             <TitledPane text="Recovery Suggestions" expanded="true">
                 <VBox fx:id="recoveryBox" spacing="10">

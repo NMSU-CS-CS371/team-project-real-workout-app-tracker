@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Chest Press",
+    "description": "aasda",
+    "type": "CHEST"
+  },
+  {
+    "name": "Push Up",
+    "description": "asdasdasd",
+    "type": "CHEST"
+  },
+  {
+    "name": "Treadmill",
+    "description": "asdasdasd",
+    "type": "CARDIO"
+  }
+]
