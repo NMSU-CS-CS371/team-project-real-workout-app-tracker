@@ -5,7 +5,7 @@
 
     <!-- directories -->
     <property name="src.dir"     value="src/com/workoutapp"/>
-    <property name="build.dir"   value="build"/>a
+    <property name="build.dir"   value="build"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="lib.dir"     value="lib"/>
     <property name="test.src.dir"     value="src/com/workoutapptests/"/>
