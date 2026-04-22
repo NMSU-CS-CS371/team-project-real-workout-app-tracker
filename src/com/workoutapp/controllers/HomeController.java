@@ -19,6 +19,7 @@ public class HomeController implements ScreenController {
     @FXML private Button startWorkoutButton;
     @FXML private Button historyButton;
     @FXML private Button routineEditorButton;
+    @FXML private Button reportButton;
     @FXML private VBox recoveryBox;
 
     @Override
@@ -28,6 +29,7 @@ public class HomeController implements ScreenController {
         startWorkoutButton.setOnAction(e -> main.loadView("WorkoutStartView.fxml"));
         historyButton.setOnAction(e -> main.loadView("WorkoutHistoryView.fxml"));
         routineEditorButton.setOnAction(e -> main.loadView("RoutineEditorView.fxml"));
+        reportButton.setOnAction(e -> main.loadView("ReportView.fxml"));
     }
 
     @Override

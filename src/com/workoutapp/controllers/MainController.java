@@ -12,6 +12,13 @@ import javafx.scene.layout.StackPane;
 import com.workoutapp.services.*;
 import com.workoutapp.models.*;
 
+/**
+ * Central controller responsible for profile management, view loading,
+ * and coordinating communication between screens. Handles profile selection,
+ * initialization of services, and switching between major UI views including
+ * workout screens and settings.
+ */
+
 public class MainController {
     @FXML private Button profileSettingsButton;
     @FXML private ComboBox<String> profileDropDown;
@@ -82,6 +89,21 @@ public class MainController {
 
             contentPane.getChildren().setAll(view);
             
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadReportDetailView(CalendarEvent selectedEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/workoutapp/views/ReportDetailView.fxml"));
+            Parent view = loader.load();
+
+            ReportDetailController controller = loader.getController();
+            controller.setMainController(this);
+            controller.loadEvent(currentProfile, selectedEvent);
+
+            contentPane.getChildren().setAll(view);
         } catch (Exception e) {
             e.printStackTrace();
         }
