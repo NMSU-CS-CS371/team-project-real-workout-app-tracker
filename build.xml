@@ -17,7 +17,7 @@
     </condition>
 
     <!-- Linux JavaFX path -->
-    <condition property="javafx.lib" value="/home/*/javafx-sdk-23/lib">
+    <condition property="javafx.lib" value="${user.home}/javafx-sdk-21.0.10/lib">
         <os family="unix"/>
     </condition>
 
