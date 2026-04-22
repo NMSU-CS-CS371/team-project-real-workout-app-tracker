@@ -145,7 +145,7 @@ public class ReportController implements ScreenController {
         }
     }
 
-    // Creates one styled summary metric card used at the top of the report.
+    // Creates a summary metric card used at the top of the report.
     private VBox metricCard(String label, String value) {
         Label labelNode = new Label(label);
         labelNode.setStyle("-fx-text-fill: #6b7280; -fx-font-size: 12;");
