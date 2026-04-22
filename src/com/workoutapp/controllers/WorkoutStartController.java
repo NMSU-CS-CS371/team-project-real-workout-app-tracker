@@ -4,7 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import com.workoutapp.services.*;
 
-//Controls workout start screen
+/**
+ * Opens when you start a new workout. Prompts user to select a routine or start 
+ * empty workout from scratch, in which it prompts user to select an exercise.
+ */
+
 public class WorkoutStartController implements ScreenController {
 
     private MainController main;

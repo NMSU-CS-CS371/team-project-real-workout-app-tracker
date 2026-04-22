@@ -10,6 +10,12 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 
+/**
+ * Manages workout history screen where you can view details about all your
+ * logged workouts, including exercise data, volume summary and exercise breakdown.
+ * Also allows you to adjust date/time, edit Notes, and delete logged workouts.
+ */
+
 public class WorkoutHistoryController implements ScreenController{
     private MainController main;
     private CalendarService calendarService;
@@ -82,40 +88,18 @@ public class WorkoutHistoryController implements ScreenController{
     private void displayWorkoutDetails(CalendarEvent event) {
         if (event == null) return;
 
-        // Title
+        // Update title
         workoutTitleLabel.setText("Workout Details — " + event.getDateTime().format(listFmt));
 
-        // Date/time fields
+        // Update fields
         dateField.setText(event.getDateTime().toLocalDate().format(dateFmt));
         timeField.setText(event.getDateTime().toLocalTime().format(timeFmt));
-
-        // Notes
         notesField.setText(event.getNotes());
 
         // Exercises
         exerciseListView.getItems().clear();
         Workout workout = event.getWorkout();
         if (workout == null) return;
-
-        int index = 1;
-        for (ExerciseInstance ex : workout.getExercises()) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(index++)
-              .append(". ")
-              .append(ex.getExerciseName())
-              .append(" (")
-              .append(ex.getExerciseType())
-              .append(")\n");
-
-            if (ex.getExerciseType() == ExerciseType.CARDIO) {
-                sb.append("Duration: ").append(ex.getDurationMinutes()).append(" minutes\n");
-            } else {
-                sb.append("Sets: ").append(ex.getSets())
-                  .append("\tReps: ").append(ex.getReps())
-                  .append("\t  Weight: ").append(ex.getWeight()).append(" lbs\n");
-            }
-            exerciseListView.getItems().add(sb.toString());
-        }
 
         // Add analytics summary
         WorkoutService.WorkoutSummary summary =
@@ -124,10 +108,7 @@ public class WorkoutHistoryController implements ScreenController{
                 event.getDateTime(),
                 0,
             "");
-        exerciseListView.getItems().add("\n--- Workout Summary ---");
-        exerciseListView.getItems().add("Total Volume: " + summary.getTotalVolume() + " lbs");
-        exerciseListView.getItems().add("Total Reps: " + summary.getTotalReps());
-        exerciseListView.getItems().add("Total Sets: " + summary.getTotalSets());
+        exerciseListView.getItems().add(summary.toString());
     }
 
     //Delete logged workout
@@ -145,7 +126,7 @@ public class WorkoutHistoryController implements ScreenController{
     }
 
     //Adjust selected workout date and time
-        private void adjustSelectedEventDateTime() {
+    private void adjustSelectedEventDateTime() {
         CalendarEvent selected = eventListView.getSelectionModel().getSelectedItem();
         if (selected == null) return;
 

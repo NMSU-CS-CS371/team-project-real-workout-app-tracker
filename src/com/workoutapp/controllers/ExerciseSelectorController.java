@@ -13,6 +13,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.LinkedList;
 
+/**
+ * Controls the Exercise Selector window used for choosing, creating, and editing exercises.
+ * Supports two modes: adding exercises to a routine or inserting exercises mid‑workout.
+ * Manages exercise list display, form fields, and communication with ExerciseService,
+ */
+
 public class ExerciseSelectorController {
     //Components from FXML file
     @FXML private ListView<Exercise> exerciseListView;

@@ -623,6 +623,58 @@ public class WorkoutService {
         return routineService;
     }
 
+    //Get recovery analysis from last 3 days of workouts
+    public String getFullRecoverySuggestions(){
+        //1. Recent muscle usage
+        LocalDateTime checkDate = LocalDateTime.now().minusDays(RECOVERY_CHECK_DAYS);
+        LinkedList<CalendarEvent> events = calendarService.getEventsInRange(
+            checkDate.toLocalDate(), LocalDate.now());
+            
+        if(events.isEmpty()){
+            return "No workouts in last " + RECOVERY_CHECK_DAYS + " days.";
+        }
+        Map<String, Integer> muscleCount = new HashMap<>();
+            
+        //Traverse calendar events in range, check all exercises in there
+        for(CalendarEvent event : events) {
+            for(ExerciseInstance instance : event.getWorkout().getExercises()){
+                ExerciseType type = instance.getExerciseType();
+                if(type != ExerciseType.CARDIO){
+                    muscleCount.merge(type.toString(), 1, Integer::sum);
+                }
+            }
+        }
+
+        StringBuilder out = new StringBuilder();
+        out.append("**Recent Muscle Usage** (last ")
+            .append(RECOVERY_CHECK_DAYS)
+            .append(" days)\n");
+
+        muscleCount.forEach((muscle, count) ->
+            out.append(String.format("• %s: %d session%s\n",
+                muscle, count, count > 1 ? "s" : ""))
+            );
+        out.append("\n");
+
+        //2. Recommended rest times
+        LinkedList<CalendarEvent> allEvents = calendarService.getEvents();
+        if(!allEvents.isEmpty()){
+            Workout lastWorkout = allEvents.getLast().getWorkout();
+            out.append(RecoverySuggestion.suggestRecovery(lastWorkout));
+            out.append("\n\n");
+        }
+
+        //3. Overuse warning
+        boolean overuse = muscleCount.values().stream().anyMatch(v -> v >= 2);
+        if(overuse) {
+            out.append("⚠ **Overuse Warning**\n");
+            out.append("Some muscle groups were trained multiple times recently.");
+            out.append("Consider resting them before your next session.");
+        }
+
+        return out.toString();
+    }
+
     // Inner class to represent workout summary
     public static class WorkoutSummary {
         private final Workout workout;
@@ -725,8 +777,8 @@ public class WorkoutService {
 
         @Override
         public String toString() {
-            return String.format("Workout completed in %d minutes\n%s\nRecovery: %s\n\n%s",
-                               durationMinutes, workout.toString(), recoverySuggestion, volumeSummary);
+            return String.format("Workout completed in %d minutes\nRecovery: %s\n\n%s",
+                               durationMinutes, recoverySuggestion, volumeSummary);
         }
     }
 }

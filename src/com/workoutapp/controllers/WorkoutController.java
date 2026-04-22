@@ -11,8 +11,12 @@ import com.workoutapp.services.*;
 import com.workoutapp.models.*;
 
 /**
- * Class to control workout process UI
+ * Manages the workout execution screen, handling exercise progression, timers,
+ * tracking sets/reps/weight/duration, and updating workout statistics.
+ * Supports adding exercises mid‑workout and finalizing or canceling the session
+ * through WorkoutService.
  */
+
 public class WorkoutController implements ScreenController {
     private MainController main;
     private WorkoutService workoutService;

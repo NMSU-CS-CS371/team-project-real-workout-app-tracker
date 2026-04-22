@@ -1,0 +1,21 @@
+[
+  {
+    "dateTime": "2026-04-22T00:58:32.3163208",
+    "workout": {
+      "exercises": [
+        {
+          "exercise": {
+            "name": "Bike",
+            "description": "Biking",
+            "type": "CARDIO"
+          },
+          "sets": 0,
+          "reps": 0,
+          "weight": 0.0,
+          "durationMinutes": 33
+        }
+      ]
+    },
+    "notes": ""
+  }
+]

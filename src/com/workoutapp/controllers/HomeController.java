@@ -1,15 +1,20 @@
 package com.workoutapp.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import com.workoutapp.services.*;
 import java.util.LinkedList;
 import java.util.List;
 import com.workoutapp.models.*;
 import java.time.format.DateTimeFormatter;
+
+/**
+ * Controls the Home screen, displaying recent workouts and recovery suggestions.
+ * Responds to profile changes by loading profile‑specific workout history and
+ * generating recovery analysis. Provides navigation to workout start, history,
+ * and routine editor views.
+ */
 
 public class HomeController implements ScreenController {
     private MainController main;
@@ -37,7 +42,7 @@ public class HomeController implements ScreenController {
         // Load workouts for this profile
         calendarService = new CalendarService(profileName);
         recentWorkoutsList.getItems().setAll(
-            getRecentWorkouts(calendarService, 5) // last 5 workouts
+            getRecentWorkouts(calendarService, 3) // last 5 workouts
         );
         recentWorkoutsList.setCellFactory(list -> new ListCell<>() {
             private final DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd MMM yyyy,\tHH:mm");
@@ -55,7 +60,7 @@ public class HomeController implements ScreenController {
             }
 }       );
 
-        // TODO: Load recovery suggestions here
+        loadRecoverySuggestions(profileName);
     }
 
     //Get recent calendarEvents
@@ -68,5 +73,21 @@ public class HomeController implements ScreenController {
             result.add(all.get(i));
         }
         return result;
+    }
+
+    //Load recovery suggestions
+    private void loadRecoverySuggestions(String profileName){
+        recoveryBox.getChildren().clear();
+
+        //Set up services for workoutService
+        RoutineService routineService = new RoutineService(profileName);
+        ExerciseService exerciseService = new ExerciseService(profileName);
+        WorkoutService ws = new WorkoutService(profileName, calendarService, routineService, exerciseService);
+    
+        //Get and display recovery analysis
+        String analysis = ws.getFullRecoverySuggestions();
+        Label label = new Label(analysis);
+        label.setWrapText(true);
+        recoveryBox.getChildren().add(label);
     }
 }

@@ -5,6 +5,12 @@ import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import com.workoutapp.services.*;
 
+/**
+ * Manages the Profile Settings screen, allowing users to create, rename, and delete
+ * workout profiles. Updates the main controller’s active profile and ensures UI
+ * elements reflect current profile data.
+ */
+
 public class ProfileSettingsController implements ScreenController {
     @FXML private ListView<String> profilesList;
     @FXML private TextField nameField;

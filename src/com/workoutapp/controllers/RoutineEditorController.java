@@ -8,6 +8,12 @@ import javafx.scene.control.*;
 import javafx.util.StringConverter;
 import java.util.LinkedList;
 
+/**
+ * Controls the Routine Editor, enabling users to create, rename, delete, and modify
+ * workout routines. Manages exercise ordering, addition/removal of exercises,
+ * and persistence of routine data through RoutineService and ExerciseService.
+ */
+
 public class RoutineEditorController implements ScreenController {
     //Import FXML parameters
     @FXML private ListView<Routine> routineListView;
