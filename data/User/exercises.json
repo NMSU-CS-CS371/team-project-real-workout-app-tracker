@@ -13,5 +13,15 @@
     "name": "Treadmill",
     "description": "asdasdasd",
     "type": "CARDIO"
+  },
+  {
+    "name": "Barbell Squat",
+    "description": "",
+    "type": "LEGS"
+  },
+  {
+    "name": "sdfasdfasdfadssfadsdfsrffhdgj",
+    "description": "",
+    "type": "CARDIO"
   }
 ]

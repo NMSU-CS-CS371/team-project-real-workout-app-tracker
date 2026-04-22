@@ -36,8 +36,7 @@ public class ReportController implements ScreenController {
     private MainController main;
     private CalendarService calendarService;
 
-    // Connects this controller to the main app controller and wires top-level actions.
-    @Override
+    // Connects controller to the main app controller 
     public void setMainController(MainController mainController) {
         this.main = mainController;
 

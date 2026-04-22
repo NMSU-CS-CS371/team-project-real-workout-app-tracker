@@ -1,27 +1,27 @@
 [
   {
-    "dateTime": "2026-04-21T13:34:53.128689291",
-    "workout": {
-      "exercises": []
-    },
-    "notes": ""
-  },
-  {
-    "dateTime": "2026-04-22T09:27:59.347668123",
+    "dateTime": "2026-04-22T09:41:01.810276138",
     "workout": {
       "exercises": [
         {
           "exercise": {
-            "name": "Chest Press",
-            "description": "aasda",
-            "type": "CHEST"
+            "name": "Treadmill",
+            "description": "asdasdasd",
+            "type": "CARDIO"
           },
-          "sets": 3,
-          "reps": 10,
-          "weight": 20.0,
-          "durationMinutes": 0
+          "sets": 0,
+          "reps": 0,
+          "weight": 0.0,
+          "durationMinutes": 30
         }
       ]
+    },
+    "notes": ""
+  },
+  {
+    "dateTime": "2026-04-22T09:40:36.157318405",
+    "workout": {
+      "exercises": []
     },
     "notes": ""
   },
@@ -67,26 +67,45 @@
     "notes": ""
   },
   {
-    "dateTime": "2026-04-22T09:40:36.157318405",
-    "workout": {
-      "exercises": []
-    },
-    "notes": ""
-  },
-  {
-    "dateTime": "2026-04-22T09:41:01.810276138",
+    "dateTime": "2026-04-22T09:27:59.347668123",
     "workout": {
       "exercises": [
         {
           "exercise": {
-            "name": "Treadmill",
-            "description": "asdasdasd",
-            "type": "CARDIO"
+            "name": "Chest Press",
+            "description": "aasda",
+            "type": "CHEST"
           },
-          "sets": 0,
-          "reps": 0,
+          "sets": 3,
+          "reps": 10,
+          "weight": 20.0,
+          "durationMinutes": 0
+        }
+      ]
+    },
+    "notes": ""
+  },
+  {
+    "dateTime": "2026-04-21T13:34:53.128689291",
+    "workout": {
+      "exercises": []
+    },
+    "notes": "lllllllllllllllllllllllllllllllllllll"
+  },
+  {
+    "dateTime": "2026-04-22T13:24:15.855926961",
+    "workout": {
+      "exercises": [
+        {
+          "exercise": {
+            "name": "Push Up",
+            "description": "asdasdasd",
+            "type": "CHEST"
+          },
+          "sets": 2,
+          "reps": 10,
           "weight": 0.0,
-          "durationMinutes": 30
+          "durationMinutes": 0
         }
       ]
     },
