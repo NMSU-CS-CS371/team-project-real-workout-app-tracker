@@ -135,7 +135,7 @@ public class WorkoutController implements ScreenController {
         if(isCardio) {
             durationSpinner.getValueFactory().setValue(ex.getDurationMinutes());
         } else {
-            setsSpinner.getValueFactory().setValue(ex.getSets());
+            setsSpinner.getValueFactory().setValue(ex.getSetCount());
             repsSpinner.getValueFactory().setValue(ex.getReps());
             weightSpinner.getValueFactory().setValue(ex.getWeight());
         }

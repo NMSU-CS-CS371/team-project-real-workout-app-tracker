@@ -22,6 +22,7 @@ import com.workoutapp.models.*;
 public class MainController {
     @FXML private Button profileSettingsButton;
     @FXML private ComboBox<String> profileDropDown;
+    @FXML private Label activeProfileLabel;
     @FXML private StackPane contentPane;
 
     private ProfileService profileService;
@@ -51,6 +52,7 @@ public class MainController {
     public void onProfileSelected(String profileName) {
         if(profileName == null) return;
         currentProfile = profileName;
+        activeProfileLabel.setText(profileName);
         if(currentScreenController != null){
             currentScreenController.onProfileChanged(profileName);
         }

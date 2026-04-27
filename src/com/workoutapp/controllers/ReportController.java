@@ -56,6 +56,7 @@ public class ReportController implements ScreenController {
 
     // Builds the report screen content: summary metrics and clickable workout cards.
     private void renderEvents(LinkedList<CalendarEvent> events) {
+        // Report page background color/theme.
         reportContentBox.getChildren().clear();
         reportContentBox.setStyle("-fx-background-color: #f5f7fb;");
 
@@ -74,6 +75,7 @@ public class ReportController implements ScreenController {
             }
         }
 
+        // Section header typography/colors.
         Label sectionHeader = new Label("Summary");
         sectionHeader.setStyle("-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #1f2937;");
 
@@ -83,12 +85,14 @@ public class ReportController implements ScreenController {
             metricCard("Cardio Minutes", String.valueOf(cardioMinutes))
         );
 
+        // Secondary section header typography/colors.
         Label detailsHeader = new Label("Workout Sessions");
         detailsHeader.setStyle("-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #1f2937;");
 
         reportContentBox.getChildren().addAll(sectionHeader, summaryRow, detailsHeader);
 
         if (events.isEmpty()) {
+            // Empty-state card colors/border/padding.
             Label empty = new Label("No workouts recorded yet.");
             empty.setStyle("-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 16; -fx-text-fill: #6b7280;");
             reportContentBox.getChildren().add(empty);
@@ -97,17 +101,21 @@ public class ReportController implements ScreenController {
 
         for (int i = events.size() - 1; i >= 0; i--) {
             CalendarEvent event = events.get(i);
+
+            // Workout card container style.
             VBox card = new VBox(8);
             card.setStyle("-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 12;");
             card.setCursor(Cursor.HAND);
             card.setOnMouseClicked(e -> main.loadReportDetailView(event));
 
             String when = event.getDateTime() == null ? "Unknown date" : event.getDateTime().format(DATE_FORMAT);
+            // Card title text style.
             Label header = new Label(when);
             header.setStyle("-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #111827;");
 
             Workout workout = event.getWorkout();
             int eventExerciseCount = (workout == null) ? 0 : workout.getExercises().size();
+            // Exercise-count badge color scheme.
             Label badge = new Label(eventExerciseCount + " exercises");
             badge.setStyle("-fx-background-color: #eff6ff; -fx-text-fill: #1d4ed8; -fx-padding: 4 8 4 8; -fx-background-radius: 999;");
 
@@ -117,6 +125,7 @@ public class ReportController implements ScreenController {
             card.getChildren().add(headerRow);
 
             if (workout == null || workout.getExercises().isEmpty()) {
+                // Muted text style for no-data rows.
                 Label none = new Label("No exercises logged.");
                 none.setStyle("-fx-text-fill: #6b7280;");
                 card.getChildren().add(none);
@@ -126,8 +135,9 @@ public class ReportController implements ScreenController {
                     if (ex.getDurationMinutes() > 0) {
                         line = ex.getExerciseName() + "  •  " + ex.getDurationMinutes() + " min cardio";
                     } else {
-                        line = ex.getExerciseName() + "  •  " + ex.getSets() + " sets x " + ex.getReps() + " reps";
+                        line = ex.getExerciseName() + "  •  " + ex.getSetCount() + " sets x " + ex.getReps() + " reps";
                     }
+                    // Exercise row text color.
                     Label exerciseLine = new Label(line);
                     exerciseLine.setStyle("-fx-text-fill: #374151;");
                     card.getChildren().add(exerciseLine);
@@ -135,6 +145,7 @@ public class ReportController implements ScreenController {
             }
 
             String notes = (event.getNotes() == null || event.getNotes().isBlank()) ? "No notes." : event.getNotes();
+            // Notes box background/border/text styling.
             Label notesLabel = new Label("Notes: " + notes);
             notesLabel.setWrapText(true);
             notesLabel.setStyle("-fx-text-fill: #4b5563; -fx-background-color: #f9fafb; -fx-border-color: #f3f4f6; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8;");
@@ -146,12 +157,15 @@ public class ReportController implements ScreenController {
 
     // Creates a summary metric card used at the top of the report.
     private VBox metricCard(String label, String value) {
+        // Summary metric label text style.
         Label labelNode = new Label(label);
         labelNode.setStyle("-fx-text-fill: #6b7280; -fx-font-size: 12;");
 
+        // Summary metric value text style.
         Label valueNode = new Label(value);
         valueNode.setStyle("-fx-text-fill: #111827; -fx-font-size: 22; -fx-font-weight: bold;");
 
+        // Summary metric card container style.
         VBox card = new VBox(4, labelNode, valueNode);
         card.setStyle("-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 12;");
         card.setPrefWidth(180);

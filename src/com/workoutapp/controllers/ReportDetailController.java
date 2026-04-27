@@ -36,11 +36,13 @@ public class ReportDetailController implements ScreenController {
         this.profileName = profileName;
         this.selectedEvent = event;
 
+        // Fallback header text when no workout is selected.
         if (selectedEvent == null || selectedEvent.getDateTime() == null) {
             titleLabel.setText("Workout Detail Report - " + (profileName == null ? "profile" : profileName));
             return;
         }
 
+        // Header/title text format for selected workout date.
         String dateText = selectedEvent.getDateTime().format(DATE_FORMAT);
         titleLabel.setText("Workout Detail Report - " + dateText);
     }

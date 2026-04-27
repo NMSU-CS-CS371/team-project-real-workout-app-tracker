@@ -1,30 +1,26 @@
 package com.workoutapp.models;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class ExerciseInstance {
 
     private Exercise exercise;
-    private int sets;
-    private int reps;
-    private double weight;
+    private List<WorkoutSet> workoutSets;
     private int durationMinutes;
 
 
     // Constructor for strength exercises
-    public ExerciseInstance(Exercise exercise, int sets, int reps, double weight) {
+    public ExerciseInstance(Exercise exercise) {
+
         if (exercise == null) {
             throw new IllegalArgumentException("Exercise cannot be null");
         } else if (exercise.getType() == ExerciseType.CARDIO) {
             throw new IllegalArgumentException("Strength exrcise cannot have type CARDIO");
-        } else if (sets < 0 || reps < 0) {
-            throw new IllegalArgumentException("Sets and reps must be non-negative");
-        } else if (weight < 0) {
-            throw new IllegalArgumentException("Weight must be non-negative");
         }
 
         this.exercise = exercise;
-        this.sets = sets;
-        this.reps = reps;
-        this.weight = weight;
+        this.workoutSets = new LinkedList<>();
         this.durationMinutes = 0;
     }
 
@@ -39,9 +35,7 @@ public class ExerciseInstance {
         }
 
         this.exercise = exercise;
-        this.sets = 0;
-        this.reps = 0;
-        this.weight = 0.0;
+        this.workoutSets = new LinkedList<>();
         this.durationMinutes = durationMinutes;
     }
 
@@ -57,16 +51,33 @@ public class ExerciseInstance {
         return exercise.getType();
     }
 
-    public int getSets() {
-        return sets;
+    public int getSetCount() {
+        return workoutSets.size();
     }
 
     public int getReps() {
-        return reps;
+        if (workoutSets.isEmpty()) {
+            return 0;
+        }
+        return workoutSets.get(0).getReps();
     }
 
     public double getWeight() {
-        return weight;
+        if (workoutSets.isEmpty()) {
+            return 0.0;
+        }
+        return workoutSets.get(0).getWeight();
+    }
+
+    public List<WorkoutSet> getWorkoutSets() {
+        return new LinkedList<>(workoutSets);
+    }
+
+    public WorkoutSet getWorkoutSet(int index) {
+        if (index < 0 || index >= workoutSets.size()) {
+            throw new IndexOutOfBoundsException("Set index out of range: " + index);
+        }
+        return workoutSets.get(index);
     }
 
     public int getDurationMinutes() {
@@ -77,21 +88,39 @@ public class ExerciseInstance {
         if (sets < 0) {
             throw new IllegalArgumentException("Sets must be non-negative");
         }
-        this.sets = sets;
+
+        int reps = getReps();
+        double weight = getWeight();
+
+        if (workoutSets.size() < sets) {
+            while (workoutSets.size() < sets) {
+                workoutSets.add(new WorkoutSet(reps, weight));
+            }
+        } else {
+            while (workoutSets.size() > sets) {
+                workoutSets.remove(workoutSets.size() - 1);
+            }
+        }
     }
 
     public void setReps(int reps) {
         if (reps < 0) {
             throw new IllegalArgumentException("Reps must be non-negative");
         }
-        this.reps = reps;
+
+        for (WorkoutSet workoutSet : workoutSets) {
+            workoutSet.setReps(reps);
+        }
     }
 
     public void setWeight(double weight) {
         if (weight < 0) {
             throw new IllegalArgumentException("Weight must be non-negative");
         }
-        this.weight = weight;
+
+        for (WorkoutSet workoutSet : workoutSets) {
+            workoutSet.setWeight(weight);
+        }
     }
 
     public void setDurationMinutes(int durationMinutes) {
@@ -99,6 +128,20 @@ public class ExerciseInstance {
             throw new IllegalArgumentException("Duration must be non-negative");
         }
         this.durationMinutes = durationMinutes;
+    }
+
+    public void addSet(WorkoutSet set) {
+        if (exercise.getType() == ExerciseType.CARDIO) {
+            throw new IllegalArgumentException("Cannot add sets to cardio exercise");
+        }
+        workoutSets.add(set);
+    }
+
+    public void removeSet(int index) {
+        if (exercise.getType() == ExerciseType.CARDIO) {
+            throw new IllegalArgumentException("Cannot remove sets from cardio exercise");
+        }
+        workoutSets.remove(index);
     }
 
     @Override
@@ -109,8 +152,8 @@ public class ExerciseInstance {
         }
 
         return "Exercise: " + exercise.getName()
-            + " | Sets: " + sets
-            + " | Reps: " + reps
-            + " | Weight: " + weight;
+            + " | Sets: " + getSetCount()
+            + " | Reps: " + getReps()
+            + " | Weight: " + getWeight();
     }
 }

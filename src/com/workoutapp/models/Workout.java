@@ -17,7 +17,7 @@ public class Workout {
             if (e.getType() == ExerciseType.CARDIO) {
                 exercises.add(new ExerciseInstance(e, 0));
             } else {
-                exercises.add(new ExerciseInstance(e, 0, 0, 0.0));
+                exercises.add(new ExerciseInstance(e));
             }
         }  
     }
