@@ -22,6 +22,7 @@ import com.workoutapp.models.*;
 public class MainController {
     @FXML private Button profileSettingsButton;
     @FXML private ComboBox<String> profileDropDown;
+    @FXML private Label activeProfileLabel;
     @FXML private StackPane contentPane;
 
     private ProfileService profileService;
@@ -51,6 +52,7 @@ public class MainController {
     public void onProfileSelected(String profileName) {
         if(profileName == null) return;
         currentProfile = profileName;
+        activeProfileLabel.setText(profileName);
         if(currentScreenController != null){
             currentScreenController.onProfileChanged(profileName);
         }
@@ -89,6 +91,21 @@ public class MainController {
 
             contentPane.getChildren().setAll(view);
             
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadReportDetailView(CalendarEvent selectedEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/workoutapp/views/ReportDetailView.fxml"));
+            Parent view = loader.load();
+
+            ReportDetailController controller = loader.getController();
+            controller.setMainController(this);
+            controller.loadEvent(currentProfile, selectedEvent);
+
+            contentPane.getChildren().setAll(view);
         } catch (Exception e) {
             e.printStackTrace();
         }

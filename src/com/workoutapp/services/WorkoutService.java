@@ -112,7 +112,10 @@ public class WorkoutService {
         if (exercise.getType() == ExerciseType.CARDIO) {
             instance = new ExerciseInstance(exercise, 30); // Default 30 minutes
         } else {
-            instance = new ExerciseInstance(exercise, 3, 10, 0.0); // 3 sets, 10 reps, 0 weight
+            instance = new ExerciseInstance(exercise);
+            instance.setSets(3);
+            instance.setReps(10);
+            instance.setWeight(0.0);
         }
 
         currentWorkout.addExercise(instance);
@@ -503,7 +506,7 @@ public class WorkoutService {
         double totalVolume = 0.0;
         for (ExerciseInstance instance : currentWorkout.getExercises()) {
             if (instance.getExerciseType() != ExerciseType.CARDIO)
-                totalVolume += instance.getSets() * instance.getReps() * instance.getWeight();
+                totalVolume += instance.getWorkoutSets().size() * instance.getReps() * instance.getWeight();
         }
         return totalVolume;
     }
@@ -514,7 +517,9 @@ public class WorkoutService {
         int totalReps = 0;
         for (ExerciseInstance instance : currentWorkout.getExercises()) {
             if (instance.getExerciseType() != ExerciseType.CARDIO) {
-                totalReps += instance.getSets() * instance.getReps();
+                for (WorkoutSet set : instance.getWorkoutSets()) {
+                    totalReps += set.getReps();
+                }
             }
         }
         return totalReps;
@@ -526,7 +531,7 @@ public class WorkoutService {
         int totalSets = 0;
         for (ExerciseInstance instance : currentWorkout.getExercises()) {
             if (instance.getExerciseType() != ExerciseType.CARDIO) {
-                totalSets += instance.getSets();
+                totalSets += instance.getSetCount();
             }
         }
         return totalSets;
@@ -546,10 +551,15 @@ public class WorkoutService {
         for (int i = 0; i < currentWorkout.getExercises().size(); i++) {
             ExerciseInstance instance = currentWorkout.getExercises().get(i);
             if (instance.getExerciseType() != ExerciseType.CARDIO) {
-                double volume = instance.getSets() * instance.getReps() * instance.getWeight();
-                summary.append(String.format("%d. %s: %.1f lbs (%dx%dx%.1f)\n",
+                double volume = 0.0;
+                int reps = 0;
+                for (WorkoutSet set : instance.getWorkoutSets()) {
+                    volume += set.getReps() * set.getWeight();
+                    reps += set.getReps();
+                }
+                summary.append(String.format("%d. %s: %.1f lbs (%d sets, %d reps)\n",
                     i + 1, instance.getExerciseName(), volume,
-                    instance.getSets(), instance.getReps(), instance.getWeight()));
+                    instance.getSetCount(), reps));
             } else {
                 summary.append(String.format("%d. %s: %d minutes (Cardio)\n",
                     i + 1, instance.getExerciseName(), instance.getDurationMinutes()));
@@ -717,7 +727,9 @@ public class WorkoutService {
             double total = 0.0;
             for (ExerciseInstance instance : workout.getExercises()) {
                 if (instance.getExerciseType() != ExerciseType.CARDIO) {
-                    total += instance.getSets() * instance.getReps() * instance.getWeight();
+                    for (WorkoutSet set : instance.getWorkoutSets()) {
+                        total += set.getReps() * set.getWeight();
+                    }
                 }
             }
             return total;
@@ -728,7 +740,9 @@ public class WorkoutService {
             int total = 0;
             for (ExerciseInstance instance : workout.getExercises()) {
                 if (instance.getExerciseType() != ExerciseType.CARDIO) {
-                    total += instance.getSets() * instance.getReps();
+                    for (WorkoutSet set : instance.getWorkoutSets()) {
+                        total += set.getReps();
+                    }
                 }
             }
             return total;
@@ -739,7 +753,7 @@ public class WorkoutService {
             int total = 0;
             for (ExerciseInstance instance : workout.getExercises()) {
                 if (instance.getExerciseType() != ExerciseType.CARDIO) {
-                    total += instance.getSets();
+                    total += instance.getSetCount();
                 }
             }
             return total;
@@ -762,10 +776,15 @@ public class WorkoutService {
             for (int i = 0; i < workout.getExercises().size(); i++) {
                 ExerciseInstance instance = workout.getExercises().get(i);
                 if (instance.getExerciseType() != ExerciseType.CARDIO) {
-                    double volume = instance.getSets() * instance.getReps() * instance.getWeight();
-                    summary.append(String.format("%d. %s: %.1f lbs (%dx%dx%.1f)\n",
+                    double volume = 0.0;
+                    int reps = 0;
+                    for (WorkoutSet set : instance.getWorkoutSets()) {
+                        volume += set.getReps() * set.getWeight();
+                        reps += set.getReps();
+                    }
+                    summary.append(String.format("%d. %s: %.1f lbs (%d sets, %d reps)\n",
                         i + 1, instance.getExerciseName(), volume,
-                        instance.getSets(), instance.getReps(), instance.getWeight()));
+                        instance.getSetCount(), reps));
                 } else {
                     summary.append(String.format("%d. %s: %d minutes (Cardio)\n",
                         i + 1, instance.getExerciseName(), instance.getDurationMinutes()));
