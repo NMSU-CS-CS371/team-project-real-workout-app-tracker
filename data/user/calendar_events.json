@@ -1,75 +1,86 @@
 [
   {
-    "dateTime": "2026-04-22T00:39:53.6566017",
+    "dateTime": "2026-04-21T13:34:53.128689291",
+    "workout": {
+      "exercises": []
+    },
+    "notes": "lllllllllllllllllllllllllllllllllllll"
+  },
+  {
+    "dateTime": "2026-04-22T09:27:59.347668123",
     "workout": {
       "exercises": [
         {
           "exercise": {
-            "name": "Elliptical",
-            "description": "",
-            "type": "CARDIO"
-          },
-          "sets": 0,
-          "reps": 0,
-          "weight": 0.0,
-          "durationMinutes": 18
-        },
-        {
-          "exercise": {
-            "name": "Push Up",
-            "description": "",
-            "type": "CORE"
-          },
-          "sets": 6,
-          "reps": 10,
-          "weight": 30.0,
-          "durationMinutes": 0
-        },
-        {
-          "exercise": {
-            "name": "Curls",
-            "description": "",
-            "type": "ARMS"
+            "name": "Chest Press",
+            "description": "aasda",
+            "type": "CHEST"
           },
           "sets": 3,
           "reps": 10,
-          "weight": 30.0,
+          "weight": 20.0,
           "durationMinutes": 0
-        },
-        {
-          "exercise": {
-            "name": "Bench Press",
-            "description": "",
-            "type": "CHEST"
-          },
-          "sets": 6,
-          "reps": 10,
-          "weight": 45.0,
-          "durationMinutes": 0
-        },
-        {
-          "exercise": {
-            "name": "Treadmill",
-            "description": "",
-            "type": "CARDIO"
-          },
-          "sets": 0,
-          "reps": 0,
-          "weight": 0.0,
-          "durationMinutes": 12
         }
       ]
     },
     "notes": ""
   },
   {
-    "dateTime": "2026-04-16T02:12:00",
+    "dateTime": "2026-04-22T09:30:49.318473878",
     "workout": {
       "exercises": [
         {
           "exercise": {
-            "name": "New Exercise",
-            "description": "",
+            "name": "Treadmill",
+            "description": "asdasdasd",
+            "type": "CARDIO"
+          },
+          "sets": 0,
+          "reps": 0,
+          "weight": 0.0,
+          "durationMinutes": 20
+        },
+        {
+          "exercise": {
+            "name": "Push Up",
+            "description": "asdasdasd",
+            "type": "CHEST"
+          },
+          "sets": 7,
+          "reps": 10,
+          "weight": 60.0,
+          "durationMinutes": 0
+        },
+        {
+          "exercise": {
+            "name": "Chest Press",
+            "description": "aasda",
+            "type": "CHEST"
+          },
+          "sets": 1,
+          "reps": 53,
+          "weight": 60.0,
+          "durationMinutes": 0
+        }
+      ]
+    },
+    "notes": ""
+  },
+  {
+    "dateTime": "2026-04-22T09:40:36.157318405",
+    "workout": {
+      "exercises": []
+    },
+    "notes": ""
+  },
+  {
+    "dateTime": "2026-04-22T09:41:01.810276138",
+    "workout": {
+      "exercises": [
+        {
+          "exercise": {
+            "name": "Treadmill",
+            "description": "asdasdasd",
             "type": "CARDIO"
           },
           "sets": 0,
@@ -82,63 +93,19 @@
     "notes": ""
   },
   {
-    "dateTime": "2026-04-15T02:11:00",
+    "dateTime": "2026-04-22T13:24:15.855926961",
     "workout": {
       "exercises": [
         {
           "exercise": {
-            "name": "Elliptical",
-            "description": "",
-            "type": "CARDIO"
-          },
-          "sets": 0,
-          "reps": 0,
-          "weight": 0.0,
-          "durationMinutes": 15
-        },
-        {
-          "exercise": {
             "name": "Push Up",
-            "description": "",
-            "type": "CORE"
-          },
-          "sets": 3,
-          "reps": 10,
-          "weight": 10.0,
-          "durationMinutes": 0
-        },
-        {
-          "exercise": {
-            "name": "Curls",
-            "description": "",
-            "type": "ARMS"
-          },
-          "sets": 3,
-          "reps": 10,
-          "weight": 25.0,
-          "durationMinutes": 0
-        },
-        {
-          "exercise": {
-            "name": "Bench Press",
-            "description": "",
+            "description": "asdasdasd",
             "type": "CHEST"
           },
-          "sets": 3,
+          "sets": 2,
           "reps": 10,
-          "weight": 85.0,
-          "durationMinutes": 0
-        },
-        {
-          "exercise": {
-            "name": "Treadmill",
-            "description": "",
-            "type": "CARDIO"
-          },
-          "sets": 0,
-          "reps": 0,
           "weight": 0.0,
-          "durationMinutes": 17
+          "durationMinutes": 0
         }
       ]
     },

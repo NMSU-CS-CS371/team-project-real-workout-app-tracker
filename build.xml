@@ -12,7 +12,7 @@
     <property name="test.classes.dir"     value="${build.dir}/classes"/>
 
     <!-- Windows JavaFX path -->
-    <condition property="javafx.lib" value="C:/Program Files/Java/javafx-sdk-26/lib">
+    <condition property="javafx.lib" value="C:/Program Files/Java/javafx-sdk-21.0.10/lib">
         <os family="windows"/>
     </condition>
 

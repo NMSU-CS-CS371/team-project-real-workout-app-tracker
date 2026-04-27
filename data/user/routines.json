@@ -1,31 +1,26 @@
 [
   {
-    "routineName": "Routine 1",
+    "routineName": "Test",
     "exercises": [
       {
-        "name": "Elliptical",
-        "description": "",
-        "type": "CARDIO"
-      },
-      {
         "name": "Push Up",
-        "description": "",
-        "type": "CORE"
-      },
-      {
-        "name": "Curls",
-        "description": "",
-        "type": "ARMS"
-      },
-      {
-        "name": "Bench Press",
-        "description": "",
+        "description": "asdasdasd",
         "type": "CHEST"
       },
       {
         "name": "Treadmill",
-        "description": "",
+        "description": "asdasdasd",
         "type": "CARDIO"
+      },
+      {
+        "name": "Chest Press",
+        "description": "aasda",
+        "type": "CHEST"
+      },
+      {
+        "name": "Barbell Squat",
+        "description": "",
+        "type": "LEGS"
       }
     ]
   }
