@@ -5,13 +5,19 @@
 <?import javafx.geometry.Insets?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.workoutapp.ui.MainController">
+            fx:controller="com.workoutapp.controllers.MainController">
 
     <top>
-        <HBox spacing="10" alignment="CENTER_RIGHT">
+        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: #ffffff; -fx-border-color: #e5e7eb; -fx-border-width: 0 0 1 0;">
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
+
+            <VBox spacing="2" style="-fx-background-color: #eef2ff; -fx-background-radius: 8; -fx-padding: 6 10 6 10;">
+                <Label fx:id="activeProfileLabel" text="No profile" style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #1f2937;"/>
+            </VBox>
+
+            <Pane HBox.hgrow="ALWAYS"/>
 
             <Label text="Profile:"/>
             <ComboBox fx:id="profileDropDown"/>

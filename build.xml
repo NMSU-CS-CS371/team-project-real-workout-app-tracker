@@ -17,7 +17,7 @@
     </condition>
 
     <!-- Linux JavaFX path -->
-    <condition property="javafx.lib" value="../javafx-sdk-21.0.10/lib">
+    <condition property="javafx.lib" value="/home/wilkes/Desktop/CS3710/javafx-sdk-21.0.10/lib">
         <os family="unix"/>
     </condition>
 
@@ -64,28 +64,33 @@
 
     <!-- run junit tests -->
     <target name="test" depends="compile-tests">
+        <pathconvert property="test.classpath" pathsep="${path.separator}">
+            <path>
+                <pathelement path="${classes.dir}"/>
+                <fileset dir="${lib.dir}" includes="**/*.jar"/>
+            </path>
+        </pathconvert>
+
         <java jar="${junitjar}" fork="true" failonerror="true">
-            <!-- Run the JUnit Console Launcher -->
             <arg value="execute"/>
-
-            <!-- Point to compiled classes -->
             <arg value="--class-path"/>
-            <arg value="${classes.dir}:${lib.dir}/*"/>
+            <arg value="${test.classpath}"/>
 
-            <!-- Automatically discover all tests -->
+            <!-- Discover tests -->
             <arg value="--scan-class-path"/>
 
-            <!-- Optional: pretty output -->
+            <!-- Pretty output -->
             <arg value="--details"/>
             <arg value="tree"/>
-
             <arg value="--details-theme"/>
             <arg value="ascii"/>
 
+            <!-- Include test classes -->
             <arg value="--include-classname"/>
             <arg value=".*Test"/>
         </java>
     </target>
+
 
     <!-- run the application-->
     <target name="run" depends="compile">
@@ -99,7 +104,7 @@
             <jvmarg value="--module-path"/>
             <jvmarg value="${javafx.lib}"/>
             <jvmarg value="--add-modules"/>
-            <jvmarg value="javafx.controls,javafx.fxml"/>
+            <jvmarg value="javafx.controls,javafx.fxml,javafx.swing"/>
         </java>
     </target>
 

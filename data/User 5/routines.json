@@ -1,0 +1,27 @@
+[
+  {
+    "routineName": "Test",
+    "exercises": [
+      {
+        "name": "Push Up",
+        "description": "asdasdasd",
+        "type": "CHEST"
+      },
+      {
+        "name": "Treadmill",
+        "description": "asdasdasd",
+        "type": "CARDIO"
+      },
+      {
+        "name": "Chest Press",
+        "description": "aasda",
+        "type": "CHEST"
+      },
+      {
+        "name": "Barbell Squat",
+        "description": "",
+        "type": "LEGS"
+      }
+    ]
+  }
+]

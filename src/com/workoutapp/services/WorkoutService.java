@@ -1,19 +1,12 @@
 package com.workoutapp.services;
 
 import com.workoutapp.models.*;
-import java.time.LocalDateTime;
-import java.time.Duration;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.CompletableFuture;
+import com.workoutapp.services.WorkoutService.WorkoutSummary;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import java.time.*;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -22,7 +15,6 @@ import javafx.collections.ObservableList;
  * exercise tracking, and integration with calendar and recovery suggestions.
  */
 public class WorkoutService {
-
     private Workout currentWorkout;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
@@ -65,14 +57,11 @@ public class WorkoutService {
         this.currentExerciseIndex = 0;
     }
 
-    /**
-     * Starts a new workout session from a routine
-     */
+    // Starts a new workout session from a routine
     public void startWorkoutFromRoutine(String routineName) {
         Routine routine = routineService.findRoutine(routineName);
-        if (routine == null) {
+        if (routine == null) 
             throw new IllegalArgumentException("Routine not found: " + routineName);
-        }
 
         currentWorkout = new Workout(routine);
         // Set baseline of 3 sets for strength exercises
@@ -93,9 +82,7 @@ public class WorkoutService {
         updateUIProperties();
     }
 
-    /**
-     * Starts a new workout session from scratch
-     */
+    // Starts a new workout session from scratch
     public void startWorkoutFromScratch() {
         currentWorkout = new Workout();
         startTime = LocalDateTime.now();
@@ -107,14 +94,10 @@ public class WorkoutService {
         updateUIProperties();
     }
 
-    /**
-     * Adds an exercise to the current workout
-     */
+    // Adds an exercise to the current workout
     public void addExerciseToWorkout(String exerciseName) {
-        if (!workoutActive) {
+        if (!workoutActive) 
             throw new IllegalStateException("No active workout session");
-        }
-
         Exercise exercise = null;
         for (Exercise e : exerciseService.getExercises()) {
             if (e.getName().equalsIgnoreCase(exerciseName)) {
@@ -122,38 +105,33 @@ public class WorkoutService {
                 break;
             }
         }
-
-        if (exercise == null) {
+        if (exercise == null)
             throw new IllegalArgumentException("Exercise not found: " + exerciseName);
-        }
 
         ExerciseInstance instance;
         if (exercise.getType() == ExerciseType.CARDIO) {
             instance = new ExerciseInstance(exercise, 30); // Default 30 minutes
         } else {
-            instance = new ExerciseInstance(exercise, 3, 10, 0.0); // 3 sets, 10 reps, 0 weight
+            instance = new ExerciseInstance(exercise);
+            instance.setSets(3);
+            instance.setReps(10);
+            instance.setWeight(0.0);
         }
 
         currentWorkout.addExercise(instance);
         updateUIProperties();
     }
 
-    /**
-     * Updates exercise instance data during workout
-     */
+    // Updates exercise instance data during workout
     public void updateExerciseData(int exerciseIndex, int sets, int reps, double weight) {
-        if (!workoutActive) {
+        if (!workoutActive)
             throw new IllegalStateException("No active workout session");
-        }
-
-        if (exerciseIndex < 0 || exerciseIndex >= currentWorkout.getNumExercises()) {
+        if (exerciseIndex < 0 || exerciseIndex >= currentWorkout.getNumExercises())
             throw new IllegalArgumentException("Invalid exercise index");
-        }
 
         ExerciseInstance instance = currentWorkout.getExercises().get(exerciseIndex);
-        if (instance.getExerciseType() == ExerciseType.CARDIO) {
+        if (instance.getExerciseType() == ExerciseType.CARDIO)
             throw new IllegalArgumentException("Cannot update sets/reps/weight for cardio exercise");
-        }
 
         instance.setSets(sets);
         instance.setReps(reps);
@@ -161,30 +139,22 @@ public class WorkoutService {
         updateUIProperties();
     }
 
-    /**
-     * Updates cardio exercise duration
-     */
+    // Updates cardio exercise duration
     public void updateCardioDuration(int exerciseIndex, int durationMinutes) {
-        if (!workoutActive) {
+        if (!workoutActive)
             throw new IllegalStateException("No active workout session");
-        }
-
-        if (exerciseIndex < 0 || exerciseIndex >= currentWorkout.getNumExercises()) {
+        if (exerciseIndex < 0 || exerciseIndex >= currentWorkout.getNumExercises())
             throw new IllegalArgumentException("Invalid exercise index");
-        }
 
         ExerciseInstance instance = currentWorkout.getExercises().get(exerciseIndex);
-        if (instance.getExerciseType() != ExerciseType.CARDIO) {
+        if (instance.getExerciseType() != ExerciseType.CARDIO)
             throw new IllegalArgumentException("Exercise is not cardio type");
-        }
 
         instance.setDurationMinutes(durationMinutes);
         updateUIProperties();
     }
 
-    /**
-     * Starts a rest timer between sets/exercises
-     */
+    // Starts a rest timer between sets/exercises
     public CompletableFuture<Void> startRestTimer(int seconds) {
         CompletableFuture<Void> future = new CompletableFuture<>();
 
@@ -198,40 +168,33 @@ public class WorkoutService {
         return future;
     }
 
-    /**
-     * Starts default rest timer
-     */
+    // Starts default rest timer
     public CompletableFuture<Void> startRestTimer() {
         return startRestTimer(defaultRestTimeSeconds);
     }
+    
+    //Get default rest time
+    public int getDefaultRestTime() {
+        return defaultRestTimeSeconds;
+    }
 
-    /**
-     * Sets the default rest time
-     */
+    // Sets the default rest time
     public void setDefaultRestTime(int seconds) {
-        if (seconds < 0) {
+        if (seconds < 0)
             throw new IllegalArgumentException("Rest time must be non-negative");
-        }
         this.defaultRestTimeSeconds = seconds;
     }
 
-    /**
-     * Gets the current workout duration in minutes
-     */
+    // Gets the current workout duration in minutes
     public long getCurrentWorkoutDurationMinutes() {
-        if (!workoutActive || startTime == null) {
-            return 0;
-        }
+        if (!workoutActive || startTime == null) return 0;
         return Duration.between(startTime, LocalDateTime.now()).toMinutes();
     }
 
-    /**
-     * Ends the current workout and saves it to calendar
-     */
+    // Ends the current workout and saves it to calendar
     public WorkoutSummary endWorkout(String notes) {
-        if (!workoutActive) {
+        if (!workoutActive)
             throw new IllegalStateException("No active workout session");
-        }
 
         endTime = LocalDateTime.now();
         workoutActive = false;
@@ -247,7 +210,6 @@ public class WorkoutService {
 
         WorkoutSummary summary = new WorkoutSummary(currentWorkout, startTime, endTime,
                                                   durationMinutes, getRecoverySuggestions());
-
         // Store for UI access
         lastWorkoutSummary = summary;
 
@@ -259,18 +221,12 @@ public class WorkoutService {
 
         // Update JavaFX properties
         updateUIProperties();
-
         return summary;
     }
 
-    /**
-     * Cancels the current workout without saving
-     */
+    //Cancels the current workout without saving
     public void cancelWorkout() {
-        if (!workoutActive) {
-            return;
-        }
-
+        if (!workoutActive) return;
         workoutActive = false;
         currentWorkout = null;
         startTime = null;
@@ -283,36 +239,24 @@ public class WorkoutService {
         updateUIProperties();
     }
 
-    /**
-     * Gets the current workout
-     */
+    //Gets the current workout
     public Workout getCurrentWorkout() {
         return currentWorkout;
     }
 
-    /**
-     * Gets a user-friendly status message for the current workout state
-     */
+    //Gets a user-friendly status message for the current workout state
     public String getWorkoutStatusMessage() {
-        if (!workoutActive) {
-            return "No active workout";
-        }
-
-        long duration = getCurrentWorkoutDurationMinutes();
+        if (!workoutActive) return "No active workout";
         int currentIndex = getCurrentExerciseIndex();
         int totalExercises = currentWorkout.getNumExercises();
 
-        return String.format("Workout in progress - %d min elapsed, Exercise %d of %d",
-                           duration, currentIndex + 1, totalExercises);
+        if(totalExercises == 0)     return "No exercises";
+        return String.format("Exercise %d of %d", currentIndex + 1, totalExercises);
     }
 
-    /**
-     * Gets formatted duration string (MM:SS or HH:MM:SS)
-     */
+    //Gets formatted duration string (MM:SS or HH:MM:SS)
     public String getFormattedDuration() {
-        if (!workoutActive || startTime == null) {
-            return "00:00";
-        }
+        if (!workoutActive || startTime == null)  return "00:00";
 
         long seconds = Duration.between(startTime, LocalDateTime.now()).getSeconds();
         long hours = seconds / 3600;
@@ -326,9 +270,7 @@ public class WorkoutService {
         }
     }
 
-    /**
-     * Gets formatted volume string for display
-     */
+    // Gets formatted volume string for display
     public String getFormattedVolume() {
         double volume = calculateTotalVolume();
         if (volume >= 1000) {
@@ -338,21 +280,16 @@ public class WorkoutService {
         }
     }
 
-    /**
-     * Gets progress percentage (0.0 to 1.0) for UI progress bars
-     */
+    //Gets progress percentage (0.0 to 1.0) for UI progress bars
     public double getWorkoutProgress() {
-        if (!workoutActive || currentWorkout == null || currentWorkout.getNumExercises() == 0) {
+        if (!workoutActive || currentWorkout == null || currentWorkout.getNumExercises() == 0)
             return 0.0;
-        }
 
         // Simple progress based on current exercise index
         return (double) (currentExerciseIndex + 1) / currentWorkout.getNumExercises();
     }
 
-    /**
-     * Gets a list of exercise names for UI dropdowns/combo boxes
-     */
+    //Gets a list of exercise names for UI dropdowns/combo boxes
     public List<String> getAvailableExerciseNames() {
         List<String> names = new ArrayList<>();
         for (Exercise exercise : exerciseService.getExercises()) {
@@ -364,28 +301,22 @@ public class WorkoutService {
     public List<String> getAvailableRoutineNames() {
         List<String> names = new ArrayList<>();
         for (Routine routine : routineService.getRoutines()) {
-            names.add(routine.getName());
+            names.add(routine.getRoutineName());
         }
         return names;
     }
 
-    /**
-     * Gets an observable list of exercise names for UI combo boxes
-     */
+    //Gets an observable list of exercise names for UI combo boxes
     public ObservableList<String> getAvailableExerciseNamesObservable() {
         return FXCollections.observableArrayList(getAvailableExerciseNames());
     }
 
-    /**
-     * Gets an observable list of routine names for UI combo boxes
-     */
+    //Gets an observable list of routine names for UI combo boxes
     public ObservableList<String> getAvailableRoutineNamesObservable() {
         return FXCollections.observableArrayList(getAvailableRoutineNames());
     }
 
-    /**
-     * Gets an observable list of current workout exercises for UI lists
-     */
+    // Gets an observable list of current workout exercises for UI lists
     public ObservableList<ExerciseInstance> getCurrentWorkoutExercisesObservable() {
         if (currentWorkout == null) {
             return FXCollections.emptyObservableList();
@@ -393,9 +324,7 @@ public class WorkoutService {
         return FXCollections.observableArrayList(currentWorkout.getExercises());
     }
 
-    /**
-     * Safely starts a workout from scratch with user-friendly error handling
-     */
+    //Safely starts a workout from scratch with user-friendly error handling
     public String startWorkoutFromScratchSafe() {
         try {
             startWorkoutFromScratch();
@@ -405,9 +334,7 @@ public class WorkoutService {
         }
     }
 
-    /**
-     * Safely starts a workout from routine with user-friendly error handling
-     */
+    //Safely starts a workout from routine with user-friendly error handling
     public String startWorkoutFromRoutineSafe(String routineName) {
         try {
             startWorkoutFromRoutine(routineName);
@@ -419,9 +346,7 @@ public class WorkoutService {
         }
     }
 
-    /**
-     * Safely adds exercise to workout with user-friendly error handling
-     */
+    //Safely adds exercise to workout with user-friendly error handling
     public String addExerciseToWorkoutSafe(String exerciseName) {
         try {
             addExerciseToWorkout(exerciseName);
@@ -435,9 +360,7 @@ public class WorkoutService {
         }
     }
 
-    /**
-     * Safely updates exercise data with user-friendly error handling
-     */
+    //Safely updates exercise data with user-friendly error handling
     public String updateExerciseDataSafe(int sets, int reps, double weight) {
         try {
             updateExerciseData(getCurrentExerciseIndex(), sets, reps, weight);
@@ -451,9 +374,7 @@ public class WorkoutService {
         }
     }
 
-    /**
-     * Safely navigates to exercise with user-friendly error handling
-     */
+    // Safely navigates to exercise with user-friendly error handling
     public String navigateToExerciseSafe(int index) {
         try {
             setCurrentExerciseIndex(index);
@@ -468,9 +389,7 @@ public class WorkoutService {
         }
     }
 
-    /**
-     * Safely ends workout with user-friendly error handling
-     */
+    //Safely ends workout with user-friendly error handling
     public String endWorkoutSafe(String notes) {
         try {
             WorkoutSummary summary = endWorkout(notes);
@@ -532,133 +451,95 @@ public class WorkoutService {
         return totalExercisesProperty;
     }
 
-    /**
-     * Gets the last completed workout summary
-     */
+    // Gets the last completed workout summary
     public WorkoutSummary getLastWorkoutSummary() {
         return lastWorkoutSummary;
     }
 
-    /**
-     * Checks if a workout is currently active
-     */
+    //Checks if a workout is currently active
     public boolean isWorkoutActive() {
         return workoutActive;
     }
 
-    /**
-     * Gets the current exercise index being worked on
-     */
+    // Gets the current exercise index being worked on
     public int getCurrentExerciseIndex() {
         return currentExerciseIndex;
     }
 
-    /**
-     * Sets the current exercise index (for navigating backwards/forwards)
-     */
+    //Sets the current exercise index (for navigating backwards/forwards)
     public void setCurrentExerciseIndex(int index) {
-        if (!workoutActive) {
+        if (!workoutActive)
             throw new IllegalStateException("No active workout session");
-        }
-        if (index < 0 || index >= currentWorkout.getNumExercises()) {
+        if (index < 0 || index >= currentWorkout.getNumExercises())
             throw new IllegalArgumentException("Invalid exercise index: " + index);
-        }
         this.currentExerciseIndex = index;
         updateUIProperties();
     }
 
-    /**
-     * Moves to the next exercise in the workout
-     */
+    // Moves to the next exercise in the workout
     public boolean moveToNextExercise() {
-        if (!workoutActive || currentExerciseIndex >= currentWorkout.getNumExercises() - 1) {
-            return false;
-        }
+        if (!workoutActive || currentExerciseIndex >= currentWorkout.getNumExercises() - 1)     return false;
         currentExerciseIndex++;
         updateUIProperties();
         return true;
     }
 
-    /**
-     * Moves to the previous exercise in the workout
-     */
+    // Moves to the previous exercise in the workout
     public boolean moveToPreviousExercise() {
-        if (!workoutActive || currentExerciseIndex <= 0) {
-            return false;
-        }
+        if (!workoutActive || currentExerciseIndex <= 0) return false;
         currentExerciseIndex--;
         updateUIProperties();
         return true;
     }
 
-    /**
-     * Gets the current exercise being worked on
-     */
+    // Gets the current exercise being worked on
     public ExerciseInstance getCurrentExercise() {
-        if (!workoutActive || currentExerciseIndex >= currentWorkout.getNumExercises()) {
+        if (!workoutActive || currentExerciseIndex >= currentWorkout.getNumExercises()) 
             return null;
-        }
         return currentWorkout.getExercises().get(currentExerciseIndex);
     }
 
-    /**
-     * Calculates the total volume (weight * reps * sets) for the entire workout
-     */
+    // Calculates the total volume (weight * reps * sets) for the entire workout
     public double calculateTotalVolume() {
-        if (currentWorkout == null) {
-            return 0.0;
-        }
+        if (currentWorkout == null) return 0.0;
 
         double totalVolume = 0.0;
         for (ExerciseInstance instance : currentWorkout.getExercises()) {
-            if (instance.getExerciseType() != ExerciseType.CARDIO) {
-                totalVolume += instance.getSets() * instance.getReps() * instance.getWeight();
-            }
+            if (instance.getExerciseType() != ExerciseType.CARDIO)
+                totalVolume += instance.getWorkoutSets().size() * instance.getReps() * instance.getWeight();
         }
         return totalVolume;
     }
 
-    /**
-     * Calculates the total reps performed in the workout
-     */
+    // Calculates the total reps performed in the workout
     public int calculateTotalReps() {
-        if (currentWorkout == null) {
-            return 0;
-        }
-
+        if (currentWorkout == null)     return 0;
         int totalReps = 0;
         for (ExerciseInstance instance : currentWorkout.getExercises()) {
             if (instance.getExerciseType() != ExerciseType.CARDIO) {
-                totalReps += instance.getSets() * instance.getReps();
+                for (WorkoutSet set : instance.getWorkoutSets()) {
+                    totalReps += set.getReps();
+                }
             }
         }
         return totalReps;
     }
 
-    /**
-     * Calculates the total sets performed in the workout
-     */
+    //Calculates the total sets performed in the workout
     public int calculateTotalSets() {
-        if (currentWorkout == null) {
-            return 0;
-        }
-
+        if (currentWorkout == null)    return 0;
         int totalSets = 0;
         for (ExerciseInstance instance : currentWorkout.getExercises()) {
             if (instance.getExerciseType() != ExerciseType.CARDIO) {
-                totalSets += instance.getSets();
+                totalSets += instance.getSetCount();
             }
         }
         return totalSets;
     }
 
-    /**
-     * Gets a summary of workout volume by exercise type
-     */
+    //Gets a summary of workout volume by exercise type
     public String getVolumeSummary() {
-        if (currentWorkout == null) {
-            return "No workout data available";
-        }
+        if (currentWorkout == null)         return "No workout data available";
 
         StringBuilder summary = new StringBuilder();
         summary.append("Workout Volume Summary:\n");
@@ -670,22 +551,24 @@ public class WorkoutService {
         for (int i = 0; i < currentWorkout.getExercises().size(); i++) {
             ExerciseInstance instance = currentWorkout.getExercises().get(i);
             if (instance.getExerciseType() != ExerciseType.CARDIO) {
-                double volume = instance.getSets() * instance.getReps() * instance.getWeight();
-                summary.append(String.format("%d. %s: %.1f lbs (%dx%dx%.1f)\n",
+                double volume = 0.0;
+                int reps = 0;
+                for (WorkoutSet set : instance.getWorkoutSets()) {
+                    volume += set.getReps() * set.getWeight();
+                    reps += set.getReps();
+                }
+                summary.append(String.format("%d. %s: %.1f lbs (%d sets, %d reps)\n",
                     i + 1, instance.getExerciseName(), volume,
-                    instance.getSets(), instance.getReps(), instance.getWeight()));
+                    instance.getSetCount(), reps));
             } else {
                 summary.append(String.format("%d. %s: %d minutes (Cardio)\n",
                     i + 1, instance.getExerciseName(), instance.getDurationMinutes()));
             }
         }
-
         return summary.toString();
     }
 
-    /**
-     * Updates recent muscle groups based on completed workout
-     */
+    //Updates recent muscle groups based on completed workout
     private void updateRecentMuscleGroups() {
         if (currentWorkout == null) return;
 
@@ -698,9 +581,7 @@ public class WorkoutService {
         }
     }
 
-    /**
-     * Checks for recovery suggestions based on recent workouts
-     */
+    //Checks for recovery suggestions based on recent workouts
     private void checkRecoverySuggestions() {
         // Check recent workouts in the last few days
         LocalDateTime checkDate = LocalDateTime.now().minusDays(RECOVERY_CHECK_DAYS);
@@ -729,14 +610,9 @@ public class WorkoutService {
         }
     }
 
-    /**
-     * Gets recovery suggestions for the current workout
-     */
+    //Gets recovery suggestions for the current workout
     public String getRecoverySuggestions() {
-        if (currentWorkout == null) {
-            return "No workout data available";
-        }
-
+        if (currentWorkout == null)     return "No workout data available";
         String basicSuggestion = RecoverySuggestion.suggestRecovery(currentWorkout);
 
         // Add additional logic for multiple workouts targeting same groups
@@ -746,13 +622,70 @@ public class WorkoutService {
             enhancedSuggestion.append("\n\nNote: Recent workouts have targeted muscle groups. " +
                                     "Monitor for fatigue and adjust intensity as needed.");
         }
-
         return enhancedSuggestion.toString();
     }
 
-    /**
-     * Inner class to represent workout summary
-     */
+    public ExerciseService getExerciseService(){
+        return exerciseService;
+    }
+
+    public RoutineService getRoutineService(){
+        return routineService;
+    }
+
+    //Get recovery analysis from last 3 days of workouts
+    public String getFullRecoverySuggestions(){
+        //1. Recent muscle usage
+        LocalDateTime checkDate = LocalDateTime.now().minusDays(RECOVERY_CHECK_DAYS);
+        LinkedList<CalendarEvent> events = calendarService.getEventsInRange(
+            checkDate.toLocalDate(), LocalDate.now());
+            
+        if(events.isEmpty()){
+            return "No workouts in last " + RECOVERY_CHECK_DAYS + " days.";
+        }
+        Map<String, Integer> muscleCount = new HashMap<>();
+            
+        //Traverse calendar events in range, check all exercises in there
+        for(CalendarEvent event : events) {
+            for(ExerciseInstance instance : event.getWorkout().getExercises()){
+                ExerciseType type = instance.getExerciseType();
+                if(type != ExerciseType.CARDIO){
+                    muscleCount.merge(type.toString(), 1, Integer::sum);
+                }
+            }
+        }
+
+        StringBuilder out = new StringBuilder();
+        out.append("**Recent Muscle Usage** (last ")
+            .append(RECOVERY_CHECK_DAYS)
+            .append(" days)\n");
+
+        muscleCount.forEach((muscle, count) ->
+            out.append(String.format("• %s: %d session%s\n",
+                muscle, count, count > 1 ? "s" : ""))
+            );
+        out.append("\n");
+
+        //2. Recommended rest times
+        LinkedList<CalendarEvent> allEvents = calendarService.getEvents();
+        if(!allEvents.isEmpty()){
+            Workout lastWorkout = allEvents.getLast().getWorkout();
+            out.append(RecoverySuggestion.suggestRecovery(lastWorkout));
+            out.append("\n\n");
+        }
+
+        //3. Overuse warning
+        boolean overuse = muscleCount.values().stream().anyMatch(v -> v >= 2);
+        if(overuse) {
+            out.append("⚠ **Overuse Warning**\n");
+            out.append("Some muscle groups were trained multiple times recently.");
+            out.append("Consider resting them before your next session.");
+        }
+
+        return out.toString();
+    }
+
+    // Inner class to represent workout summary
     public static class WorkoutSummary {
         private final Workout workout;
         private final LocalDateTime startTime;
@@ -794,7 +727,9 @@ public class WorkoutService {
             double total = 0.0;
             for (ExerciseInstance instance : workout.getExercises()) {
                 if (instance.getExerciseType() != ExerciseType.CARDIO) {
-                    total += instance.getSets() * instance.getReps() * instance.getWeight();
+                    for (WorkoutSet set : instance.getWorkoutSets()) {
+                        total += set.getReps() * set.getWeight();
+                    }
                 }
             }
             return total;
@@ -805,7 +740,9 @@ public class WorkoutService {
             int total = 0;
             for (ExerciseInstance instance : workout.getExercises()) {
                 if (instance.getExerciseType() != ExerciseType.CARDIO) {
-                    total += instance.getSets() * instance.getReps();
+                    for (WorkoutSet set : instance.getWorkoutSets()) {
+                        total += set.getReps();
+                    }
                 }
             }
             return total;
@@ -816,7 +753,7 @@ public class WorkoutService {
             int total = 0;
             for (ExerciseInstance instance : workout.getExercises()) {
                 if (instance.getExerciseType() != ExerciseType.CARDIO) {
-                    total += instance.getSets();
+                    total += instance.getSetCount();
                 }
             }
             return total;
@@ -839,10 +776,15 @@ public class WorkoutService {
             for (int i = 0; i < workout.getExercises().size(); i++) {
                 ExerciseInstance instance = workout.getExercises().get(i);
                 if (instance.getExerciseType() != ExerciseType.CARDIO) {
-                    double volume = instance.getSets() * instance.getReps() * instance.getWeight();
-                    summary.append(String.format("%d. %s: %.1f lbs (%dx%dx%.1f)\n",
+                    double volume = 0.0;
+                    int reps = 0;
+                    for (WorkoutSet set : instance.getWorkoutSets()) {
+                        volume += set.getReps() * set.getWeight();
+                        reps += set.getReps();
+                    }
+                    summary.append(String.format("%d. %s: %.1f lbs (%d sets, %d reps)\n",
                         i + 1, instance.getExerciseName(), volume,
-                        instance.getSets(), instance.getReps(), instance.getWeight()));
+                        instance.getSetCount(), reps));
                 } else {
                     summary.append(String.format("%d. %s: %d minutes (Cardio)\n",
                         i + 1, instance.getExerciseName(), instance.getDurationMinutes()));
@@ -854,8 +796,8 @@ public class WorkoutService {
 
         @Override
         public String toString() {
-            return String.format("Workout completed in %d minutes\n%s\nRecovery: %s\n\n%s",
-                               durationMinutes, workout.toString(), recoverySuggestion, volumeSummary);
+            return String.format("Workout completed in %d minutes\nRecovery: %s\n\n%s",
+                               durationMinutes, recoverySuggestion, volumeSummary);
         }
     }
 }

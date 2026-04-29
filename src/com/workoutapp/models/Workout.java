@@ -15,11 +15,9 @@ public class Workout {
         this.exercises = new LinkedList<>();
         for (Exercise e : routine.getExercises()) {
             if (e.getType() == ExerciseType.CARDIO) {
-                // if the exercise is a cardio exercise, initialize the exercise instances with a duration of 0.
                 exercises.add(new ExerciseInstance(e, 0));
             } else {
-                // if the exercise is a strength exercise, set default values for sets, reps, and weight.
-                exercises.add(new ExerciseInstance(e, 0, 0, 0.0));
+                exercises.add(new ExerciseInstance(e));
             }
         }  
     }
@@ -52,9 +50,8 @@ public class Workout {
     // Prints the workout details
     public String toString() {
         StringBuilder r = new StringBuilder();
-        r.append("Workout\n-------------\n");
         for (int i = 0; i < exercises.size(); i++) {
-            r.append("#" + (i+1) + " - ").append(exercises.get(i).toString()).append("\n\n");
+            r.append("#" + (i+1) + " - ").append(exercises.get(i).toString()).append("\n");
         }
         return r.toString();
     }

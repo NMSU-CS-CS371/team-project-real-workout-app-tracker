@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- Page-level background color/theme -->
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.workoutapp.controllers.ReportDetailController"
+            minWidth="650" minHeight="500"
+            style="-fx-background-color: #f5f7fb;">
+
+    <top>
+        <!-- Top header bar styling -->
+        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-width: 0 0 1 0;">
+            <padding>
+                <Insets top="16" right="16" bottom="12" left="16"/>
+            </padding>
+            <!-- Back button text/placement -->
+            <Button fx:id="backButton" text="Back to Reports"/>
+            <!-- Detail header typography -->
+            <Label fx:id="titleLabel" text="Workout Detail Report" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+        </HBox>
+    </top>
+
+</BorderPane>

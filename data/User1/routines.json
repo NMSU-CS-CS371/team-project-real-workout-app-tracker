@@ -1,0 +1,12 @@
+[
+  {
+    "routineName": "New Routine",
+    "exercises": [
+      {
+        "name": "Bike",
+        "description": "Biking",
+        "type": "CARDIO"
+      }
+    ]
+  }
+]

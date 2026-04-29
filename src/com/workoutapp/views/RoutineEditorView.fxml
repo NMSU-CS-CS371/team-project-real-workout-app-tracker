@@ -4,8 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" minWidth="700" minHeight="400"
-            fx:controller="com.workoutapp.ui.RoutineEditorController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" minWidth="650" minHeight="500"
+            fx:controller="com.workoutapp.controllers.RoutineEditorController">
 
     <!-- LEFT: Routines -->
     <left>
@@ -51,10 +51,13 @@
             <!-- Bottom-right buttons -->
             <HBox spacing="10">
                 <Button fx:id="addExerciseButton" text="Add Exercise"/>
-                <Button fx:id="deleteExerciseButton" text="Delete"/>
-                <Button fx:id="moveUpButton" text="Move Up"/>
-                <Button fx:id="moveDownButton" text="Move Down"/>
+                <Button fx:id="deleteExerciseButton" text="Delete Exercise"/>
                 <Button fx:id="clearExercisesButton" text="Clear"/>
+            </HBox>
+
+            <HBox spacing="10">
+                <Button fx:id="moveDownButton" text="Move Down"/>
+                <Button fx:id="moveUpButton" text="Move Up"/>
                 <Button fx:id="saveRoutineButton" text="Save" style="-fx-font-weight: bold;"/>
             </HBox>
         </VBox>

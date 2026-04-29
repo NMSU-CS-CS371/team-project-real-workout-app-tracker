@@ -5,7 +5,7 @@
 <?import javafx.geometry.Insets?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.workoutapp.ui.ExerciseSelectorController">
+            fx:controller="com.workoutapp.controllers.ExerciseSelectorController">
 
     <center>
         <VBox spacing="10">
@@ -38,8 +38,10 @@
             <HBox spacing="10">
                 <Button fx:id="createExerciseButton" text="New Exercise"/>
                 <Button fx:id="editExerciseButton" text="Save Changes"/>
-                <Button fx:id="addToRoutineButton" text="Add to Routine" style="-fx-font-weight: bold;"/>
                 <Button fx:id="closeButton" text="Cancel"/>
+            </HBox>
+            <HBox spacing="10">
+                <Button fx:id="addToRoutineButton" text="Add to Routine" style="-fx-font-weight: bold;" minWidth="275" alignment="CENTER" maxWidth="Infinity"/>
             </HBox>
         </VBox>
     </center>

@@ -1,4 +1,4 @@
-package com.workoutapp.ui;
+package com.workoutapp.controllers;
 
 import com.workoutapp.models.*;
 import com.workoutapp.services.*;
@@ -7,6 +7,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.StringConverter;
 import java.util.LinkedList;
+
+/**
+ * Controls the Routine Editor, enabling users to create, rename, delete, and modify
+ * workout routines. Manages exercise ordering, addition/removal of exercises,
+ * and persistence of routine data through RoutineService and ExerciseService.
+ */
 
 public class RoutineEditorController implements ScreenController {
     //Import FXML parameters
@@ -135,8 +141,20 @@ public class RoutineEditorController implements ScreenController {
 
     //Create new routine
     private void onCreateRoutine() {
-        Routine newRoutine = new Routine("New Routine");
-        routineService.addRoutine(newRoutine); // will save
+        //Prevent empty routine name or duplicate
+        String inputName = routineNameField.getText();
+        String finalName;
+
+        if(inputName == null || inputName.trim().isEmpty()){
+            inputName = "New Routine";
+        } 
+        if(routineService.getRoutineNames().contains(inputName.trim())){
+            System.out.println("Duplicate routine name");
+            inputName = inputName + "*";
+        }
+        finalName = inputName.trim();
+        Routine newRoutine = new Routine(finalName);
+        routineService.addRoutine(newRoutine);
         routineItems.add(newRoutine);
         routineListView.getSelectionModel().select(newRoutine);
         routineNameField.requestFocus();

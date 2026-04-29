@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.workoutapp.controllers.HomeController" minWidth="650" minHeight="500"
+            style="-fx-background-color: #dcdee1;">
+    <padding>
+        <Insets top="12" right="12" bottom="12" left="12"/>
+    </padding>
+
+    <!-- LEFT SIDE: Dashboard Summary -->
+    <left>
+        <VBox spacing="15" prefWidth="350"
+                            style="-fx-background-color: white; -fx-border-color: #dbe1ea; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(17,24,39,0.08), 10, 0.1, 0, 2);">
+            <padding>
+                <Insets top="20" left="20" bottom="20" right="10"/>
+            </padding>
+
+            <Label text="Workout Dashboard"
+                   style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #1f2937; -fx-background-color: #eef2ff; -fx-background-radius: 8; -fx-padding: 8 12;"
+                   alignment="CENTER" maxWidth="Infinity"/>
+
+            <GridPane hgap="10" vgap="10"
+                      style="-fx-background-color: #f9fafb; -fx-border-color: #dbe1ea; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10;">
+                <Label text="Total Workouts" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-text-fill: #6b7280;"/>
+                <Label fx:id="totalWorkoutsLabel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-font-weight: bold; -fx-text-fill: #1f2937;"/>
+
+                <Label text="Total Exercises" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-text-fill: #6b7280;"/>
+                <Label fx:id="totalExercisesLabel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" style="-fx-font-weight: bold; -fx-text-fill: #1f2937;"/>
+
+                <Label text="Cardio Minutes" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-text-fill: #6b7280;"/>
+                <Label fx:id="totalCardioMinutesLabel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" style="-fx-font-weight: bold; -fx-text-fill: #1f2937;"/>
+            </GridPane>
+
+            <VBox spacing="6"
+                  style="-fx-background-color: #f9fafb; -fx-border-color: #dbe1ea; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10;">
+                <Label text="Latest Session" style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #1f2937;"/>
+                <Label fx:id="latestWorkoutLabel" text="No sessions yet" style="-fx-text-fill: #374151; -fx-font-weight: bold;"/>
+                <Label fx:id="latestWorkoutDetailsLabel" text="Complete a workout to see details here."
+                       wrapText="true" style="-fx-text-fill: #6b7280;"/>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- RIGHT SIDE: Navigation Buttons + Recovery Suggestions -->
+    <right>
+        <VBox spacing="20" prefWidth="300"
+              style="-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-radius: 10; -fx-background-radius: 10;">
+            <padding>
+                <Insets top="22" right="20" bottom="20" left="10"/>
+            </padding>
+
+            <!-- Top-right: Start Workout, Workout History, Routine Editor -->
+            <Button fx:id="startWorkoutButton" text="Start Workout" 
+                    maxWidth="Infinity" 
+                    style="-fx-font-size: 14; -fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+
+            <Button fx:id="historyButton" text="Workout History"  
+                    maxWidth="Infinity" 
+                    style="-fx-font-size: 14; -fx-background-color: #eef2ff; -fx-text-fill: #1d4ed8; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+
+            <Button fx:id="routineEditorButton" text="Routine Editor"
+                    maxWidth="Infinity"
+                    style="-fx-font-size: 14; -fx-background-color: #f3f4f6; -fx-text-fill: #374151; -fx-background-radius: 8;" />
+
+            <!-- Bottom-right: Recovery Suggestions -->
+                <TitledPane text="Recovery Suggestions" expanded="true"
+                    style="-fx-text-fill: #1f2937; -fx-font-weight: bold;">
+                <VBox fx:id="recoveryBox" spacing="10">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                </VBox>
+            </TitledPane>
+        </VBox>
+    </right>
+
+</BorderPane>
