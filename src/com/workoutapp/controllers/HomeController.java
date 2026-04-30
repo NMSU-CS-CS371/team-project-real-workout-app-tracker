@@ -1,12 +1,15 @@
 package com.workoutapp.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import com.workoutapp.services.*;
 import java.util.LinkedList;
 import com.workoutapp.models.*;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class HomeController implements ScreenController {
     private MainController main;
@@ -21,6 +24,10 @@ public class HomeController implements ScreenController {
     @FXML private Button historyButton;
     @FXML private Button routineEditorButton;
     @FXML private VBox recoveryBox;
+    @FXML private PieChart recoveryChart;
+    @FXML private TextArea recoveryDetailsArea;
+
+    private static final int RECOVERY_PERIOD_DAYS = 7;
 
     @Override
     public void setMainController(MainController mainController){
@@ -37,8 +44,106 @@ public class HomeController implements ScreenController {
 
         calendarService = new CalendarService(profileName);
         loadDashboardSummary();
+        loadRecoverySuggestions();
+    }
 
-        // TODO: Load recovery suggestions here
+    private void loadRecoverySuggestions() {
+        Map<ExerciseType, Double> volumeByGroup = getRecentMuscleVolume(RECOVERY_PERIOD_DAYS);
+        recoveryChart.getData().clear();
+
+        if (volumeByGroup.isEmpty()) {
+            recoveryDetailsArea.setText("No strength workouts recorded in the last "
+                + RECOVERY_PERIOD_DAYS + " days. Complete workouts to build a muscle volume map and get recovery guidance.");
+            return;
+        }
+
+        double totalVolume = volumeByGroup.values().stream().mapToDouble(Double::doubleValue).sum();
+
+        for (Map.Entry<ExerciseType, Double> entry : volumeByGroup.entrySet()) {
+            double value = entry.getValue();
+            PieChart.Data slice = new PieChart.Data(entry.getKey().toString(), value);
+            recoveryChart.getData().add(slice);
+        }
+
+        StringBuilder message = new StringBuilder();
+        message.append(String.format("Volume in the last %d days:\n", RECOVERY_PERIOD_DAYS));
+        for (Map.Entry<ExerciseType, Double> entry : volumeByGroup.entrySet()) {
+            double value = entry.getValue();
+            double percent = totalVolume > 0 ? value / totalVolume * 100.0 : 0.0;
+            message.append(String.format("• %s: %.1f lbs (%.0f%%)\n",
+                entry.getKey(), value, percent));
+        }
+        message.append("\n");
+
+        String recoveryText = buildRecoveryDetailsText(volumeByGroup, totalVolume);
+        message.append(recoveryText);
+        recoveryDetailsArea.setText(message.toString());
+    }
+
+    private Map<ExerciseType, Double> getRecentMuscleVolume(int days) {
+        Map<ExerciseType, Double> volumeByGroup = new EnumMap<>(ExerciseType.class);
+        LocalDate cutoff = LocalDate.now().minusDays(days);
+
+        for (CalendarEvent event : calendarService.getEventsInRange(cutoff, LocalDate.now())) {
+            if (event.getWorkout() == null) continue;
+            for (ExerciseInstance instance : event.getWorkout().getExercises()) {
+                if (instance.getExerciseType() == ExerciseType.CARDIO) continue;
+                double volume = instance.getSetCount() * instance.getReps() * instance.getWeight();
+                volumeByGroup.merge(instance.getExerciseType(), volume, Double::sum);
+            }
+        }
+        return volumeByGroup;
+    }
+
+    private String buildRecoveryDetailsText(Map<ExerciseType, Double> volumeByGroup, double totalVolume) {
+        Map<ExerciseType, Integer> sessionCount = new EnumMap<>(ExerciseType.class);
+        LocalDate cutoff = LocalDate.now().minusDays(RECOVERY_PERIOD_DAYS);
+
+        for (CalendarEvent event : calendarService.getEventsInRange(cutoff, LocalDate.now())) {
+            if (event.getWorkout() == null) continue;
+            Set<ExerciseType> usedGroups = new HashSet<>();
+            for (ExerciseInstance instance : event.getWorkout().getExercises()) {
+                ExerciseType type = instance.getExerciseType();
+                if (type == ExerciseType.CARDIO) continue;
+                usedGroups.add(type);
+            }
+            for (ExerciseType type : usedGroups) {
+                sessionCount.merge(type, 1, Integer::sum);
+            }
+        }
+
+        StringBuilder text = new StringBuilder();
+        List<ExerciseType> overloaded = new ArrayList<>();
+        for (Map.Entry<ExerciseType, Double> entry : volumeByGroup.entrySet()) {
+            double ratio = totalVolume > 0 ? entry.getValue() / totalVolume : 0.0;
+            if (ratio >= 0.40) {
+                overloaded.add(entry.getKey());
+            }
+        }
+
+        if (!overloaded.isEmpty()) {
+            text.append("⚠ Overuse warning: ");
+            text.append("Your workouts are heavily focused on ");
+            text.append(String.join(", ", overloaded.stream().map(Enum::toString).toList()));
+            text.append(". Consider resting or rotating these muscle groups.\n");
+        }
+
+        List<String> repeated = new ArrayList<>();
+        for (Map.Entry<ExerciseType, Integer> entry : sessionCount.entrySet()) {
+            if (entry.getValue() >= 2) {
+                repeated.add(entry.getKey().toString());
+            }
+        }
+        if (!repeated.isEmpty()) {
+            text.append("⚠ Recovery alert: ");
+            text.append(String.join(", ", repeated));
+            text.append(" were trained on multiple recent sessions. Prioritize recovery.\n");
+        }
+
+        if (text.length() == 0) {
+            text.append("Recovery is looking balanced. Keep alternating muscle groups and listen to your energy levels.");
+        }
+        return text.toString();
     }
 
     private void loadDashboardSummary() {

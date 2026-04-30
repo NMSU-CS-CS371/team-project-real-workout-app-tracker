@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
@@ -72,6 +73,10 @@
                     <padding>
                         <Insets top="10" right="10" bottom="10" left="10"/>
                     </padding>
+                    <PieChart fx:id="recoveryChart" title="Muscle Volume Distribution"
+                              legendSide="RIGHT" prefHeight="220" />
+                    <TextArea fx:id="recoveryDetailsArea" editable="false" wrapText="true"
+                              prefHeight="140" style="-fx-font-size: 12; -fx-control-inner-background: #f8fafc;"/>
                 </VBox>
             </TitledPane>
         </VBox>
