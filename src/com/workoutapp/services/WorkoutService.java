@@ -41,7 +41,7 @@ public class WorkoutService {
     private WorkoutSummary lastWorkoutSummary;
 
     // Recovery tracking
-    private static final int RECOVERY_CHECK_DAYS = 3;
+    private static final int RECOVERY_CHECK_DAYS = 7;
     private List<String> recentMuscleGroups;
 
     public WorkoutService(String profileName, CalendarService calendarService,

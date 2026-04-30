@@ -23,5 +23,25 @@
         "type": "LEGS"
       }
     ]
+  },
+  {
+    "routineName": "Test routine",
+    "exercises": [
+      {
+        "name": "Triceps Pull-downs",
+        "description": "V-bar\n",
+        "type": "TRICEPS"
+      },
+      {
+        "name": "Curls",
+        "description": "",
+        "type": "BICEPS"
+      },
+      {
+        "name": "Barbell Squat",
+        "description": "",
+        "type": "LEGS"
+      }
+    ]
   }
 ]
