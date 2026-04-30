@@ -46,12 +46,20 @@
                 <Insets top="10" left="5" bottom="10" right="10"/>
             </padding>
 
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Button fx:id="prevMonthButton" text="←" />
+                <Label fx:id="monthLabel" text="Month" style="-fx-font-size: 14; -fx-font-weight: bold;"/>
+                <Button fx:id="nextMonthButton" text="→" />
+            </HBox>
+
+            <GridPane fx:id="calendarGrid" hgap="4" vgap="4" style="-fx-background-color: #f8fafc; -fx-border-color: #e5e7eb; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10;" />
+
+            <Label fx:id="selectedDateLabel" text="Selected Date" style="-fx-font-size: 14; -fx-font-weight: bold;"/>
+            <ListView fx:id="selectedDateEventList" prefHeight="140"/>
+
             <Label fx:id="workoutTitleLabel" text="Workout Details" style="-fx-font-size: 16;"/>
+            <ListView fx:id="exerciseListView" prefHeight="200"/>
 
-            <!-- Exercises list -->
-            <ListView fx:id="exerciseListView" prefHeight="300"/>
-
-            <!-- Bottom-right buttons -->
             <HBox spacing="10">
                 <Label text="Notes:"/>
                 <TextField fx:id="notesField" HBox.hgrow="ALWAYS"/>

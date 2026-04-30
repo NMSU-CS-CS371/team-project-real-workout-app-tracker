@@ -2,6 +2,8 @@ package com.workoutapp.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 import com.workoutapp.models.*;
@@ -9,6 +11,8 @@ import com.workoutapp.services.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Manages workout history screen where you can view details about all your
@@ -22,6 +26,7 @@ public class WorkoutHistoryController implements ScreenController{
 
     //Initialize fxml components
     @FXML private ListView<CalendarEvent> eventListView;
+    @FXML private ListView<CalendarEvent> selectedDateEventList;
     @FXML private ListView<String> exerciseListView;
 
     @FXML private TextField dateField;
@@ -32,8 +37,16 @@ public class WorkoutHistoryController implements ScreenController{
     @FXML private Button adjustDateTimeButton;
     @FXML private Button saveNotesButton;
     @FXML private Button exitButton;
+    @FXML private Button prevMonthButton;
+    @FXML private Button nextMonthButton;
 
     @FXML private Label workoutTitleLabel;
+    @FXML private Label monthLabel;
+    @FXML private Label selectedDateLabel;
+    @FXML private GridPane calendarGrid;
+
+    private YearMonth displayedMonth = YearMonth.now();
+    private LocalDate selectedDate = LocalDate.now();
 
     //Date formats for workout
     private final DateTimeFormatter dateFmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -51,14 +64,31 @@ public class WorkoutHistoryController implements ScreenController{
         exitButton.setOnAction(e -> main.loadView("HomeView.fxml"));
         deleteEventButton.setOnAction(e -> deleteSelectedEvent());
         adjustDateTimeButton.setOnAction(e -> adjustSelectedEventDateTime());
-        saveNotesButton.setOnAction(e -> saveNotes());        
+        saveNotesButton.setOnAction(e -> saveNotes());
+        prevMonthButton.setOnAction(e -> changeMonth(-1));
+        nextMonthButton.setOnAction(e -> changeMonth(1));
+
+        selectedDateEventList.setCellFactory(list -> new ListCell<>() {
+            @Override
+            protected void updateItem(CalendarEvent event, boolean empty) {
+                super.updateItem(event, empty);
+                if (empty || event == null) {
+                    setText(null);
+                    return;
+                }
+                setText(event.getDateTime().format(listFmt) + " - "
+                    + (event.getWorkout() != null ? event.getWorkout().getNumExercises() + " exercises" : "No workout"));
+            }
+        });
+        selectedDateEventList.getSelectionModel().selectedItemProperty().addListener(
+            (obs, oldVal, newVal) -> displayWorkoutDetails(newVal)
+        );
     }
 
     //Refresh when profile calendar service
     public void onProfileChanged(String profileName) {
         if (profileName == null) return;
 
-        //Set up calendar service
         calendarService = new CalendarService(profileName);
         loadEventsIntoList();
         eventListView.setCellFactory(list -> new ListCell<>() {
@@ -73,8 +103,15 @@ public class WorkoutHistoryController implements ScreenController{
             }
         });
         eventListView.getSelectionModel().selectedItemProperty().addListener(
-            (obs, oldVal, newVal) -> displayWorkoutDetails(newVal)
+            (obs, oldVal, newVal) -> {
+                if (newVal != null) {
+                    selectDate(newVal.getDateTime().toLocalDate());
+                }
+            }
         );
+
+        buildCalendar();
+        selectDate(selectedDate);
     }
 
     //Load events into list
@@ -82,6 +119,73 @@ public class WorkoutHistoryController implements ScreenController{
         LinkedList<CalendarEvent> events = calendarService.getEvents();
         events.sort((a,b) -> b.getDateTime().compareTo(a.getDateTime()));
         eventListView.getItems().setAll(events);
+    }
+
+    private void buildCalendar() {
+        calendarGrid.getChildren().clear();
+        monthLabel.setText(displayedMonth.getMonth().toString() + " " + displayedMonth.getYear());
+
+        String[] headers = {"Sun","Mon","Tue","Wed","Thu","Fri","Sat"};
+        for (int col = 0; col < headers.length; col++) {
+            Label header = new Label(headers[col]);
+            header.setStyle("-fx-font-weight: bold; -fx-text-fill: #334155;");
+            calendarGrid.add(header, col, 0);
+        }
+
+        LocalDate firstOfMonth = displayedMonth.atDay(1);
+        int weekday = firstOfMonth.getDayOfWeek().getValue() % 7;
+        int daysInMonth = displayedMonth.lengthOfMonth();
+        int row = 1;
+        int col = weekday;
+
+        for (int day = 1; day <= daysInMonth; day++) {
+            LocalDate date = displayedMonth.atDay(day);
+            Button dayButton = new Button(String.valueOf(day));
+            dayButton.setMaxWidth(Double.MAX_VALUE);
+            dayButton.setMaxHeight(Double.MAX_VALUE);
+            dayButton.setOnAction(e -> selectDate(date));
+
+            if (date.equals(selectedDate)) {
+                dayButton.setStyle("-fx-border-color: #2563eb; -fx-border-width: 2; -fx-background-color: #e0f2fe;");
+            }
+
+            if (!calendarService.getEventsForDate(date).isEmpty()) {
+                dayButton.setStyle(dayButton.getStyle() + "-fx-background-color: #d1fae5;");
+            }
+
+            calendarGrid.add(dayButton, col, row);
+            GridPane.setHgrow(dayButton, Priority.ALWAYS);
+            GridPane.setVgrow(dayButton, Priority.ALWAYS);
+            col++;
+            if (col == 7) {
+                col = 0;
+                row++;
+            }
+        }
+    }
+
+    private void selectDate(LocalDate date) {
+        selectedDate = date;
+        buildCalendar();
+        selectedDateLabel.setText("Selected: " + date.format(DateTimeFormatter.ofPattern("EEE, MMM d, yyyy")));
+
+        LinkedList<CalendarEvent> dateEvents = calendarService.getEventsForDate(date);
+        selectedDateEventList.getItems().setAll(dateEvents);
+        if (!dateEvents.isEmpty()) {
+            selectedDateEventList.getSelectionModel().selectFirst();
+            displayWorkoutDetails(dateEvents.getFirst());
+        } else {
+            exerciseListView.getItems().clear();
+            workoutTitleLabel.setText("Workout Details");
+            dateField.clear();
+            timeField.clear();
+            notesField.clear();
+        }
+    }
+
+    private void changeMonth(int months) {
+        displayedMonth = displayedMonth.plusMonths(months);
+        buildCalendar();
     }
 
     //Display workout labels
@@ -101,7 +205,6 @@ public class WorkoutHistoryController implements ScreenController{
         Workout workout = event.getWorkout();
         if (workout == null) return;
 
-        // Add analytics summary
         WorkoutService.WorkoutSummary summary =
             new WorkoutService.WorkoutSummary(workout,
                 event.getDateTime(),
