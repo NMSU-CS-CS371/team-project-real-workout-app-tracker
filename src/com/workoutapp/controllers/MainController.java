@@ -79,6 +79,8 @@ public class MainController {
         }
     }
 
+
+
     // NEW unified loader for workout screen
     public void loadWorkoutView(String routineName) {
         try {
@@ -87,9 +89,13 @@ public class MainController {
 
             WorkoutController wc = loader.getController();
             wc.setMainController(this);
-            wc.initializeWorkout(currentProfile, routineName);
 
+            // Show the workout view first so any navigation performed during
+            // initialization (e.g. user cancelling the exercise selector)
+            // can replace it and won't be overwritten afterward.
             contentPane.getChildren().setAll(view);
+
+            wc.initializeWorkout(currentProfile, routineName);
             
         } catch (Exception e) {
             e.printStackTrace();

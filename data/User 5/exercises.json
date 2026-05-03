@@ -23,5 +23,10 @@
     "name": "sdfasdfasdfadssfadsdfsrffhdgj",
     "description": "",
     "type": "CARDIO"
+  },
+  {
+    "name": "back test",
+    "description": "asdasdasd",
+    "type": "BACK"
   }
 ]
