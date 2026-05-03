@@ -13,14 +13,14 @@
     </padding>
 
     <Label text="Start Workout"
-           style="-fx-font-size: 22; -fx-font-weight: bold;"/>
+            style="-fx-font-size: 22; -fx-font-weight: bold;"/>
 
-    <Label text="Select routine (double‑click):"/>
+    <Label text="Select a routine (double-click):"/>
 
     <ListView fx:id="routineList" prefWidth="300" prefHeight="250"/>
 
     <Button fx:id="startScratchButton"
-            text="Start Empty Workout"
+            text="Start Workout Without Routine"
             maxWidth="300"/>
 
     <Button fx:id="cancelButton"

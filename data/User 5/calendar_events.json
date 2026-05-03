@@ -1,54 +1,29 @@
 [
   {
-    "dateTime": "2026-04-21T13:34:53.128689291",
-    "workout": {
-      "exercises": []
-    },
-    "notes": "lllllllllllllllllllllllllllllllllllll"
-  },
-  {
-    "dateTime": "2026-04-22T09:27:59.347668123",
+    "dateTime": "2026-05-02T14:53:05.220154654",
     "workout": {
       "exercises": [
-        {
-          "exercise": {
-            "name": "Chest Press",
-            "description": "aasda",
-            "type": "CHEST"
-          },
-          "sets": 3,
-          "reps": 10,
-          "weight": 20.0,
-          "durationMinutes": 0
-        }
-      ]
-    },
-    "notes": ""
-  },
-  {
-    "dateTime": "2026-04-22T09:30:49.318473878",
-    "workout": {
-      "exercises": [
-        {
-          "exercise": {
-            "name": "Treadmill",
-            "description": "asdasdasd",
-            "type": "CARDIO"
-          },
-          "sets": 0,
-          "reps": 0,
-          "weight": 0.0,
-          "durationMinutes": 20
-        },
         {
           "exercise": {
             "name": "Push Up",
             "description": "asdasdasd",
             "type": "CHEST"
           },
-          "sets": 7,
-          "reps": 10,
-          "weight": 60.0,
+          "workoutSets": [
+            {
+              "reps": 10,
+              "weight": 0.0
+            }
+          ],
+          "durationMinutes": 0
+        },
+        {
+          "exercise": {
+            "name": "Treadmill",
+            "description": "asdasdasd",
+            "type": "CARDIO"
+          },
+          "workoutSets": [],
           "durationMinutes": 0
         },
         {
@@ -57,9 +32,16 @@
             "description": "aasda",
             "type": "CHEST"
           },
-          "sets": 1,
-          "reps": 53,
-          "weight": 60.0,
+          "workoutSets": [],
+          "durationMinutes": 0
+        },
+        {
+          "exercise": {
+            "name": "Barbell Squat",
+            "description": "",
+            "type": "LEGS"
+          },
+          "workoutSets": [],
           "durationMinutes": 0
         }
       ]
@@ -67,14 +49,191 @@
     "notes": ""
   },
   {
-    "dateTime": "2026-04-22T09:40:36.157318405",
+    "dateTime": "2026-05-02T15:00:48.513655366",
     "workout": {
-      "exercises": []
+      "exercises": [
+        {
+          "exercise": {
+            "name": "Push Up",
+            "description": "asdasdasd",
+            "type": "CHEST"
+          },
+          "workoutSets": [
+            {
+              "reps": 15,
+              "weight": 0.0
+            }
+          ],
+          "durationMinutes": 0
+        },
+        {
+          "exercise": {
+            "name": "Treadmill",
+            "description": "asdasdasd",
+            "type": "CARDIO"
+          },
+          "workoutSets": [],
+          "durationMinutes": 0
+        },
+        {
+          "exercise": {
+            "name": "Chest Press",
+            "description": "aasda",
+            "type": "CHEST"
+          },
+          "workoutSets": [
+            {
+              "reps": 10,
+              "weight": 0.0
+            }
+          ],
+          "durationMinutes": 0
+        },
+        {
+          "exercise": {
+            "name": "Barbell Squat",
+            "description": "",
+            "type": "LEGS"
+          },
+          "workoutSets": [
+            {
+              "reps": 10,
+              "weight": 0.0
+            }
+          ],
+          "durationMinutes": 0
+        }
+      ]
     },
     "notes": ""
   },
   {
-    "dateTime": "2026-04-22T09:41:01.810276138",
+    "dateTime": "2026-05-02T15:08:10.307187877",
+    "workout": {
+      "exercises": [
+        {
+          "exercise": {
+            "name": "Push Up",
+            "description": "asdasdasd",
+            "type": "CHEST"
+          },
+          "workoutSets": [
+            {
+              "reps": 10,
+              "weight": 0.0
+            }
+          ],
+          "durationMinutes": 0
+        },
+        {
+          "exercise": {
+            "name": "Treadmill",
+            "description": "asdasdasd",
+            "type": "CARDIO"
+          },
+          "workoutSets": [],
+          "durationMinutes": 0
+        },
+        {
+          "exercise": {
+            "name": "Chest Press",
+            "description": "aasda",
+            "type": "CHEST"
+          },
+          "workoutSets": [
+            {
+              "reps": 10,
+              "weight": 0.0
+            }
+          ],
+          "durationMinutes": 0
+        },
+        {
+          "exercise": {
+            "name": "Barbell Squat",
+            "description": "",
+            "type": "LEGS"
+          },
+          "workoutSets": [],
+          "durationMinutes": 0
+        }
+      ]
+    },
+    "notes": ""
+  },
+  {
+    "dateTime": "2026-05-02T15:13:21.846663988",
+    "workout": {
+      "exercises": [
+        {
+          "exercise": {
+            "name": "Push Up",
+            "description": "asdasdasd",
+            "type": "CHEST"
+          },
+          "workoutSets": [
+            {
+              "reps": 10,
+              "weight": 110.0
+            },
+            {
+              "reps": 10,
+              "weight": 110.0
+            },
+            {
+              "reps": 10,
+              "weight": 110.0
+            }
+          ],
+          "durationMinutes": 0
+        },
+        {
+          "exercise": {
+            "name": "Treadmill",
+            "description": "asdasdasd",
+            "type": "CARDIO"
+          },
+          "workoutSets": [],
+          "durationMinutes": 0
+        },
+        {
+          "exercise": {
+            "name": "Chest Press",
+            "description": "aasda",
+            "type": "CHEST"
+          },
+          "workoutSets": [
+            {
+              "reps": 10,
+              "weight": 110.0
+            },
+            {
+              "reps": 10,
+              "weight": 110.0
+            }
+          ],
+          "durationMinutes": 0
+        },
+        {
+          "exercise": {
+            "name": "Barbell Squat",
+            "description": "",
+            "type": "LEGS"
+          },
+          "workoutSets": [
+            {
+              "reps": 10,
+              "weight": 315.0
+            }
+          ],
+          "durationMinutes": 0
+        }
+      ]
+    },
+    "notes": ""
+  },
+  {
+    "dateTime": "2026-05-02T15:15:04.227566277",
     "workout": {
       "exercises": [
         {
@@ -83,9 +242,7 @@
             "description": "asdasdasd",
             "type": "CARDIO"
           },
-          "sets": 0,
-          "reps": 0,
-          "weight": 0.0,
+          "workoutSets": [],
           "durationMinutes": 30
         }
       ]
@@ -93,7 +250,7 @@
     "notes": ""
   },
   {
-    "dateTime": "2026-04-22T13:24:15.855926961",
+    "dateTime": "2026-05-03T17:33:04.59882393",
     "workout": {
       "exercises": [
         {
@@ -102,9 +259,56 @@
             "description": "asdasdasd",
             "type": "CHEST"
           },
-          "sets": 2,
-          "reps": 10,
-          "weight": 0.0,
+          "workoutSets": [
+            {
+              "reps": 10,
+              "weight": 0.0
+            },
+            {
+              "reps": 10,
+              "weight": 20.0
+            },
+            {
+              "reps": 10,
+              "weight": 0.0
+            },
+            {
+              "reps": 10,
+              "weight": 0.0
+            }
+          ],
+          "durationMinutes": 0
+        },
+        {
+          "exercise": {
+            "name": "Treadmill",
+            "description": "asdasdasd",
+            "type": "CARDIO"
+          },
+          "workoutSets": [],
+          "durationMinutes": 0
+        },
+        {
+          "exercise": {
+            "name": "Chest Press",
+            "description": "aasda",
+            "type": "CHEST"
+          },
+          "workoutSets": [
+            {
+              "reps": 10,
+              "weight": 0.0
+            }
+          ],
+          "durationMinutes": 0
+        },
+        {
+          "exercise": {
+            "name": "Barbell Squat",
+            "description": "",
+            "type": "LEGS"
+          },
+          "workoutSets": [],
           "durationMinutes": 0
         }
       ]
