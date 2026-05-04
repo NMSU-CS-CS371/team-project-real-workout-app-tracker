@@ -69,6 +69,22 @@ public class ExerciseInstance {
         return workoutSets.get(0).getWeight();
     }
 
+    public int getTotalReps() {
+        int total = 0;
+        for (WorkoutSet workoutSet : workoutSets) {
+            total += workoutSet.getReps();
+        }
+        return total;
+    }
+
+    public double getTotalVolume() {
+        double total = 0.0;
+        for (WorkoutSet workoutSet : workoutSets) {
+            total += workoutSet.getReps() * workoutSet.getWeight();
+        }
+        return total;
+    }
+
     public List<WorkoutSet> getWorkoutSets() {
         return new LinkedList<>(workoutSets);
     }

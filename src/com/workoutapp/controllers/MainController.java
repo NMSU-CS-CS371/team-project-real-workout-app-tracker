@@ -21,6 +21,7 @@ import com.workoutapp.models.*;
 
 public class MainController {
     @FXML private Button profileSettingsButton;
+    @FXML private Button themeToggleButton;
     @FXML private ComboBox<String> profileDropDown;
     @FXML private Label activeProfileLabel;
     @FXML private StackPane contentPane;
@@ -47,6 +48,8 @@ public class MainController {
         loadView("HomeView.fxml");
 
         profileSettingsButton.setOnAction(e -> loadView("ProfileSettingsView.fxml"));
+        themeToggleButton.setOnAction(e -> onThemeToggled());
+        updateThemeButtonText();
     }
 
     public void onProfileSelected(String profileName) {
@@ -158,6 +161,16 @@ public class MainController {
 
     public ComboBox<String> getProfileDropDown() {
         return profileDropDown;
+    }
+
+    private void onThemeToggled() {
+        ThemeManager.getInstance().toggleTheme();
+        updateThemeButtonText();
+    }
+
+    private void updateThemeButtonText() {
+        boolean isDark = ThemeManager.getInstance().isDarkMode();
+        themeToggleButton.setText(isDark ? "☀️ Light Mode" : "🌙 Dark Mode");
     }
 
 }

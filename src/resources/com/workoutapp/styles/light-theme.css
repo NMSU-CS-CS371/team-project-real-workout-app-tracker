@@ -1,0 +1,257 @@
+/* Light Theme - Colorful Aesthetic */
+
+* {
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+/* Root background */
+.root {
+    -fx-base: #f8fafc;
+    -fx-background: #f8fafc;
+}
+
+/* Text colors */
+.label {
+    -fx-text-fill: #1f2937;
+}
+
+.text-secondary {
+    -fx-text-fill: #6b7280;
+}
+
+/* Recovery/Home Page Specific Styling */
+.recovery-box {
+    -fx-background-color: linear-gradient(to bottom right, #eef2ff, #f5d0fe) !important;
+    -fx-border-color: rgba(168,85,247,0.3) !important;
+    -fx-border-radius: 14;
+    -fx-background-radius: 14;
+    -fx-padding: 16;
+}
+
+.recovery-label {
+    -fx-text-fill: #312e81 !important;
+    -fx-font-weight: bold;
+}
+
+.recovery-details {
+    -fx-control-inner-background: rgba(255,255,255,0.95) !important;
+    -fx-text-fill: #1f2937 !important;
+    -fx-border-color: rgba(168,85,247,0.2) !important;
+    -fx-background-insets: 0;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-font-size: 12;
+}
+
+.home-card {
+    -fx-background-color: rgba(255,255,255,0.92) !important;
+    -fx-border-color: rgba(59,130,246,0.25) !important;
+}
+
+.home-card-text {
+    -fx-text-fill: #111827 !important;
+}
+
+/* Buttons */
+.button {
+    -fx-background-color: #3b82f6;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.button:hover {
+    -fx-background-color: #2563eb;
+}
+
+.button:pressed {
+    -fx-background-color: #1d4ed8;
+}
+
+/* Cards and panels */
+.card-pane {
+    -fx-background-color: rgba(255, 255, 255, 0.92);
+    -fx-border-color: rgba(59, 130, 246, 0.25);
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-border-width: 1;
+}
+
+.card-pane-highlighted {
+    -fx-background-color: rgba(255, 255, 255, 0.95);
+    -fx-border-color: #3b82f6;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-border-width: 2;
+}
+
+/* Text fields and inputs */
+.text-input {
+    -fx-control-inner-background: #f3f4f6;
+    -fx-text-fill: #1f2937;
+    -fx-border-color: #e5e7eb;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.text-input:focused {
+    -fx-border-color: #3b82f6;
+    -fx-border-width: 2;
+}
+
+/* ComboBox */
+.combo-box {
+    -fx-background-color: #f3f4f6;
+    -fx-text-fill: #1f2937;
+    -fx-border-color: #e5e7eb;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #ffffff;
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1f2937;
+    -fx-padding: 8;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected {
+    -fx-background-color: #3b82f6;
+    -fx-text-fill: white;
+}
+
+/* ListView */
+.list-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e5e7eb;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1f2937;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #3b82f6;
+    -fx-text-fill: white;
+}
+
+/* TableView */
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e5e7eb;
+}
+
+.table-view .column-header {
+    -fx-background-color: #f3f4f6;
+    -fx-text-fill: #1f2937;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1f2937;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: rgba(59, 130, 246, 0.1);
+}
+
+/* TextArea */
+.text-area {
+    -fx-control-inner-background: #f3f4f6;
+    -fx-text-fill: #1f2937;
+    -fx-border-color: #e5e7eb;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.text-area:focused {
+    -fx-border-color: #3b82f6;
+}
+
+/* ScrollBar */
+.scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(59, 130, 246, 0.5);
+    -fx-background-radius: 5;
+}
+
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #3b82f6;
+}
+
+/* Tabs */
+.tab {
+    -fx-background-color: #f3f4f6;
+    -fx-text-fill: #6b7280;
+    -fx-padding: 8 16;
+}
+
+.tab:selected {
+    -fx-background-color: #3b82f6;
+    -fx-text-fill: white;
+}
+
+/* Slider */
+.slider .thumb {
+    -fx-background-color: #3b82f6;
+}
+
+.slider .track {
+    -fx-background-color: rgba(59, 130, 246, 0.3);
+}
+
+/* CheckBox and RadioButton */
+.check-box, .radio-button {
+    -fx-text-fill: #1f2937;
+}
+
+.check-box .box, .radio-button .radio {
+    -fx-border-color: #9ca3af;
+    -fx-background-color: transparent;
+}
+
+.check-box:selected .box, .radio-button:selected .radio {
+    -fx-background-color: #3b82f6;
+}
+
+/* Tooltip */
+.tooltip {
+    -fx-background-color: rgba(31, 41, 55, 0.95);
+    -fx-text-fill: white;
+    -fx-border-color: #3b82f6;
+}
+
+/* Menu */
+.menu-bar {
+    -fx-background-color: rgba(255, 255, 255, 0.95);
+    -fx-border-color: #e5e7eb;
+}
+
+.menu, .menu-item {
+    -fx-text-fill: #1f2937;
+    -fx-background-color: transparent;
+}
+
+.menu-item:focused {
+    -fx-background-color: rgba(59, 130, 246, 0.1);
+}
+
+/* TitledPane */
+.titled-pane {
+    -fx-background-color: rgba(255, 255, 255, 0.92);
+    -fx-border-color: #e5e7eb;
+}
+
+.titled-pane:expanded .title {
+    -fx-background-color: rgba(59, 130, 246, 0.1);
+}
+
+.titled-pane .title {
+    -fx-text-fill: #1f2937;
+}

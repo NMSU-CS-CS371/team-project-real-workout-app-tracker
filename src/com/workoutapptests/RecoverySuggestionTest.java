@@ -66,4 +66,18 @@ public class RecoverySuggestionTest {
         String result = RecoverySuggestion.suggestRecovery(w);
         assertTrue(result.contains("Mixed small and large"));
     }
+
+    //Test high-volume recovery recommendation for multiple heavy sets
+    @Test
+    public void testHighVolumeRecovery() {
+        Workout w = new Workout();
+        ExerciseInstance inst = new ExerciseInstance(new Exercise("Deadlift", "Legs", ExerciseType.LEGS));
+        inst.addSet(new WorkoutSet(8, 180));
+        inst.addSet(new WorkoutSet(8, 180));
+        w.addExercise(inst);
+
+        String result = RecoverySuggestion.suggestRecovery(w);
+        assertTrue(result.contains("High-volume workout"));
+        assertTrue(result.contains("Total volume"));
+    }
 }

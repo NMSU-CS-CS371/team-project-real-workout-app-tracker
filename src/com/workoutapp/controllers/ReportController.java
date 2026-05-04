@@ -135,7 +135,9 @@ public class ReportController implements ScreenController {
                     if (ex.getDurationMinutes() > 0) {
                         line = ex.getExerciseName() + "  •  " + ex.getDurationMinutes() + " min cardio";
                     } else {
-                        line = ex.getExerciseName() + "  •  " + ex.getSetCount() + " sets x " + ex.getReps() + " reps";
+                        line = ex.getExerciseName() + "  •  "
+                            + ex.getSetCount() + " sets, "
+                            + ex.getTotalReps() + " reps";
                     }
                     // Exercise row text color.
                     Label exerciseLine = new Label(line);
