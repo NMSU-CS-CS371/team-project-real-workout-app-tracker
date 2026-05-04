@@ -2,6 +2,7 @@ package com.workoutapp.controllers;
 
 import com.workoutapp.models.CalendarEvent;
 import com.workoutapp.models.ExerciseInstance;
+import com.workoutapp.models.ExerciseType;
 import com.workoutapp.models.Workout;
 import com.workoutapp.services.CalendarService;
 
@@ -28,7 +29,6 @@ public class ReportController implements ScreenController {
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("MMM d, yyyy h:mm a");
 
     @FXML private Button backButton;
-    @FXML private Button exportPdfButton;
     @FXML private Label titleLabel;
     @FXML private ScrollPane reportScrollPane;
     @FXML private VBox reportContentBox;
@@ -41,7 +41,6 @@ public class ReportController implements ScreenController {
         this.main = mainController;
 
         backButton.setOnAction(e -> main.loadView("HomeView.fxml"));
-        exportPdfButton.setOnAction(e -> exportPdf());
     }
 
     // Refreshes report data whenever the active profile changes.
@@ -49,7 +48,7 @@ public class ReportController implements ScreenController {
     public void onProfileChanged(String profileName) {
         if (profileName == null) return;
 
-        titleLabel.setText("Workout Report - " + profileName);
+        titleLabel.setText("Workout History");
         calendarService = new CalendarService(profileName);
         renderEvents(calendarService.getEvents());
     }
@@ -132,8 +131,8 @@ public class ReportController implements ScreenController {
             } else {
                 for (ExerciseInstance ex : workout.getExercises()) {
                     String line;
-                    if (ex.getDurationMinutes() > 0) {
-                        line = ex.getExerciseName() + "  •  " + ex.getDurationMinutes() + " min cardio";
+                    if (ex.getExerciseType() == ExerciseType.CARDIO) {
+                        line = ex.getExerciseName() + "  •  " + ex.getDurationMinutes() + " minutes";
                     } else {
                         line = ex.getExerciseName() + "  •  "
                             + ex.getSetCount() + " sets, "

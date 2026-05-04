@@ -29,6 +29,7 @@ public class MainController {
     private ProfileService profileService;
     private String currentProfile;    
     private ScreenController currentScreenController;
+    private CalendarEvent lastReportEvent;
 
     @FXML
     public void initialize(){
@@ -107,6 +108,7 @@ public class MainController {
 
     public void loadReportDetailView(CalendarEvent selectedEvent) {
         try {
+            lastReportEvent = selectedEvent;
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/workoutapp/views/ReportDetailView.fxml"));
             Parent view = loader.load();
 
@@ -118,6 +120,24 @@ public class MainController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void loadProgressReportView() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/workoutapp/views/ProgressReportView.fxml"));
+            Parent view = loader.load();
+
+            ProgressReportController controller = loader.getController();
+            controller.setMainController(this);
+
+            contentPane.getChildren().setAll(view);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public CalendarEvent getLastReportEvent() {
+        return lastReportEvent;
     }
 
     public void refreshProfileDropdown() {
