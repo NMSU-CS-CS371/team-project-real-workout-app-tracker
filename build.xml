@@ -37,6 +37,7 @@
         <mkdir dir="${classes.dir}"/>
         <copy todir="${classes.dir}">
             <fileset dir="src" includes="**/*.fxml"/>
+            <fileset dir="src" includes="**/*.css"/>
         </copy>
         <javac srcdir="${src.dir}"
                destdir="${classes.dir}"
