@@ -2,6 +2,7 @@ package com.workoutapp.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import com.workoutapp.services.*;
@@ -88,7 +89,10 @@ public class HomeController implements ScreenController {
             if (event.getWorkout() == null) continue;
             for (ExerciseInstance instance : event.getWorkout().getExercises()) {
                 if (instance.getExerciseType() == ExerciseType.CARDIO) continue;
-                double volume = instance.getSetCount() * instance.getReps() * instance.getWeight();
+                double volume = 0.0;
+                for (WorkoutSet set : instance.getWorkoutSets()) {
+                    volume += set.getReps() * set.getWeight();
+                }
                 volumeByGroup.merge(instance.getExerciseType(), volume, Double::sum);
             }
         }

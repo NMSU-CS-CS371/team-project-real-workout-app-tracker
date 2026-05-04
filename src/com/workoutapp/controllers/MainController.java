@@ -21,6 +21,7 @@ import com.workoutapp.models.*;
 
 public class MainController {
     @FXML private Button profileSettingsButton;
+    @FXML private Button themeToggleButton;
     @FXML private ComboBox<String> profileDropDown;
     @FXML private Label activeProfileLabel;
     @FXML private StackPane contentPane;
@@ -47,6 +48,8 @@ public class MainController {
         loadView("HomeView.fxml");
 
         profileSettingsButton.setOnAction(e -> loadView("ProfileSettingsView.fxml"));
+        themeToggleButton.setOnAction(e -> onThemeToggled());
+        updateThemeButtonText();
     }
 
     public void onProfileSelected(String profileName) {
@@ -79,6 +82,8 @@ public class MainController {
         }
     }
 
+
+
     // NEW unified loader for workout screen
     public void loadWorkoutView(String routineName) {
         try {
@@ -87,9 +92,13 @@ public class MainController {
 
             WorkoutController wc = loader.getController();
             wc.setMainController(this);
-            wc.initializeWorkout(currentProfile, routineName);
 
+            // Show the workout view first so any navigation performed during
+            // initialization (e.g. user cancelling the exercise selector)
+            // can replace it and won't be overwritten afterward.
             contentPane.getChildren().setAll(view);
+
+            wc.initializeWorkout(currentProfile, routineName);
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -152,6 +161,16 @@ public class MainController {
 
     public ComboBox<String> getProfileDropDown() {
         return profileDropDown;
+    }
+
+    private void onThemeToggled() {
+        ThemeManager.getInstance().toggleTheme();
+        updateThemeButtonText();
+    }
+
+    private void updateThemeButtonText() {
+        boolean isDark = ThemeManager.getInstance().isDarkMode();
+        themeToggleButton.setText(isDark ? "☀️ Light Mode" : "🌙 Dark Mode");
     }
 
 }

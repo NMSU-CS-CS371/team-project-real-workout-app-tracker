@@ -64,14 +64,6 @@ public class WorkoutService {
             throw new IllegalArgumentException("Routine not found: " + routineName);
 
         currentWorkout = new Workout(routine);
-        // Set baseline of 3 sets for strength exercises
-        for (ExerciseInstance instance : currentWorkout.getExercises()) {
-            if (instance.getExerciseType() != ExerciseType.CARDIO) {
-                instance.setSets(3);
-                instance.setReps(10); // Default 10 reps
-                instance.setWeight(0.0); // User will set this
-            }
-        }
 
         startTime = LocalDateTime.now();
         workoutActive = true;
@@ -113,9 +105,6 @@ public class WorkoutService {
             instance = new ExerciseInstance(exercise, 30); // Default 30 minutes
         } else {
             instance = new ExerciseInstance(exercise);
-            instance.setSets(3);
-            instance.setReps(10);
-            instance.setWeight(0.0);
         }
 
         currentWorkout.addExercise(instance);
@@ -505,8 +494,11 @@ public class WorkoutService {
 
         double totalVolume = 0.0;
         for (ExerciseInstance instance : currentWorkout.getExercises()) {
-            if (instance.getExerciseType() != ExerciseType.CARDIO)
-                totalVolume += instance.getWorkoutSets().size() * instance.getReps() * instance.getWeight();
+            if (instance.getExerciseType() != ExerciseType.CARDIO) {
+                for (WorkoutSet set : instance.getWorkoutSets()) {
+                    totalVolume += set.getReps() * set.getWeight();
+                }
+            }
         }
         return totalVolume;
     }

@@ -25,13 +25,8 @@
     "type": "CARDIO"
   },
   {
-    "name": "Curls",
-    "description": "",
-    "type": "BICEPS"
-  },
-  {
-    "name": "Triceps Pull-downs",
-    "description": "V-bar\n",
-    "type": "TRICEPS"
+    "name": "back test",
+    "description": "asdasdasd",
+    "type": "BACK"
   }
 ]
