@@ -53,8 +53,17 @@ public class RecoverySuggestion {
         int maxHours = 48;
         String summary;
 
+        double totalVolume = calculateTotalVolume(workout);
+        int totalSets = calculateWorkoutSets(workout);
+        int totalReps = calculateWorkoutReps(workout);
+        boolean highVolume = totalVolume >= 2000 || totalSets >= 12 || totalReps >= 50;
+
         if (hasLargeGroup) {
             maxHours = 72;
+        }
+        if (highVolume) {
+            minHours = Math.max(minHours, 36);
+            maxHours = Math.max(maxHours, 96);
         }
 
         if (hasCardio && !hasLargeGroup && !hasSmallGroup) {
@@ -71,13 +80,58 @@ public class RecoverySuggestion {
             summary = "General workout";
         }
 
+        if (highVolume) {
+            summary = "High-volume workout";
+        }
+
         return String.format(
             "Recovery recommendation: %d-%d hours (%s).\n" +
+            "Total volume: %.1f lbs across %d sets and %d reps.\n" +
             "General guideline: small muscle groups (e.g. biceps, abs, arms, core) typically need 24-48 hours; " +
             "large groups (e.g. legs, back, chest, shoulders) or high-intensity sessions often require 48-72 hours.",
             minHours,
             maxHours,
-            summary
+            summary,
+            totalVolume,
+            totalSets,
+            totalReps
         );
+    }
+
+    private static double calculateTotalVolume(Workout workout) {
+        if (workout == null) return 0.0;
+        double total = 0.0;
+        for (ExerciseInstance instance : workout.getExercises()) {
+            if (instance.getExerciseType() != ExerciseType.CARDIO) {
+                for (WorkoutSet set : instance.getWorkoutSets()) {
+                    total += set.getReps() * set.getWeight();
+                }
+            }
+        }
+        return total;
+    }
+
+    private static int calculateWorkoutSets(Workout workout) {
+        if (workout == null) return 0;
+        int total = 0;
+        for (ExerciseInstance instance : workout.getExercises()) {
+            if (instance.getExerciseType() != ExerciseType.CARDIO) {
+                total += instance.getSetCount();
+            }
+        }
+        return total;
+    }
+
+    private static int calculateWorkoutReps(Workout workout) {
+        if (workout == null) return 0;
+        int total = 0;
+        for (ExerciseInstance instance : workout.getExercises()) {
+            if (instance.getExerciseType() != ExerciseType.CARDIO) {
+                for (WorkoutSet set : instance.getWorkoutSets()) {
+                    total += set.getReps();
+                }
+            }
+        }
+        return total;
     }
 }

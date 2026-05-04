@@ -81,6 +81,19 @@ public class ExerciseInstanceTest {
         assertEquals(12, inst.getWorkoutSet(1).getReps());
     }
 
+    //Test total reps and volume accounting across individual sets
+    @Test
+    public void testTotalRepsAndVolumeAcrossSets() {
+        Exercise e = new Exercise("Squat", "Legs", ExerciseType.LEGS);
+        ExerciseInstance inst = new ExerciseInstance(e);
+
+        inst.addSet(new WorkoutSet(10, 135));
+        inst.addSet(new WorkoutSet(8, 155));
+
+        assertEquals(18, inst.getTotalReps());
+        assertEquals(10 * 135 + 8 * 155, inst.getTotalVolume(), 0.0001);
+    }
+
     //Test exception on negative duration for cardio instance
     @Test
     public void testRejectNegativeDuration() {

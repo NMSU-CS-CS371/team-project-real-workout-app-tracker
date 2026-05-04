@@ -8,19 +8,20 @@
             fx:controller="com.workoutapp.controllers.MainController">
 
     <top>
-        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: #ffffff; -fx-border-color: #e5e7eb; -fx-border-width: 0 0 1 0;">
+        <HBox spacing="15" alignment="CENTER_LEFT" style="-fx-padding: 12;">
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
 
-            <VBox spacing="2" style="-fx-background-color: #eef2ff; -fx-background-radius: 8; -fx-padding: 6 10 6 10;">
-                <Label fx:id="activeProfileLabel" text="No profile" style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #1f2937;"/>
+            <VBox spacing="2" style="-fx-background-radius: 14; -fx-padding: 10 18 10 18;" styleClass="card-pane">
+                <Label fx:id="activeProfileLabel" text="No profile" style="-fx-font-size: 14; -fx-font-weight: bold;"/>
             </VBox>
 
             <Pane HBox.hgrow="ALWAYS"/>
 
             <Label text="Profile:"/>
-            <ComboBox fx:id="profileDropDown"/>
+            <ComboBox fx:id="profileDropDown" prefWidth="120"/>
+            <Button text="🌙 Dark Mode" fx:id="themeToggleButton" style="-fx-padding: 8 12;"/>
             <Button text="Profile Settings" fx:id="profileSettingsButton"/>
         </HBox>
     </top>
@@ -28,7 +29,7 @@
     <center>
         <SplitPane>
             <items>
-                <StackPane fx:id="contentPane"/>
+                <StackPane fx:id="contentPane" style="-fx-padding: 20;"/>
             </items>
         </SplitPane>
     </center>
