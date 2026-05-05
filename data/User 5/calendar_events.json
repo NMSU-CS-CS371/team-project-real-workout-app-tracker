@@ -314,5 +314,35 @@
       ]
     },
     "notes": ""
+  },
+  {
+    "dateTime": "2026-05-04T14:56:49.950364372",
+    "workout": {
+      "exercises": [
+        {
+          "exercise": {
+            "name": "Barbell Squat",
+            "description": "",
+            "type": "LEGS"
+          },
+          "workoutSets": [
+            {
+              "reps": 10,
+              "weight": 135.0
+            },
+            {
+              "reps": 8,
+              "weight": 135.0
+            },
+            {
+              "reps": 10,
+              "weight": 115.0
+            }
+          ],
+          "durationMinutes": 0
+        }
+      ]
+    },
+    "notes": ""
   }
 ]

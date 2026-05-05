@@ -1,9 +1,19 @@
 package com.workoutapp.controllers;
 
 import com.workoutapp.models.CalendarEvent;
+import com.workoutapp.models.ExerciseInstance;
+import com.workoutapp.models.ExerciseType;
+import com.workoutapp.models.Workout;
+import com.workoutapp.models.WorkoutSet;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.VBox;
 import java.time.format.DateTimeFormatter;
 
 public class ReportDetailController implements ScreenController {
@@ -12,6 +22,8 @@ public class ReportDetailController implements ScreenController {
 
     @FXML private Button backButton;
     @FXML private Label titleLabel;
+    @FXML private ScrollPane reportScrollPane;
+    @FXML private VBox reportContentBox;
 
     private MainController main;
     private String profileName;
@@ -39,11 +51,61 @@ public class ReportDetailController implements ScreenController {
         // Fallback header text when no workout is selected.
         if (selectedEvent == null || selectedEvent.getDateTime() == null) {
             titleLabel.setText("Workout Detail Report - " + (profileName == null ? "profile" : profileName));
+            if (reportContentBox != null) {
+                reportContentBox.getChildren().clear();
+            }
             return;
         }
 
         // Header/title text format for selected workout date.
         String dateText = selectedEvent.getDateTime().format(DATE_FORMAT);
         titleLabel.setText("Workout Detail Report - " + dateText);
+
+        if (reportContentBox == null) {
+            return;
+        }
+
+        reportContentBox.getChildren().clear();
+
+        Workout workout = selectedEvent.getWorkout();
+        if (workout == null) {
+            return;
+        }
+
+        Label exercisesHeader = new Label("Exercises");
+        exercisesHeader.setStyle("-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #1f2937;");
+        reportContentBox.getChildren().add(exercisesHeader);
+
+        for (ExerciseInstance exercise : workout.getExercises()) {
+            VBox exerciseBox = new VBox(6);
+            exerciseBox.setStyle("-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 12;");
+
+            Label exerciseName = new Label(exercise.getExerciseName());
+            exerciseName.setStyle("-fx-font-weight: bold; -fx-font-size: 14;");
+            Button progressButton = new Button("View Progress");
+            progressButton.setCursor(Cursor.HAND);
+            progressButton.setOnAction(e -> main.loadProgressReportView());
+
+            Region spacer = new Region();
+            HBox.setHgrow(spacer, Priority.ALWAYS);
+            HBox headerRow = new HBox(10, exerciseName, spacer, progressButton);
+            exerciseBox.getChildren().add(headerRow);
+
+            if (exercise.getExerciseType() == ExerciseType.CARDIO) {
+                Label cardioLabel = new Label(exercise.getDurationMinutes() + " minutes");
+                exerciseBox.getChildren().add(cardioLabel);
+                reportContentBox.getChildren().add(exerciseBox);
+                continue;
+            }
+
+            int setNumber = 1;
+            for (WorkoutSet set : exercise.getWorkoutSets()) {
+                Label setLabel = new Label("Set " + setNumber + ": " + set.getReps() + " reps @ " + set.getWeight() + " lbs");
+                exerciseBox.getChildren().add(setLabel);
+                setNumber++;
+            }
+
+            reportContentBox.getChildren().add(exerciseBox);
+        }
     }
 }

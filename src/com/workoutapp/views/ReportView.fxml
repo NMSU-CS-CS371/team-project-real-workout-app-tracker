@@ -21,8 +21,6 @@
             <!-- Header typography -->
             <Label fx:id="titleLabel" text="Workout Report" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
             <Pane HBox.hgrow="ALWAYS"/>
-            <!-- Primary action button color scheme -->
-            <Button fx:id="exportPdfButton" text="Export PDF" style="-fx-background-color: #2563eb; -fx-text-fill: white;"/>
         </HBox>
     </top>
 
