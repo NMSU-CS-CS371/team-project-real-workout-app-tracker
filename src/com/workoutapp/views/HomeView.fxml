@@ -6,7 +6,7 @@
 <?import javafx.geometry.Insets?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.workoutapp.controllers.HomeController" minWidth="650" minHeight="500"
-            style="-fx-background-color: linear-gradient(to bottom right, #4338ca, #8b5cf6, #ec4899);">
+            style="-fx-background-color: linear-gradient(to bottom right, #063372, #375b8d, #94a3b8);">
     <padding>
         <Insets top="16" right="16" bottom="16" left="16"/>
     </padding>

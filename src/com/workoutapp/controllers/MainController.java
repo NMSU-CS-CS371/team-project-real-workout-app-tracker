@@ -122,13 +122,14 @@ public class MainController {
         }
     }
 
-    public void loadProgressReportView() {
+    public void loadProgressReportView(String profileName, String exerciseName) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/workoutapp/views/ProgressReportView.fxml"));
             Parent view = loader.load();
 
             ProgressReportController controller = loader.getController();
             controller.setMainController(this);
+            controller.loadExerciseProgress(profileName, exerciseName);
 
             contentPane.getChildren().setAll(view);
         } catch (Exception e) {

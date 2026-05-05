@@ -15,7 +15,8 @@
               "weight": 0.0
             }
           ],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         },
         {
           "exercise": {
@@ -24,7 +25,8 @@
             "type": "CARDIO"
           },
           "workoutSets": [],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         },
         {
           "exercise": {
@@ -33,7 +35,8 @@
             "type": "CHEST"
           },
           "workoutSets": [],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         },
         {
           "exercise": {
@@ -42,7 +45,8 @@
             "type": "LEGS"
           },
           "workoutSets": [],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         }
       ]
     },
@@ -64,7 +68,8 @@
               "weight": 0.0
             }
           ],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         },
         {
           "exercise": {
@@ -73,7 +78,8 @@
             "type": "CARDIO"
           },
           "workoutSets": [],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         },
         {
           "exercise": {
@@ -87,7 +93,8 @@
               "weight": 0.0
             }
           ],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         },
         {
           "exercise": {
@@ -101,7 +108,8 @@
               "weight": 0.0
             }
           ],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         }
       ]
     },
@@ -123,7 +131,8 @@
               "weight": 0.0
             }
           ],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         },
         {
           "exercise": {
@@ -132,7 +141,8 @@
             "type": "CARDIO"
           },
           "workoutSets": [],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         },
         {
           "exercise": {
@@ -146,7 +156,8 @@
               "weight": 0.0
             }
           ],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         },
         {
           "exercise": {
@@ -155,7 +166,8 @@
             "type": "LEGS"
           },
           "workoutSets": [],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         }
       ]
     },
@@ -185,7 +197,8 @@
               "weight": 110.0
             }
           ],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         },
         {
           "exercise": {
@@ -194,7 +207,8 @@
             "type": "CARDIO"
           },
           "workoutSets": [],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         },
         {
           "exercise": {
@@ -212,7 +226,8 @@
               "weight": 110.0
             }
           ],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         },
         {
           "exercise": {
@@ -226,7 +241,8 @@
               "weight": 315.0
             }
           ],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         }
       ]
     },
@@ -243,7 +259,8 @@
             "type": "CARDIO"
           },
           "workoutSets": [],
-          "durationMinutes": 30
+          "durationMinutes": 30,
+          "distance": 0.0
         }
       ]
     },
@@ -277,7 +294,8 @@
               "weight": 0.0
             }
           ],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         },
         {
           "exercise": {
@@ -286,7 +304,8 @@
             "type": "CARDIO"
           },
           "workoutSets": [],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         },
         {
           "exercise": {
@@ -300,7 +319,8 @@
               "weight": 0.0
             }
           ],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         },
         {
           "exercise": {
@@ -309,7 +329,8 @@
             "type": "LEGS"
           },
           "workoutSets": [],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
         }
       ]
     },
@@ -339,7 +360,26 @@
               "weight": 115.0
             }
           ],
-          "durationMinutes": 0
+          "durationMinutes": 0,
+          "distance": 0.0
+        }
+      ]
+    },
+    "notes": ""
+  },
+  {
+    "dateTime": "2026-05-05T12:38:12.068451902",
+    "workout": {
+      "exercises": [
+        {
+          "exercise": {
+            "name": "Treadmill",
+            "description": "asdasdasd",
+            "type": "CARDIO"
+          },
+          "workoutSets": [],
+          "durationMinutes": 30,
+          "distance": 1.0
         }
       ]
     },

@@ -20,4 +20,19 @@
         </HBox>
     </top>
 
+    <center>
+        <ScrollPane style="-fx-fit-to-width: true;">
+            <VBox spacing="16" style="-fx-background-color: #f5f7fb;">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Metric:" style="-fx-font-weight: bold;"/>
+                    <ComboBox fx:id="metricSelector" prefWidth="150"/>
+                </HBox>
+                <VBox fx:id="chartContainer" spacing="16" style="-fx-background-color: #f5f7fb;"/>
+            </VBox>
+        </ScrollPane>
+    </center>
+
 </BorderPane>
