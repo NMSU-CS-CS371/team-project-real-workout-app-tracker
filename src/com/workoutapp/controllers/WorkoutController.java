@@ -77,10 +77,10 @@ public class WorkoutController implements ScreenController {
         Label header = new Label(ex.getExerciseName() + " (Exercise " 
             + (workoutService.getCurrentExerciseIndex() + 1) + " of " 
             + workoutService.getCurrentWorkout().getNumExercises() + ")");
-        header.setStyle("-fx-font-size: 20; -fx-font-weight: bold;");
+        header.setStyle("-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #e6eef6;");
 
         VBox content = new VBox(15);
-        content.setStyle("-fx-padding: 20;");
+        content.setStyle("-fx-padding: 20; -fx-text-fill: #e6eef6;");
         content.getChildren().add(header);
 
         if (ex.getExerciseType() == ExerciseType.CARDIO) {
@@ -137,14 +137,21 @@ public class WorkoutController implements ScreenController {
         Button addSetBtn = new Button("Add Set");
         addSetBtn.setStyle("-fx-font-size: 14;");
 
+        Label repsLabel = new Label("Reps:");
+        repsLabel.setStyle("-fx-text-fill: #e6eef6;");
+
+        Label weightLabel = new Label("Weight (lbs):");
+        weightLabel.setStyle("-fx-text-fill: #e6eef6;");
+
         HBox entryBox = new HBox(10);
         entryBox.getChildren().addAll(
-            new Label("Reps:"), repsSpinner,
-            new Label("Weight (lbs):"), weightSpinner,
+            repsLabel, repsSpinner,
+            weightLabel, weightSpinner,
             addSetBtn
         );
 
         ListView<String> setsList = new ListView<>();
+        setsList.setStyle("-fx-text-fill: #e6eef6;");
         refreshSetsList(setsList, ex);
 
         addSetBtn.setOnAction(e -> {
@@ -158,10 +165,16 @@ public class WorkoutController implements ScreenController {
             }
         });
 
+        Label addSetsLabel = new Label("Add sets for this exercise:");
+        addSetsLabel.setStyle("-fx-text-fill: #e6eef6;");
+
+        Label setsCompletedLabel = new Label("Sets completed:");
+        setsCompletedLabel.setStyle("-fx-text-fill: #e6eef6;");
+
         parent.getChildren().addAll(
-            new Label("Add sets for this exercise:"),
+            addSetsLabel,
             entryBox,
-            new Label("Sets completed:"),
+            setsCompletedLabel,
             setsList
         );
     }
@@ -176,7 +189,7 @@ public class WorkoutController implements ScreenController {
         distanceSpinner.setEditable(true);
         
         Label timerTitle = new Label("Cardio Timer");
-        timerTitle.setStyle("-fx-font-size: 18; -fx-font-weight: bold;");
+        timerTitle.setStyle("-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #000000;");
 
         Label timerLabel = new Label("Ready to start");
         timerLabel.setStyle("-fx-font-size: 48; -fx-font-weight: bold; -fx-text-fill: #1d4ed8;");
@@ -209,10 +222,12 @@ public class WorkoutController implements ScreenController {
         timerButtons.setAlignment(Pos.CENTER);
 
         Label durationLabel = new Label("Duration for this cardio exercise (minutes):");
+        durationLabel.setStyle("-fx-text-fill: #e6eef6;");
         VBox durationBox = new VBox(6, durationLabel, durationSpinner);
         durationBox.setAlignment(Pos.CENTER);
 
         Label distanceLabel = new Label("Distance (miles):");
+        distanceLabel.setStyle("-fx-text-fill: #e6eef6;");
         VBox distanceBox = new VBox(6, distanceLabel, distanceSpinner);
         distanceBox.setAlignment(Pos.CENTER);
 
