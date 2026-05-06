@@ -36,6 +36,30 @@ public class WorkoutStartController implements ScreenController {
 
     @FXML
     public void initialize() {
+        routineList.setCellFactory(list -> new ListCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item);
+                applyStyle();
+            }
+
+            @Override
+            public void updateSelected(boolean selected) {
+                super.updateSelected(selected);
+                applyStyle();
+            }
+
+            private void applyStyle() {
+                if (isEmpty() || getItem() == null) {
+                    setStyle("-fx-background-color: transparent;");
+                } else if (isSelected()) {
+                    setStyle("-fx-background-color: #2563eb; -fx-text-fill: white;");
+                } else {
+                    setStyle("-fx-background-color: transparent; -fx-text-fill: #e2e8f0;");
+                }
+            }
+        });
 
         routineList.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {

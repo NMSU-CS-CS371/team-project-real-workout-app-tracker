@@ -40,6 +40,19 @@ public class ProfileSettingsController implements ScreenController {
     //Initialize profile settings UI
     private void initialize(){
         profilesList.setItems(FXCollections.observableArrayList(profileService.getProfiles()));
+        profilesList.setCellFactory(list -> new ListCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(item);
+                    setStyle("-fx-text-fill: #e2e8f0;");
+                }
+            }
+        });
         profilesList.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> {
             if (newV != null) {
                 nameField.setText(newV);

@@ -168,8 +168,13 @@ public class WorkoutController implements ScreenController {
 
     private void buildCardioUI(VBox parent, ExerciseInstance ex) {
         int initialMinutes = ex.getDurationMinutes() > 0 ? ex.getDurationMinutes() : 30;
+        double initialDistance = ex.getDistance() > 0 ? ex.getDistance() : 0.0;
+        
         Spinner<Integer> durationSpinner = new Spinner<>(1, 300, initialMinutes);
         durationSpinner.setEditable(true);
+        Spinner<Double> distanceSpinner = new Spinner<>(0.0, 100.0, initialDistance, 0.1);
+        distanceSpinner.setEditable(true);
+        
         Label timerTitle = new Label("Cardio Timer");
         timerTitle.setStyle("-fx-font-size: 18; -fx-font-weight: bold;");
 
@@ -196,6 +201,10 @@ public class WorkoutController implements ScreenController {
             workoutService.updateCardioDuration(workoutService.getCurrentExerciseIndex(), newV);
         });
 
+        distanceSpinner.valueProperty().addListener((obs, oldV, newV) -> {
+            workoutService.updateCardioDistance(workoutService.getCurrentExerciseIndex(), newV);
+        });
+
         HBox timerButtons = new HBox(10, startTimerBtn, stopTimerBtn, resetTimerBtn);
         timerButtons.setAlignment(Pos.CENTER);
 
@@ -203,9 +212,14 @@ public class WorkoutController implements ScreenController {
         VBox durationBox = new VBox(6, durationLabel, durationSpinner);
         durationBox.setAlignment(Pos.CENTER);
 
+        Label distanceLabel = new Label("Distance (miles):");
+        VBox distanceBox = new VBox(6, distanceLabel, distanceSpinner);
+        distanceBox.setAlignment(Pos.CENTER);
+
         parent.getChildren().addAll(
             timerDisplayBox,
             durationBox,
+            distanceBox,
             timerButtons
         );
     }

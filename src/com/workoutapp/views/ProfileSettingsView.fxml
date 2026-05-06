@@ -5,27 +5,28 @@
 <?import javafx.geometry.Insets?>
 
 <VBox spacing="12"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.workoutapp.controllers.ProfileSettingsController">
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="com.workoutapp.controllers.ProfileSettingsController"
+    style="-fx-background-color: #0f172a;">
 
     <padding>
         <Insets top="20" left="20" right="20" bottom="20"/>
     </padding>
 
-    <Label text="Profile Manager" style="-fx-font-size: 18px;"/>
+    <Label text="Profile Manager" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #e2e8f0;"/>
 
-    <ListView fx:id="profilesList" prefHeight="200"/>
+    <ListView fx:id="profilesList" prefHeight="200" style="-fx-background-color: #1e293b; -fx-control-inner-background: #1e293b; -fx-border-color: #334155; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #e2e8f0;"/>
 
     <HBox spacing="8">
-        <Label text="Name:"/>
-        <TextField fx:id="nameField" HBox.hgrow="ALWAYS"/>
+        <Label text="Name:" style="-fx-text-fill: #cbd5e1; -fx-font-weight: 600;"/>
+        <TextField fx:id="nameField" HBox.hgrow="ALWAYS" style="-fx-background-color: #0f172a; -fx-text-fill: #e2e8f0; -fx-control-inner-background: #0f172a; -fx-border-color: #334155; -fx-border-radius: 8; -fx-background-radius: 8;"/>
     </HBox>
 
     <HBox spacing="10">
-        <Button fx:id="createButton" text="Create"/>
-        <Button fx:id="renameButton" text="Rename"/>
-        <Button fx:id="deleteButton" text="Delete"/>
-        <Button fx:id="closeButton" text="Close"/>
+        <Button fx:id="createButton" text="Create" style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+        <Button fx:id="renameButton" text="Rename" style="-fx-background-color: #0ea5e9; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+        <Button fx:id="deleteButton" text="Delete" style="-fx-background-color: #475569; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+        <Button fx:id="closeButton" text="Close" style="-fx-background-color: #334155; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
     </HBox>
 
 </VBox>

@@ -6,70 +6,70 @@
 <?import javafx.geometry.Insets?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.workoutapp.controllers.HomeController" minWidth="650" minHeight="500"
-            style="-fx-background-color: linear-gradient(to bottom right, #4338ca, #8b5cf6, #ec4899);">
+            style="-fx-background-color: #0f172a;">
     <padding>
-        <Insets top="16" right="16" bottom="16" left="16"/>
+        <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
     <!-- LEFT SIDE: Dashboard Summary -->
     <left>
-        <VBox spacing="18" prefWidth="360"
-              style="-fx-background-color: rgba(255,255,255,0.88); -fx-border-color: rgba(192,132,252,0.28); -fx-border-radius: 18; -fx-background-radius: 18; -fx-effect: dropshadow(gaussian, rgba(15,23,42,0.14), 24, 0.14, 0, 8);">
+        <VBox spacing="16" prefWidth="360"
+              style="-fx-background-color: #1e293b; -fx-border-color: #334155; -fx-border-radius: 12; -fx-background-radius: 12; -fx-border-width: 1;">
             <padding>
-                <Insets top="24" left="24" bottom="24" right="16"/>
+                <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
 
             <Label text="Workout Dashboard"
-                   style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: linear-gradient(to right, #a855f7, #38bdf8); -fx-background-radius: 14; -fx-padding: 14 18;"
-                   alignment="CENTER" maxWidth="Infinity"/>
+                   style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #e2e8f0;"
+                   maxWidth="Infinity"/>
 
-            <GridPane hgap="14" vgap="14"
-                      style="-fx-background-color: rgba(255,255,255,0.90); -fx-border-color: rgba(192,132,252,0.2); -fx-border-radius: 14; -fx-background-radius: 14; -fx-padding: 16;">
-                <Label text="Total Workouts" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-text-fill: #475569; -fx-font-size: 13;"/>
-                <Label fx:id="totalWorkoutsLabel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #111827;"/>
+            <GridPane hgap="12" vgap="12"
+                      style="-fx-background-color: #0f172a; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 14; -fx-border-color: #334155; -fx-border-width: 1;">
+                <Label text="Total Workouts" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-text-fill: #94a3b8; -fx-font-size: 11; -fx-font-weight: 600;"/>
+                <Label fx:id="totalWorkoutsLabel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #38bdf8;"/>
 
-                <Label text="Total Exercises" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-text-fill: #475569; -fx-font-size: 13;"/>
-                <Label fx:id="totalExercisesLabel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #111827;"/>
+                <Label text="Total Exercises" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-text-fill: #94a3b8; -fx-font-size: 11; -fx-font-weight: 600;"/>
+                <Label fx:id="totalExercisesLabel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #38bdf8;"/>
 
-                <Label text="Cardio Minutes" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-text-fill: #475569; -fx-font-size: 13;"/>
-                <Label fx:id="totalCardioMinutesLabel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #111827;"/>
+                <Label text="Cardio Minutes" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-text-fill: #94a3b8; -fx-font-size: 11; -fx-font-weight: 600;"/>
+                <Label fx:id="totalCardioMinutesLabel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #38bdf8;"/>
             </GridPane>
 
-            <VBox spacing="10"
-                  style="-fx-background-color: rgba(167,139,250,0.16); -fx-border-color: rgba(168,85,247,0.24); -fx-border-radius: 14; -fx-background-radius: 14; -fx-padding: 16;">
-                <Label text="Latest Session" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #1e3a8a;"/>
-                <Label fx:id="latestWorkoutLabel" text="No sessions yet" style="-fx-text-fill: #1f2937; -fx-font-weight: bold;"/>
+            <VBox spacing="8"
+                  style="-fx-background-color: #0f172a; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 14; -fx-border-color: #334155; -fx-border-width: 1;">
+                <Label text="Latest Session" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #e2e8f0;"/>
+                <Label fx:id="latestWorkoutLabel" text="No sessions yet" style="-fx-text-fill: #cbd5e1; -fx-font-weight: 600; -fx-font-size: 13;"/>
                 <Label fx:id="latestWorkoutDetailsLabel" text="Complete a workout to see details here."
-                       wrapText="true" style="-fx-text-fill: #475569; -fx-font-size: 13;"/>
+                    wrapText="true" style="-fx-text-fill: #94a3b8; -fx-font-size: 12;"/>
             </VBox>
         </VBox>
     </left>
 
     <!-- RIGHT SIDE: Navigation Buttons + Recovery Suggestions -->
     <right>
-        <VBox spacing="22" prefWidth="340"
-              style="-fx-background-color: rgba(255,255,255,0.94); -fx-border-color: rgba(168,85,247,0.2); -fx-border-radius: 18; -fx-background-radius: 18; -fx-effect: dropshadow(gaussian, rgba(15,23,42,0.1), 20, 0.08, 0, 5);">
+        <VBox spacing="16" prefWidth="360"
+              style="-fx-background-color: #1e293b; -fx-border-color: #334155; -fx-border-radius: 12; -fx-background-radius: 12; -fx-border-width: 1;">
             <padding>
-                <Insets top="24" right="20" bottom="24" left="18"/>
+                <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
 
             <Button fx:id="startWorkoutButton" text="Start Workout"
-                    maxWidth="Infinity"
-                    style="-fx-font-size: 14; -fx-background-color: linear-gradient(to right, #22c55e, #06b6d4); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(16,185,129,0.25), 0, 0.1, 0, 10);"/>
+                maxWidth="Infinity"
+                style="-fx-font-size: 13; -fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 12 16; -fx-cursor: hand;"/>
 
             <Button fx:id="historyButton" text="Workout History"
-                    maxWidth="Infinity"
-                    style="-fx-font-size: 14; -fx-background-color: linear-gradient(to right, #8b5cf6, #ec4899); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(156,163,175,0.22), 0, 0.1, 0, 10);"/>
+                maxWidth="Infinity"
+                style="-fx-font-size: 13; -fx-background-color: #475569; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 12 16; -fx-cursor: hand;"/>
 
             <Button fx:id="routineEditorButton" text="Routine Editor"
-                    maxWidth="Infinity"
-                    style="-fx-font-size: 14; -fx-background-color: linear-gradient(to right, #fb7185, #f59e0b); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(249,115,22,0.2), 0, 0.1, 0, 10);" />
+                maxWidth="Infinity"
+                style="-fx-font-size: 13; -fx-background-color: #0ea5e9; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 12 16; -fx-cursor: hand;"/>
 
-            <Label text="Recovery Suggestions" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #312e81;"/>
-            <VBox fx:id="recoveryBox" spacing="12" style="-fx-background-color: linear-gradient(to bottom right, #eef2ff, #f5d0fe); -fx-border-color: rgba(168,85,247,0.3); -fx-border-radius: 14; -fx-background-radius: 14; -fx-padding: 16;">
-                <PieChart fx:id="recoveryChart" title="Muscle Volume" legendSide="RIGHT" prefHeight="220" style="-fx-background-color: transparent;"/>
+            <Label text="Recovery Suggestions" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #e2e8f0;"/>
+            <VBox fx:id="recoveryBox" spacing="12" style="-fx-background-color: #f5f5f5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 14; -fx-border-color: #e0e0e0; -fx-border-width: 1;" VBox.vgrow="ALWAYS">
+                <PieChart fx:id="recoveryChart" title="Muscle Volume" legendSide="RIGHT" prefHeight="280" style="-fx-background-color: #f5f5f5;"/>
                 <TextArea fx:id="recoveryDetailsArea" editable="false" wrapText="true"
-                          prefHeight="140" style="-fx-font-size: 12; -fx-control-inner-background: rgba(255,255,255,0.95); -fx-background-insets: 0; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: rgba(168,85,247,0.2);"/>
+                      prefHeight="160" style="-fx-font-size: 11; -fx-control-inner-background: #f8f8f8; -fx-background-insets: 0; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #ddd; -fx-text-fill: #333333;"/>
             </VBox>
         </VBox>
     </right>

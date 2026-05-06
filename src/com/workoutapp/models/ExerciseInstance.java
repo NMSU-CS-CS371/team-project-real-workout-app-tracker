@@ -8,6 +8,7 @@ public class ExerciseInstance {
     private Exercise exercise;
     private List<WorkoutSet> workoutSets;
     private int durationMinutes;
+    private double distance; // Distance in miles for cardio exercises
 
 
     // Constructor for strength exercises
@@ -37,6 +38,7 @@ public class ExerciseInstance {
         this.exercise = exercise;
         this.workoutSets = new LinkedList<>();
         this.durationMinutes = durationMinutes;
+        this.distance = 0.0;
     }
 
     public Exercise getExercise() {
@@ -98,6 +100,17 @@ public class ExerciseInstance {
 
     public int getDurationMinutes() {
         return durationMinutes;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        if (distance < 0) {
+            throw new IllegalArgumentException("Distance must be non-negative");
+        }
+        this.distance = distance;
     }
 
     public void setSets(int sets) {

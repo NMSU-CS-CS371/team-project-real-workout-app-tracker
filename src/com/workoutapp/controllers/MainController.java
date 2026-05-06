@@ -56,11 +56,19 @@ public class MainController {
     public void onProfileSelected(String profileName) {
         if(profileName == null) return;
         currentProfile = profileName;
-        activeProfileLabel.setText(profileName);
+        activeProfileLabel.setText(profileName + " ▾");
         if(currentScreenController != null){
             currentScreenController.onProfileChanged(profileName);
         }
     
+    }
+
+    @FXML
+    private void handleActiveProfileClicked() {
+        if (profileDropDown == null || profileDropDown.getItems().isEmpty()) {
+            return;
+        }
+        profileDropDown.show();
     }
 
     //Load views within UI
@@ -122,13 +130,14 @@ public class MainController {
         }
     }
 
-    public void loadProgressReportView() {
+    public void loadProgressReportView(String profileName, String exerciseName) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/workoutapp/views/ProgressReportView.fxml"));
             Parent view = loader.load();
 
             ProgressReportController controller = loader.getController();
             controller.setMainController(this);
+            controller.loadExerciseProgress(profileName, exerciseName);
 
             contentPane.getChildren().setAll(view);
         } catch (Exception e) {
@@ -145,11 +154,13 @@ public class MainController {
 
         if (currentProfile != null && profileDropDown.getItems().contains(currentProfile)) {
             profileDropDown.getSelectionModel().select(currentProfile);
+            activeProfileLabel.setText(currentProfile + " ▾");
         } else if (!profileDropDown.getItems().isEmpty()) {
             currentProfile = profileDropDown.getItems().get(0);
             profileDropDown.getSelectionModel().select(currentProfile);
             onProfileSelected(currentProfile);
         } else {
+            activeProfileLabel.setText("No profile ▾");
             // No profiles left — force creation
             promptForNewProfile();
         }

@@ -5,65 +5,71 @@
 <?import javafx.geometry.Insets?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" minWidth="650" minHeight="500"
-            fx:controller="com.workoutapp.controllers.WorkoutHistoryController">
+            fx:controller="com.workoutapp.controllers.WorkoutHistoryController"
+            style="-fx-background-color: #0f172a;">
+    <padding>
+        <Insets top="16" right="16" bottom="16" left="16"/>
+    </padding>
 
     <!-- LEFT: Logged workouts  -->
     <left>
-        <VBox spacing="10" prefWidth="250">
+        <VBox spacing="14" prefWidth="280" style="-fx-background-color: #1e293b; -fx-border-color: #334155; -fx-border-radius: 12; -fx-background-radius: 12; -fx-border-width: 1;">
             <padding>
-                <Insets top="10" left="10" bottom="10" right="5"/>
+                <Insets top="24" right="20" bottom="24" left="20"/>
             </padding>
 
-            <Label text="Past Workouts" style="-fx-font-size: 16;"/>
+            <Label text="Past Workouts" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #e2e8f0;"/>
 
             <!-- List of routines (name + #exercises) -->
-            <ListView fx:id="eventListView" prefHeight="300" editable="true"/>
+            <ListView fx:id="eventListView" prefHeight="200" editable="true" style="-fx-background-color: #0f172a; -fx-control-inner-background: #0f172a; -fx-border-color: #334155; -fx-border-radius: 12; -fx-background-radius: 12; -fx-text-fill: #e2e8f0;"/>
 
             <!-- Date and Time Fields -->
-            <HBox spacing="5">
-                <Label text="Date:"/>
-                <TextField fx:id="dateField" maxWidth="100" HBox.hgrow="ALWAYS"/>
+            <VBox spacing="8">
+                <HBox spacing="6" alignment="CENTER_LEFT">
+                    <Label text="Date:" style="-fx-text-fill: #cbd5e1; -fx-font-weight: bold;"/>
+                    <TextField fx:id="dateField" HBox.hgrow="ALWAYS" style="-fx-background-color: #0f172a; -fx-text-fill: #e2e8f0; -fx-control-inner-background: #0f172a; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #334155; -fx-padding: 6 10;"/>
+                </HBox>
+
+                <HBox spacing="6" alignment="CENTER_LEFT">
+                    <Label text="Time:" style="-fx-text-fill: #cbd5e1; -fx-font-weight: bold;"/>
+                    <TextField fx:id="timeField" HBox.hgrow="ALWAYS" style="-fx-background-color: #0f172a; -fx-text-fill: #e2e8f0; -fx-control-inner-background: #0f172a; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #334155; -fx-padding: 6 10;"/>
+                </HBox>
+            </VBox>
+
+            <HBox spacing="8">
+                <Button fx:id="deleteEventButton" text="Delete" HBox.hgrow="ALWAYS" style="-fx-padding: 8 12; -fx-font-weight: bold; -fx-background-radius: 10; -fx-background-color: #475569; -fx-text-fill: white;"/>
+                <Button fx:id="adjustDateTimeButton" text="Adjust" HBox.hgrow="ALWAYS" style="-fx-padding: 8 12; -fx-font-weight: bold; -fx-background-radius: 10; -fx-background-color: #2563eb; -fx-text-fill: white;"/>
             </HBox>
 
-            <HBox spacing="10">
-                <Label text="Time:"/>
-                <TextField fx:id="timeField" maxWidth="100"  HBox.hgrow="ALWAYS"/>
-            </HBox>
-
-            <HBox spacing="10">
-                <Button fx:id="deleteEventButton" text="Delete"/>
-                <Button fx:id="adjustDateTimeButton" text="Adjust Date/Time"/>
-            </HBox>
-
-            <Button fx:id="exitButton" text="Exit" maxWidth="Infinity"/>
+            <Button fx:id="exitButton" text="Exit to Home" maxWidth="Infinity" style="-fx-padding: 10 12; -fx-font-size: 13; -fx-font-weight: bold; -fx-background-color: #334155; -fx-text-fill: white; -fx-background-radius: 10;"/>
         </VBox>
     </left>
 
-    <!-- RIGHT: Exercises in selected routine -->
+    <!-- RIGHT: Calendar and Exercises -->
     <center>
-        <VBox spacing="10">
+        <VBox spacing="14" style="-fx-background-color: #1e293b; -fx-border-color: #334155; -fx-border-radius: 12; -fx-background-radius: 12; -fx-border-width: 1;">
             <padding>
-                <Insets top="10" left="5" bottom="10" right="10"/>
+                <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
 
             <HBox spacing="10" alignment="CENTER_LEFT">
-                <Button fx:id="prevMonthButton" text="←" />
-                <Label fx:id="monthLabel" text="Month" style="-fx-font-size: 14; -fx-font-weight: bold;"/>
-                <Button fx:id="nextMonthButton" text="→" />
+                <Button fx:id="prevMonthButton" text="←" style="-fx-padding: 6 12; -fx-font-weight: bold; -fx-background-radius: 8; -fx-background-color: #334155; -fx-text-fill: white;"/>
+                <Label fx:id="monthLabel" text="Month" style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #e2e8f0;"/>
+                <Button fx:id="nextMonthButton" text="→" style="-fx-padding: 6 12; -fx-font-weight: bold; -fx-background-radius: 8; -fx-background-color: #334155; -fx-text-fill: white;"/>
             </HBox>
 
-            <GridPane fx:id="calendarGrid" hgap="4" vgap="4" style="-fx-background-color: #f8fafc; -fx-border-color: #e5e7eb; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10;" />
+            <GridPane fx:id="calendarGrid" hgap="4" vgap="4" style="-fx-background-color: #0f172a; -fx-border-color: #334155; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 12;" VBox.vgrow="SOMETIMES"/>
 
-            <Label fx:id="selectedDateLabel" text="Selected Date" style="-fx-font-size: 14; -fx-font-weight: bold;"/>
-            <ListView fx:id="selectedDateEventList" prefHeight="140"/>
+            <Label fx:id="selectedDateLabel" text="Selected Date" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #e2e8f0;"/>
+            <ListView fx:id="selectedDateEventList" prefHeight="100" style="-fx-background-color: #0f172a; -fx-control-inner-background: #0f172a; -fx-border-color: #334155; -fx-border-radius: 10; -fx-background-radius: 10; -fx-text-fill: #e2e8f0;"/>
 
-            <Label fx:id="workoutTitleLabel" text="Workout Details" style="-fx-font-size: 16;"/>
-            <ListView fx:id="exerciseListView" prefHeight="200"/>
+            <Label fx:id="workoutTitleLabel" text="Workout Details" style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #e2e8f0;"/>
+            <ListView fx:id="exerciseListView" prefHeight="140" style="-fx-background-color: #0f172a; -fx-control-inner-background: #0f172a; -fx-border-color: #334155; -fx-border-radius: 10; -fx-background-radius: 10; -fx-text-fill: #e2e8f0;"/>
 
-            <HBox spacing="10">
-                <Label text="Notes:"/>
-                <TextField fx:id="notesField" HBox.hgrow="ALWAYS"/>
-                <Button fx:id="saveNotesButton" text="Save Notes" style="-fx-font-weight: bold;"/>
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Label text="Notes:" style="-fx-text-fill: #cbd5e1; -fx-font-weight: bold;"/>
+                <TextField fx:id="notesField" HBox.hgrow="ALWAYS" style="-fx-background-color: #0f172a; -fx-text-fill: #e2e8f0; -fx-control-inner-background: #0f172a; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #334155; -fx-padding: 6 10;"/>
+                <Button fx:id="saveNotesButton" text="Save" style="-fx-padding: 8 14; -fx-font-weight: bold; -fx-background-color: #2563eb; -fx-text-fill: white; -fx-background-radius: 8;"/>
             </HBox>
         </VBox>
     </center>

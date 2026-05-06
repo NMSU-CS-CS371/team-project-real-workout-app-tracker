@@ -1,6 +1,10 @@
 [
   {
-    "routineName": "Legs",
+    "routineName": "Push",
+    "exercises": []
+  },
+  {
+    "routineName": "New Routine",
     "exercises": []
   }
 ]

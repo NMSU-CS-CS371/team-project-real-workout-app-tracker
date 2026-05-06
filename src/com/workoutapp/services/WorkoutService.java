@@ -143,6 +143,21 @@ public class WorkoutService {
         updateUIProperties();
     }
 
+    // Updates cardio exercise distance
+    public void updateCardioDistance(int exerciseIndex, double distance) {
+        if (!workoutActive)
+            throw new IllegalStateException("No active workout session");
+        if (exerciseIndex < 0 || exerciseIndex >= currentWorkout.getNumExercises())
+            throw new IllegalArgumentException("Invalid exercise index");
+
+        ExerciseInstance instance = currentWorkout.getExercises().get(exerciseIndex);
+        if (instance.getExerciseType() != ExerciseType.CARDIO)
+            throw new IllegalArgumentException("Exercise is not cardio type");
+
+        instance.setDistance(distance);
+        updateUIProperties();
+    }
+
     // Starts a rest timer between sets/exercises
     public CompletableFuture<Void> startRestTimer(int seconds) {
         CompletableFuture<Void> future = new CompletableFuture<>();

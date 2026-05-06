@@ -73,7 +73,7 @@ public class ReportDetailController implements ScreenController {
         }
 
         Label exercisesHeader = new Label("Exercises");
-        exercisesHeader.setStyle("-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #1f2937;");
+        exercisesHeader.setStyle("-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #e2e8f0;");
         reportContentBox.getChildren().add(exercisesHeader);
 
         for (ExerciseInstance exercise : workout.getExercises()) {
@@ -84,7 +84,7 @@ public class ReportDetailController implements ScreenController {
             exerciseName.setStyle("-fx-font-weight: bold; -fx-font-size: 14;");
             Button progressButton = new Button("View Progress");
             progressButton.setCursor(Cursor.HAND);
-            progressButton.setOnAction(e -> main.loadProgressReportView());
+            progressButton.setOnAction(e -> main.loadProgressReportView(profileName, exercise.getExerciseName()));
 
             Region spacer = new Region();
             HBox.setHgrow(spacer, Priority.ALWAYS);
@@ -92,8 +92,12 @@ public class ReportDetailController implements ScreenController {
             exerciseBox.getChildren().add(headerRow);
 
             if (exercise.getExerciseType() == ExerciseType.CARDIO) {
-                Label cardioLabel = new Label(exercise.getDurationMinutes() + " minutes");
-                exerciseBox.getChildren().add(cardioLabel);
+                VBox cardioDetails = new VBox(4);
+                cardioDetails.getChildren().add(new Label(exercise.getDurationMinutes() + " minutes"));
+                if (exercise.getDistance() > 0) {
+                    cardioDetails.getChildren().add(new Label(String.format("%.2f miles", exercise.getDistance())));
+                }
+                exerciseBox.getChildren().add(cardioDetails);
                 reportContentBox.getChildren().add(exerciseBox);
                 continue;
             }
