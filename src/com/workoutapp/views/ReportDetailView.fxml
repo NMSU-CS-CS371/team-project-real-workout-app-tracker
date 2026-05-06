@@ -8,26 +8,26 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.workoutapp.controllers.ReportDetailController"
             minWidth="650" minHeight="500"
-            style="-fx-background-color: #f5f7fb;">
+            style="-fx-background-color: #0f172a;">
 
     <top>
         <!-- Top header bar styling -->
-        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-width: 0 0 1 0;">
+        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: #1e293b; -fx-border-color: #334155; -fx-border-width: 0 0 1 0;">
             <padding>
                 <Insets top="16" right="16" bottom="12" left="16"/>
             </padding>
             <!-- Back button text/placement -->
-            <Button fx:id="backButton" text="Back to Workout History"/>
+            <Button fx:id="backButton" text="Back to Workout History" style="-fx-background-color: #334155; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
             <!-- Detail header typography -->
-            <Label fx:id="titleLabel" text="Workout Details" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+            <Label fx:id="titleLabel" text="Workout Details" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #e2e8f0;"/>
             <Pane HBox.hgrow="ALWAYS"/>
         </HBox>
     </top>
 
     <center>
-        <ScrollPane fx:id="reportScrollPane" fitToWidth="true">
+        <ScrollPane fx:id="reportScrollPane" fitToWidth="true" style="-fx-background: #0f172a; -fx-background-color: #0f172a;">
             <content>
-                <VBox fx:id="reportContentBox" spacing="10">
+                <VBox fx:id="reportContentBox" spacing="10" style="-fx-background-color: #0f172a;">
                     <padding>
                         <Insets top="10" right="16" bottom="16" left="16"/>
                     </padding>

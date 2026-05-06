@@ -184,8 +184,17 @@ public class HomeController implements ScreenController {
         latestWorkoutLabel.setText(dateText);
 
         Workout latestWorkout = latest.getWorkout();
-        int latestCount = latestWorkout == null ? 0 : latestWorkout.getExercises().size();
+        String exerciseNames = "";
+        if (latestWorkout != null && !latestWorkout.getExercises().isEmpty()) {
+            List<String> names = new ArrayList<>();
+            for (ExerciseInstance ex : latestWorkout.getExercises()) {
+                names.add(ex.getExerciseName());
+            }
+            exerciseNames = String.join(", ", names);
+        } else {
+            exerciseNames = "No exercises";
+        }
         String notes = (latest.getNotes() == null || latest.getNotes().isBlank()) ? "No notes." : latest.getNotes();
-        latestWorkoutDetailsLabel.setText("Exercises: " + latestCount + "\nNotes: " + notes);
+        latestWorkoutDetailsLabel.setText("Exercises: " + exerciseNames + "\nNotes: " + notes);
     }
 }

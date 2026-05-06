@@ -5,43 +5,48 @@
 <?import javafx.geometry.Insets?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.workoutapp.controllers.ExerciseSelectorController">
+            fx:controller="com.workoutapp.controllers.ExerciseSelectorController"
+            style="-fx-background-color: #0f172a;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
 
     <center>
-        <VBox spacing="10">
+        <VBox spacing="12" style="-fx-background-color: #1e293b; -fx-border-color: #334155; -fx-border-radius: 12; -fx-background-radius: 12; -fx-border-width: 1;">
             <padding>
-                <Insets top="10" left="10" bottom="10" right="10"/>
+                <Insets top="16" left="16" bottom="16" right="16"/>
             </padding>
 
-            <Label text="Exercises" style="-fx-font-size: 16;"/>
+            <Label text="Exercises" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #e2e8f0;"/>
 
             <!-- List of exercises -->
-            <ListView fx:id="exerciseListView" prefHeight="250" editable="true"/>
+            <ListView fx:id="exerciseListView" prefHeight="250" editable="true" style="-fx-background-color: #0f172a; -fx-control-inner-background: #0f172a; -fx-border-color: #334155; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #e2e8f0;"/>
 
             <!-- Inline editing fields -->
-            <GridPane hgap="5" vgap="5">
+            <GridPane hgap="8" vgap="8">
                 <columnConstraints>
                     <ColumnConstraints percentWidth="20"/>
                     <ColumnConstraints percentWidth="80"/>
                 </columnConstraints>
 
-                <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-text-fill: #cbd5e1; -fx-font-weight: 600;"/>
+                <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1" style="-fx-background-color: #0f172a; -fx-text-fill: #e2e8f0; -fx-control-inner-background: #0f172a; -fx-border-radius: 6; -fx-background-radius: 6; -fx-border-color: #334155;"/>
 
-                <Label text="Description:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <Label text="Description:" GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-text-fill: #cbd5e1; -fx-font-weight: 600;"/>
                 <TextArea fx:id="descriptionField" prefRowCount="1"
-                          GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-                <Label text="Type:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                <ComboBox fx:id="typeDropDown" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                          GridPane.rowIndex="1" GridPane.columnIndex="1" style="-fx-background-color: #0f172a; -fx-text-fill: #e2e8f0; -fx-control-inner-background: #0f172a; -fx-border-radius: 6; -fx-background-radius: 6; -fx-border-color: #334155;"/>
+                <Label text="Type:" GridPane.rowIndex="2" GridPane.columnIndex="0" style="-fx-text-fill: #cbd5e1; -fx-font-weight: 600;"/>
+                <ComboBox fx:id="typeDropDown" GridPane.rowIndex="2" GridPane.columnIndex="1" style="-fx-background-color: #0f172a; -fx-text-fill: #e2e8f0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-border-color: #334155;"/>
             </GridPane>
 
             <HBox spacing="10">
-                <Button fx:id="createExerciseButton" text="New Exercise"/>
-                <Button fx:id="editExerciseButton" text="Save Changes"/>
-                <Button fx:id="closeButton" text="Cancel"/>
+                <Button fx:id="createExerciseButton" text="New Exercise" style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+                <Button fx:id="editExerciseButton" text="Save Changes" style="-fx-background-color: #0ea5e9; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+                <Button fx:id="closeButton" text="Cancel" style="-fx-background-color: #475569; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
             </HBox>
             <HBox spacing="10">
-                <Button fx:id="addToRoutineButton" text="Add to Routine" style="-fx-font-weight: bold;" minWidth="275" alignment="CENTER" maxWidth="Infinity"/>
+                <Button fx:id="addToRoutineButton" text="Add to Routine" style="-fx-font-weight: bold; -fx-background-color: #2563eb; -fx-text-fill: white; -fx-background-radius: 8;" minWidth="275" alignment="CENTER" maxWidth="Infinity"/>
             </HBox>
         </VBox>
     </center>

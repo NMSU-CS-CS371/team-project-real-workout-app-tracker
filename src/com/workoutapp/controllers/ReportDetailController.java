@@ -73,7 +73,7 @@ public class ReportDetailController implements ScreenController {
         }
 
         Label exercisesHeader = new Label("Exercises");
-        exercisesHeader.setStyle("-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #1f2937;");
+        exercisesHeader.setStyle("-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #e2e8f0;");
         reportContentBox.getChildren().add(exercisesHeader);
 
         for (ExerciseInstance exercise : workout.getExercises()) {

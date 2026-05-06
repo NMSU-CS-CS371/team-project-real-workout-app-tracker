@@ -5,58 +5,61 @@
 <?import javafx.geometry.Insets?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" minWidth="650" minHeight="500"
-            fx:controller="com.workoutapp.controllers.RoutineEditorController">
+            fx:controller="com.workoutapp.controllers.RoutineEditorController"
+            style="-fx-background-color: #0f172a;">
 
     <!-- LEFT: Routines -->
     <left>
-        <VBox spacing="10" prefWidth="250">
+        <VBox spacing="10" prefWidth="250"
+              style="-fx-background-color: #1e293b; -fx-border-color: #334155; -fx-border-radius: 12; -fx-background-radius: 12; -fx-border-width: 1;">
             <padding>
-                <Insets top="10" left="10" bottom="10" right="5"/>
+                <Insets top="20" left="20" bottom="20" right="12"/>
             </padding>
 
-            <Label text="Routines" style="-fx-font-size: 16;"/>
+            <Label text="Routines" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #e2e8f0;"/>
 
             <!-- List of routines (name + #exercises) -->
-            <ListView fx:id="routineListView" prefHeight="300" editable="true"/>
+            <ListView fx:id="routineListView" prefHeight="300" editable="true" style="-fx-background-color: #0f172a; -fx-control-inner-background: #0f172a; -fx-border-color: #334155; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #e2e8f0;"/>
 
             <!-- Rename field (no popup) -->
             <HBox spacing="5">
-                <Label text="Name:"/>
-                <TextField fx:id="routineNameField" HBox.hgrow="ALWAYS"/>
+                <Label text="Name:" style="-fx-text-fill: #cbd5e1; -fx-font-weight: 600;"/>
+                <TextField fx:id="routineNameField" HBox.hgrow="ALWAYS" style="-fx-background-color: #0f172a; -fx-text-fill: #e2e8f0; -fx-control-inner-background: #0f172a; -fx-border-color: #334155; -fx-border-radius: 8; -fx-background-radius: 8;"/>
             </HBox>
 
             <!-- Routine actions -->
             <VBox spacing="10">
-                <Button fx:id="createRoutineButton" text="Create" maxWidth="Infinity" minHeight="34"/>
-                <Button fx:id="deleteRoutineButton" text="Delete" maxWidth="Infinity" minHeight="34"/>
+                <Button fx:id="createRoutineButton" text="Create" maxWidth="Infinity" minHeight="34" style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+                <Button fx:id="deleteRoutineButton" text="Delete" maxWidth="Infinity" minHeight="34" style="-fx-background-color: #475569; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
             </VBox>
 
             <Region VBox.vgrow="ALWAYS"/>
 
-            <Button fx:id="exitButton" text="Exit to Home" maxWidth="Infinity"/>
+            <Button fx:id="exitButton" text="Exit to Home" maxWidth="Infinity" style="-fx-background-color: #334155; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
         </VBox>
     </left>
 
     <!-- RIGHT: Exercises in selected routine -->
     <center>
-        <VBox spacing="10">
+        <VBox spacing="10"
+              style="-fx-background-color: #1e293b; -fx-border-color: #334155; -fx-border-radius: 12; -fx-background-radius: 12; -fx-border-width: 1;">
             <padding>
-                <Insets top="10" left="5" bottom="10" right="10"/>
+                <Insets top="20" left="12" bottom="20" right="20"/>
             </padding>
 
-            <Label fx:id="routineTitleLabel" text="Select a routine..." style="-fx-font-size: 16;"/>
+            <Label fx:id="routineTitleLabel" text="Select a routine..." style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #e2e8f0;"/>
 
             <HBox spacing="15">
                 <!-- Exercises list -->
-                <ListView fx:id="exerciseListView" prefHeight="300" HBox.hgrow="ALWAYS"/>
+                <ListView fx:id="exerciseListView" prefHeight="300" HBox.hgrow="ALWAYS" style="-fx-background-color: #0f172a; -fx-control-inner-background: #0f172a; -fx-border-color: #334155; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #e2e8f0;"/>
 
                 <!-- Exercise editing buttons -->
                 <VBox spacing="10" prefWidth="140">
-                    <Button fx:id="addExerciseButton" text="Add Exercise" maxWidth="Infinity"/>
-                    <Button fx:id="deleteExerciseButton" text="Delete Exercise" maxWidth="Infinity"/>
-                    <Button fx:id="moveUpButton" text="Move Up" maxWidth="Infinity"/>
-                    <Button fx:id="moveDownButton" text="Move Down" maxWidth="Infinity"/>
-                    <Button fx:id="saveRoutineButton" text="Save" maxWidth="Infinity" style="-fx-font-weight: bold;"/>
+                    <Button fx:id="addExerciseButton" text="Add Exercise" maxWidth="Infinity" style="-fx-background-color: #0ea5e9; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+                    <Button fx:id="deleteExerciseButton" text="Delete Exercise" maxWidth="Infinity" style="-fx-background-color: #475569; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+                    <Button fx:id="moveUpButton" text="Move Up" maxWidth="Infinity" style="-fx-background-color: #334155; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+                    <Button fx:id="moveDownButton" text="Move Down" maxWidth="Infinity" style="-fx-background-color: #334155; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+                    <Button fx:id="saveRoutineButton" text="Save" maxWidth="Infinity" style="-fx-font-weight: bold; -fx-background-color: #2563eb; -fx-text-fill: white; -fx-background-radius: 8;"/>
                 </VBox>
             </HBox>
         </VBox>

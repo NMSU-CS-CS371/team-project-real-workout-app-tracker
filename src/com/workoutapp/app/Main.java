@@ -23,7 +23,7 @@ public class Main extends Application{
         stage.setScene(scene);
         stage.setTitle("Workout Tracker");
         stage.setWidth(1000);
-        stage.setHeight(700);
+        stage.setHeight(900);
         stage.show();
     }
     public static void main(String[] args) {

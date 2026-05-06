@@ -16,7 +16,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.image.WritableImage;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.SnapshotParameters;
+import javafx.stage.FileChooser;
 import javafx.collections.FXCollections;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -28,6 +35,7 @@ import java.util.TreeMap;
 public class ProgressReportController implements ScreenController {
 
     @FXML private Button backButton;
+    @FXML private Button exportButton;
     @FXML private Label titleLabel;
     @FXML private VBox chartContainer;
     @FXML private ComboBox<String> metricSelector;
@@ -55,6 +63,8 @@ public class ProgressReportController implements ScreenController {
                 main.loadView("ReportView.fxml");
             }
         });
+
+        exportButton.setOnAction(e -> handleExportChart());
     }
 
     @Override
@@ -229,5 +239,58 @@ public class ProgressReportController implements ScreenController {
         xAxis.setCategories(FXCollections.observableArrayList(dateLabels));
         chart.getData().add(series);
         chartContainer.getChildren().add(chart);
+    }
+
+    private void handleExportChart() {
+        if (chartContainer.getChildren().isEmpty()) {
+            return;
+        }
+
+        // Get the chart from the container
+        Object chartNode = chartContainer.getChildren().get(0);
+        if (!(chartNode instanceof LineChart)) {
+            return;
+        }
+
+        LineChart<String, Number> chart = (LineChart<String, Number>) chartNode;
+
+        // Create file chooser
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Export Chart as Image");
+        fileChooser.getExtensionFilters().add(
+            new FileChooser.ExtensionFilter("PNG Images", "*.png")
+        );
+        
+        // Set initial filename
+        String filename = exerciseName.replaceAll("[^a-zA-Z0-9_-]", "_") + "_progress.png";
+        fileChooser.setInitialFileName(filename);
+
+        // Show save dialog
+        File file = fileChooser.showSaveDialog(chart.getScene().getWindow());
+        if (file != null) {
+            try {
+                // Take snapshot of chart
+                WritableImage image = new WritableImage((int)chart.getWidth(), (int)chart.getHeight());
+                chart.snapshot(new SnapshotParameters(), image);
+
+                // Convert WritableImage to BufferedImage
+                BufferedImage bufferedImage = new BufferedImage(
+                    (int)image.getWidth(),
+                    (int)image.getHeight(),
+                    BufferedImage.TYPE_INT_RGB
+                );
+
+                for (int y = 0; y < image.getHeight(); y++) {
+                    for (int x = 0; x < image.getWidth(); x++) {
+                        bufferedImage.setRGB(x, y, image.getPixelReader().getArgb(x, y));
+                    }
+                }
+
+                // Write to file
+                ImageIO.write(bufferedImage, "png", file);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

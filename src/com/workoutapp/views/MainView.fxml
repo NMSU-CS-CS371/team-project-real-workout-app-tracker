@@ -6,30 +6,38 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.workoutapp.controllers.MainController">
+    <style>-fx-background-color: #0f172a;</style>
 
     <top>
-        <HBox spacing="15" alignment="CENTER_LEFT" style="-fx-padding: 12;">
+        <HBox spacing="14" alignment="CENTER_LEFT"
+              style="-fx-padding: 12 14 12 14; -fx-background-color: linear-gradient(to right, #0f172a, #111827, #0b1220); -fx-border-color: rgba(96,165,250,0.18); -fx-border-width: 0 0 1 0; -fx-effect: dropshadow(gaussian, rgba(2,6,23,0.35), 16, 0.18, 0, 6);">
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
 
-            <VBox spacing="2" style="-fx-background-radius: 14; -fx-padding: 10 18 10 18;" styleClass="card-pane">
-                <Label fx:id="activeProfileLabel" text="No profile" style="-fx-font-size: 14; -fx-font-weight: bold;"/>
+            <VBox spacing="2"
+                  style="-fx-background-color: rgba(255,255,255,0.08); -fx-background-radius: 16; -fx-border-color: rgba(255,255,255,0.10); -fx-border-radius: 16; -fx-padding: 10 18 10 18; -fx-effect: dropshadow(gaussian, rgba(15,23,42,0.28), 10, 0.12, 0, 2);"
+                  styleClass="card-pane">
+                <Label text="Active Profile" style="-fx-font-size: 10; -fx-font-weight: bold; -fx-text-fill: rgba(255,255,255,0.72); -fx-letter-spacing: 0.8;"/>
+                <Label fx:id="activeProfileLabel" text="No profile ▾"
+                       onMouseClicked="#handleActiveProfileClicked"
+                       style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: white; -fx-cursor: hand;"/>
             </VBox>
 
             <Pane HBox.hgrow="ALWAYS"/>
 
-            <Label text="Profile:"/>
-            <ComboBox fx:id="profileDropDown" prefWidth="120"/>
-            <Button text="🌙 Dark Mode" fx:id="themeToggleButton" style="-fx-padding: 8 12;"/>
-            <Button text="Profile Settings" fx:id="profileSettingsButton"/>
+            <ComboBox fx:id="profileDropDown" prefWidth="128" visible="false" managed="false"/>
+            <Button text="🌙 Dark Mode" fx:id="themeToggleButton" visible="false" managed="false"
+                    style="-fx-padding: 8 14; -fx-background-radius: 12; -fx-background-color: rgba(37,99,235,0.16); -fx-text-fill: #e2e8f0; -fx-font-weight: bold; -fx-border-color: rgba(96,165,250,0.25); -fx-border-radius: 12;"/>
+            <Button text="Profile Settings" fx:id="profileSettingsButton"
+                    style="-fx-padding: 10 16; -fx-background-radius: 14; -fx-background-color: linear-gradient(to right, #38bdf8, #0ea5e9); -fx-text-fill: white; -fx-font-size: 13; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(14,165,233,0.20), 10, 0.12, 0, 6);"/>
         </HBox>
     </top>
 
     <center>
-        <SplitPane>
+        <SplitPane style="-fx-background-color: transparent; -fx-padding: 0; -fx-border-color: transparent;">
             <items>
-                <StackPane fx:id="contentPane" style="-fx-padding: 20;"/>
+                <StackPane fx:id="contentPane" style="-fx-padding: 0; -fx-background-color: #0f172a;"/>
             </items>
         </SplitPane>
     </center>

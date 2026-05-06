@@ -68,13 +68,17 @@ public class RoutineEditorController implements ScreenController {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setText(null);
+                    setStyle("");
                 } else if(item.getNumExercises() == 0){
                     setText(item.getRoutineName() + " (No exercises)");
+                    setStyle("-fx-text-fill: #e2e8f0;");
                 } else if(item.getNumExercises() == 1){
                     setText(item.getRoutineName() + " (1 exercise)");
+                    setStyle("-fx-text-fill: #e2e8f0;");
                 } else{
                     int count = item.getNumExercises();
                     setText(item.getRoutineName() + " (" + count + " exercises)");
+                    setStyle("-fx-text-fill: #e2e8f0;");
                 }
             }
         });
@@ -113,10 +117,13 @@ public class RoutineEditorController implements ScreenController {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setText(null);
+                    setStyle("");
                 } else if (item.getDesc() == null || item.getDesc().equals("")){
                     setText(item.getName() + " (" + item.getType() + ")");
+                    setStyle("-fx-text-fill: #e2e8f0;");
                 } else {
                     setText(item.getName() + " (" + item.getType() + ") - " + item.getDesc());
+                    setStyle("-fx-text-fill: #e2e8f0;");
                 }
             }
         });

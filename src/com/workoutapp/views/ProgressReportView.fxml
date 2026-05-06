@@ -14,20 +14,21 @@
             <padding>
                 <Insets top="16" right="16" bottom="12" left="16"/>
             </padding>
-            <Button fx:id="backButton" text="Back"/>
-            <Label fx:id="titleLabel" text="Progress Report" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+            <Button fx:id="backButton" text="Back" style="-fx-background-color: linear-gradient(to right, #38bdf8, #0ea5e9); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+            <Label fx:id="titleLabel" text="Progress Report" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #1f2937;"/>
             <Pane HBox.hgrow="ALWAYS"/>
+            <Button fx:id="exportButton" text="Export" style="-fx-background-color: linear-gradient(to right, #10b981, #059669); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
         </HBox>
     </top>
 
     <center>
-        <ScrollPane style="-fx-fit-to-width: true;">
+        <ScrollPane style="-fx-fit-to-width: true; -fx-background: #f5f7fb; -fx-background-color: #f5f7fb;">
             <VBox spacing="16" style="-fx-background-color: #f5f7fb;">
                 <padding>
                     <Insets top="20" right="20" bottom="20" left="20"/>
                 </padding>
                 <HBox spacing="10" alignment="CENTER_LEFT">
-                    <Label text="Metric:" style="-fx-font-weight: bold;"/>
+                    <Label text="Metric:" style="-fx-font-weight: bold; -fx-text-fill: #1f2937;"/>
                     <ComboBox fx:id="metricSelector" prefWidth="150"/>
                 </HBox>
                 <VBox fx:id="chartContainer" spacing="16" style="-fx-background-color: #f5f7fb;"/>
