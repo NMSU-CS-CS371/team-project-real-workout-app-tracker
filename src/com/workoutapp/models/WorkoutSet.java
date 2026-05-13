@@ -1,5 +1,10 @@
 package com.workoutapp.models;
 
+/* Represents a single set of an exercise, containing a unique rep and weight variable.
+*  This allows the user to log multiple sets of the same exercise with varying reps/weight
+*  The class provides getter/setter methods, and a toString method for displaying set details.
+*/
+
 public class WorkoutSet {
 
     private int reps;

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- WorkoutHistoryView.fxml -->
+<!-- Defines the Workout History calendar/details screen (WorkoutHistoryController). -->
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>

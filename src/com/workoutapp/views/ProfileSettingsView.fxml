@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- ProfileSettingsView.fxml -->
+<!-- Defines the Profile Settings screen (ProfileSettingsController). -->
+
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>

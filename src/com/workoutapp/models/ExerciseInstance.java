@@ -3,6 +3,12 @@ package com.workoutapp.models;
 import java.util.LinkedList;
 import java.util.List;
 
+/* Represents an instance of an exercise performed during a workout.
+* Contains instance specific details such as the sets/reps/weight for strength exercises, or duration/distance for cardio exercises.
+* Provides getter/setter methods for the instance details.
+*
+*/
+
 public class ExerciseInstance {
 
     private Exercise exercise;

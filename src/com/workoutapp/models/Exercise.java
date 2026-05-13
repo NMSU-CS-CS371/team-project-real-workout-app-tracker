@@ -1,5 +1,7 @@
 package com.workoutapp.models;
 
+// Class to represent an individual exercise, which contains a name, description, and an enum type defined in ExerciseType.java.
+
 public class Exercise {
 
     private String name;

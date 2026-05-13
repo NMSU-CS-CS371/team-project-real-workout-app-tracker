@@ -1,6 +1,10 @@
 package com.workoutapp.models;
 import java.util.LinkedList;
 
+/* Represents a workout, which consists of a list of exercise instances.
+*  Can be created manually, or generated from a routine object.
+*  The class provides methods to add/remove exercises, as well as a toString method for displaying workout details.
+*/
 public class Workout {
 
     private LinkedList<ExerciseInstance> exercises;

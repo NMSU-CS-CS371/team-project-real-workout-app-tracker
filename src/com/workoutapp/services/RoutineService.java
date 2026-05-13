@@ -7,6 +7,12 @@ import com.workoutapp.models.Routine;
 import java.lang.reflect.Type;
 import java.util.LinkedList;
 
+/* Routine management service.
+*  Provides methods to create, edit, and delete routines and exercises within them.
+*  The service uses a linked list to manage routines in memory, and persists them to a json file using the DataStorage class.
+*
+*/
+
 public class RoutineService {
 
     private LinkedList<Routine> routines;   // list of routines used for runtime management

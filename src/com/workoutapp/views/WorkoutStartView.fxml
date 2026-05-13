@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- WorkoutStartView.fxml -->
+<!-- Defines the Workout Start/selection screen (WorkoutStartController). -->
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
