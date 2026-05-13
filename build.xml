@@ -116,10 +116,10 @@
     <!-- Build fat JAR with Gson merged, JavaFX external -->
     <target name="jar" depends="compile">
         <!-- Clean jar directory -->
-        <delete file="workoutApp.jar"/>
+        <delete file="WorkoutApp.jar"/>
 
         <!-- Create JAR -->
-        <jar destfile="workoutApp.jar" basedir="${classes.dir}">
+        <jar destfile="WorkoutApp.jar" basedir="${classes.dir}">
             
             <!-- Merge Gson into JAR -->
             <zipgroupfileset dir="${lib.dir}" includes="gson-*.jar"/>
@@ -143,7 +143,7 @@
 
     <!-- Run application from JAR (NOTE: Do "ant jar" first)-->
     <target name="run-jar">
-        <java jar="workoutApp.jar" fork="true">
+        <java jar="WorkoutApp.jar" fork="true">
             <jvmarg value="--module-path"/>
             <jvmarg value="${javafx.lib}"/>
             <jvmarg value="--add-modules"/>
