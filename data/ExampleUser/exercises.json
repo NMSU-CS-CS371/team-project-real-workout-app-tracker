@@ -6,7 +6,7 @@
   },
   {
     "name": "Bench Press",
-    "description": "---",
+    "description": "",
     "type": "CHEST"
   },
   {
@@ -16,42 +16,37 @@
   },
   {
     "name": "Barbell Squat",
-    "description": "-----",
+    "description": "",
     "type": "LEGS"
   },
   {
     "name": "Hamstring Curls",
-    "description": "-----",
+    "description": "",
     "type": "LEGS"
   },
   {
     "name": "Leg Extension",
-    "description": "-----",
+    "description": "",
     "type": "LEGS"
   },
   {
     "name": "Treadmill",
-    "description": "-----",
+    "description": "",
     "type": "CARDIO"
   },
   {
     "name": "Cable Row",
-    "description": "**!!***",
+    "description": "",
     "type": "BACK"
   },
   {
     "name": "Dumbbell Curl",
-    "description": "**!!***",
+    "description": "",
     "type": "BICEPS"
   },
   {
     "name": "Pull Up",
-    "description": "**!!***!!!",
-    "type": "BACK"
-  },
-  {
-    "name": "Etsadfasd",
     "description": "",
-    "type": "CARDIO"
+    "type": "BACK"
   }
 ]

@@ -1,22 +1,52 @@
 [
   {
-    "name": "Push-Up",
-    "description": "description",
+    "name": "Push Up",
+    "description": "performed in a prone position by raising and lowering the body with the straightening and bending of the arms while keeping the back straight and supporting the body on the hands and toes",
     "type": "CHEST"
   },
   {
-    "name": "Squat",
-    "description": "description",
+    "name": "Bench Press",
+    "description": "",
+    "type": "CHEST"
+  },
+  {
+    "name": "Overhead Press",
+    "description": "***",
+    "type": "SHOULDERS"
+  },
+  {
+    "name": "Barbell Squat",
+    "description": "",
     "type": "LEGS"
   },
   {
-    "name": "Plank",
-    "description": "description",
-    "type": "CORE"
+    "name": "Hamstring Curls",
+    "description": "",
+    "type": "LEGS"
+  },
+  {
+    "name": "Leg Extension",
+    "description": "",
+    "type": "LEGS"
   },
   {
     "name": "Treadmill",
-    "description": "description",
+    "description": "",
     "type": "CARDIO"
+  },
+  {
+    "name": "Cable Row",
+    "description": "",
+    "type": "BACK"
+  },
+  {
+    "name": "Dumbbell Curl",
+    "description": "",
+    "type": "BICEPS"
+  },
+  {
+    "name": "Pull Up",
+    "description": "",
+    "type": "BACK"
   }
 ]

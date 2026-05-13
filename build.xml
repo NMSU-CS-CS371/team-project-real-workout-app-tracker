@@ -10,7 +10,14 @@
     <property name="lib.dir"     value="lib"/>
     <property name="test.src.dir"     value="src"/>
     <property name="test.classes.dir"     value="${build.dir}/classes"/>
-    <property name="javafx.lib"     value="${lib.dir}/javafx-sdk-21.0.11/lib"/>
+
+    <condition property="javafx.lib"     value="${lib.dir}/javafx-sdk-21.0.11-win/lib">
+        <os family="windows"/>
+    </condition>
+
+    <condition property="javafx.lib"     value="${lib.dir}/javafx-sdk-21.0.11/lib">
+        <os family="unix"/>
+    </condition>
 
     <!-- classpath for compilation and tests -->
     <path id="compile.classpath">
