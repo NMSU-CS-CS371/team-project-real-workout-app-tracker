@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- HomeView.fxml -->
+<!-- Defines the Home dashboard screen (HomeController). -->
+
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.*?>

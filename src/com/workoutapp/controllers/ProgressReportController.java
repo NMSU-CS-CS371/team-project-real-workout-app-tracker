@@ -32,6 +32,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/* Controller for the exercise progress report screen
+*  Displays progress charts for a specific exercise, allowing users to track specific metrics over time (max weight, average weight, pace, etc.)
+*  Provides an option to export the displayed chart as a PNG image.
+*/
+
 public class ProgressReportController implements ScreenController {
 
     @FXML private Button backButton;

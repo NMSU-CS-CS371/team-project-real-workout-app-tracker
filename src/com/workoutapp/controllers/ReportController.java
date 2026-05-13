@@ -24,6 +24,11 @@ import javafx.scene.Cursor;
 import javafx.scene.transform.Scale;
 import javafx.stage.Window;
 
+/* Controller for the workout history/report screen
+*  Displays all logged workouts for the active profile, showing basic summary metrics.
+*  Each workout displayed is a clickable card that navigates to the ReportDetailController for that specific workout
+*/
+
 public class ReportController implements ScreenController {
 
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("MMM d, yyyy h:mm a");

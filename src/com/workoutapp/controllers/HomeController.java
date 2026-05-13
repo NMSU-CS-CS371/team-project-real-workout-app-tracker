@@ -12,6 +12,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/*  Controller for the home/dashboard screen.
+*   Displays the most recent workout, as well as the recovery suggestions based on recent workout volume.
+*   Provides navigation to start a workout, view workout history, and edit routines.
+*/
+
 public class HomeController implements ScreenController {
     private MainController main;
     private CalendarService calendarService;

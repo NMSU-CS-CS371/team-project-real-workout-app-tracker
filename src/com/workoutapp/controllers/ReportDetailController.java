@@ -16,6 +16,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import java.time.format.DateTimeFormatter;
 
+/* Controller for the workout detail report screen, which displays information about a specific workout
+* Including exercises completed, sets/reps/weight, cardio details, and provides navigation to exercise-specific progress charts
+*/
+
 public class ReportDetailController implements ScreenController {
 
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("MMM d, yyyy h:mm a");
