@@ -76,7 +76,7 @@ Building and running program is done via Apache Ant using build.xml.
 - tests/ contains files ending in *Test.java for JUnit tests
 
 ### Build Project
-Through the command line, navigate to the project root /team-project-real-workout-app-tracker, which contains the build.xml file.
+Through the command line, navigate to the project root "/team-project-real-workout-app-tracker"
 
 Enter:
     **ant compile**
