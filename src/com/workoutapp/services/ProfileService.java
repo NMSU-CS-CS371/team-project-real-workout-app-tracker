@@ -93,6 +93,17 @@ public class ProfileService {
         try {
             Path dir = Path.of(BASE_DIR, profileName);
             Files.createDirectories(dir);
+
+            // Copy defaultExercises.json → exercises.json
+            Path source = Path.of(BASE_DIR, "defaultExercises.json");
+            Path target = dir.resolve("exercises.json");
+
+            if (Files.exists(source)) {
+                Files.copy(source, target);
+            } else {
+                System.out.println("Warning: defaultExercises.json not found.");
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

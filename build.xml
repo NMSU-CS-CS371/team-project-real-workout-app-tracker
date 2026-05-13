@@ -1,25 +1,16 @@
-<project name="workoutApp" default="run">
+<project name="workoutApp" default="run-jar">
 
     <!-- JUnit Platform Console -->
     <property name="junitjar" location="lib/junit-platform-console-standalone-6.1.0-M1.jar"/>
 
     <!-- directories -->
-    <property name="src.dir"     value="src/com/workoutapp"/>
+    <property name="src.dir"     value="src"/>
     <property name="build.dir"   value="build"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="lib.dir"     value="lib"/>
-    <property name="test.src.dir"     value="src/com/workoutapptests/"/>
+    <property name="test.src.dir"     value="src"/>
     <property name="test.classes.dir"     value="${build.dir}/classes"/>
-
-    <!-- Windows JavaFX path -->
-    <condition property="javafx.lib" value="C:/Program Files/Java/javafx-sdk-21.0.10/lib">
-        <os family="windows"/>
-    </condition>
-
-    <!-- Linux JavaFX path -->
-    <condition property="javafx.lib" value="/home/wilkes/Desktop/CS3710/javafx-sdk-21.0.10/lib">
-        <os family="unix"/>
-    </condition>
+    <property name="javafx.lib"     value="${lib.dir}/javafx-sdk-21.0.11/lib"/>
 
     <!-- classpath for compilation and tests -->
     <path id="compile.classpath">
@@ -92,8 +83,8 @@
         </java>
     </target>
 
-    <!-- run the application-->
-    <target name="run" depends="compile">
+    <!-- build and run application-->
+    <target name="run-build" depends="compile">
         <java classname="com.workoutapp.app.Main" fork="true">
             <classpath>
                 <pathelement path="${classes.dir}"/>
@@ -101,6 +92,51 @@
             </classpath>
 
             <!-- JavaFX runtime module path -->
+            <jvmarg value="--module-path"/>
+            <jvmarg value="${javafx.lib}"/>
+            <jvmarg value="--add-modules"/>
+            <jvmarg value="javafx.controls,javafx.fxml,javafx.swing"/>
+        </java>
+    </target>
+
+    <pathconvert property="manifest.classpath" pathsep=" ">
+        <mapper type="glob" from="*.jar" to="../lib/*.jar"/>
+        <path>
+            <fileset dir="${lib.dir}" includes="**/*.jar"/>
+        </path>
+    </pathconvert>
+    
+    <!-- Build fat JAR with Gson merged, JavaFX external -->
+    <target name="jar" depends="compile">
+        <!-- Clean jar directory -->
+        <delete file="workoutApp.jar"/>
+
+        <!-- Create JAR -->
+        <jar destfile="workoutApp.jar" basedir="${classes.dir}">
+            
+            <!-- Merge Gson into JAR -->
+            <zipgroupfileset dir="${lib.dir}" includes="gson-*.jar"/>
+
+            <!-- Include FXML + CSS -->
+            <fileset dir="src" includes="**/*.fxml"/>
+            <fileset dir="src" includes="**/*.css"/>
+
+            <!-- Exclude tests -->
+            <exclude name="**/*Test.class"/>
+            <exclude name="**/com/workoutapptests/**"/>
+
+            <!-- Manifest -->
+            <manifest>
+                <attribute name="Main-Class" value="com.workoutapp.app.Main"/>
+                <attribute name="Class-Path"
+                    value="../lib/javafx-base.jar ../lib/javafx-controls.jar ../lib/javafx-fxml.jar ../lib/javafx-graphics.jar"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- Run application from JAR (NOTE: Do "ant jar" first)-->
+    <target name="run-jar">
+        <java jar="workoutApp.jar" fork="true">
             <jvmarg value="--module-path"/>
             <jvmarg value="${javafx.lib}"/>
             <jvmarg value="--add-modules"/>

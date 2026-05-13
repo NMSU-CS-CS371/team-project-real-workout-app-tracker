@@ -1,0 +1,2 @@
+Main-Class: com.workoutapp.app.Main
+Class-Path: lib/
