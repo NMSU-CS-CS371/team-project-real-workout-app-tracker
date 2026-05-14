@@ -11,7 +11,7 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 FX="$DIR/lib/javafx-sdk-21.0.11/lib"
 
 # Path to your JAR
-APP="$DIR/workoutApp.jar"
+APP="$DIR/WorkoutApp.jar"
 
 # --- Checks --------------------------------------------------
 
