@@ -10,6 +10,6 @@ set FX=%DIR%lib\javafx-sdk-21.0.11-win\lib
 java ^
   --module-path "%FX%" ^
   --add-modules javafx.controls,javafx.fxml,javafx.swing ^
-  -jar "%DIR%workoutApp.jar"
+  -jar "%DIR%WorkoutApp.jar"
 
 endlocal
